@@ -57,6 +57,7 @@ const { title, description, date, updated, toc, tags } = Astro.props;
         font-weight: 400;
         padding-bottom: 2em;
         flex: 1;
+        min-width: 0;
       }
       .sidebar {
         font-weight: 300;
@@ -71,13 +72,13 @@ const { title, description, date, updated, toc, tags } = Astro.props;
       .sidebar .back-to-top a {
         text-decoration: none;
       }
-      @media (max-width: 1200px) {
+      /* @media (max-width: 1200px) {
         .sidebar {
           position: static;
           width: 100%;
           max-height: none;
         }
-      }
+      } */
       .tag-list {
         display: flex;
         flex-wrap: wrap;

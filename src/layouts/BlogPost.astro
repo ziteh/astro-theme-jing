@@ -66,12 +66,17 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         flex: 1;
       }
       .sidebar {
+        font-weight: 300;
+        font-size: 0.85em;
         position: fixed;
         top: 200px;
-        right: 20px;
-        width: 250px;
+        right: 40px;
+        width: 160px;
         max-height: calc(100vh - 140px);
         overflow-y: auto;
+      }
+      .sidebar .back-to-top a {
+        text-decoration: none;
       }
       @media (max-width: 1200px) {
         .sidebar {
@@ -90,10 +95,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
     />
     <style>
       /* tocbot */
-      :global(.toc) {
-        font-weight: 300;
-        font-size: 0.85em;
-      }
       :global(.toc-link) {
         text-decoration: none;
         overflow: hidden;
@@ -132,6 +133,10 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
             </div>
             <div class="sidebar">
               <div class="toc"></div>
+              <hr />
+              <div class="back-to-top">
+                <a href="#top">Back to top</a>
+              </div>
             </div>
           </div>
           <hr />

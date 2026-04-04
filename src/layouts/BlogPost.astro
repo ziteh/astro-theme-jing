@@ -95,6 +95,9 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
     />
     <style>
       /* tocbot */
+      :global(.toc > .toc-list) {
+        padding-left: 0;
+      }
       :global(.toc-link) {
         text-decoration: none;
         overflow: hidden;

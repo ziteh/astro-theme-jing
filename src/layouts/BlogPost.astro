@@ -1,14 +1,15 @@
 ---
-import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
+import TagPill from "../components/TagPill.astro";
+import { slugifyStr } from "../utils/slugify";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, date, updated, toc } = Astro.props;
+const { title, description, date, updated, toc, tags } = Astro.props;
 ---
 
 <html lang="en">
@@ -76,6 +77,13 @@ const { title, description, date, updated, toc } = Astro.props;
           max-height: none;
         }
       }
+      .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5em;
+        padding-left: 0;
+        list-style-type: none;
+      }
     </style>
     <link
       rel="stylesheet"
@@ -131,6 +139,16 @@ const { title, description, date, updated, toc } = Astro.props;
             </div>
           </div>
           <hr />
+          <ul class="tag-list">
+            {
+              tags &&
+                tags.map((tag) => (
+                  <li>
+                    <TagPill id={slugifyStr(tag)} name={tag} />
+                  </li>
+                ))
+            }
+          </ul>
         </div>
       </article>
     </main>

@@ -1,0 +1,31 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  count?: number;
+}
+
+const { id, name, count } = Astro.props;
+---
+
+<a href={`/tags/${id}/`}>
+  <div class="tag-pill">
+    <span>{name}</span>
+    {count !== undefined && <span class="count">{count}</span>}
+  </div>
+</a>
+
+<style>
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    font-size: 0.85rem;
+    text-decoration: none;
+  }
+  span {
+    display: inline-block;
+  }
+</style>

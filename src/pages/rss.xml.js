@@ -1,5 +1,6 @@
 import { getCollection } from "astro:content";
 import rss from "@astrojs/rss";
+import postFilter from "../utils/postFilter";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
 export async function GET(context) {
@@ -8,7 +9,7 @@ export async function GET(context) {
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     site: context.site,
-    items: posts.map((post) => ({
+    items: posts.filter(postFilter).map((post) => ({
       ...post.data,
       link: `/posts/${post.id}/`,
     })),

@@ -1,0 +1,31 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+export interface Props {
+  frontmatter: {
+    title: string;
+    description?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout>
+  <head>
+    <BaseHead title={frontmatter.title} description={frontmatter.description || "About"} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section>
+        <h1>{frontmatter.title}</h1>
+        <slot />
+      </section>
+    </main>
+    <Footer />
+  </body>
+</BaseLayout>

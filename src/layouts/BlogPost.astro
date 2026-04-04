@@ -151,9 +151,10 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
           contentSelector: ".main-content",
           headingSelector: "h2, h3, h4",
           hasInnerContainers: true,
-          scrollSmoothDuration: 300,
+          scrollSmoothDuration: 250,
           headingsOffset: 20,
           scrollSmoothOffset: -20,
+          scrollHandlerTimeout: 10,
         });
       };
     </script>

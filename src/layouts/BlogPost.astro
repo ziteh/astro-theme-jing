@@ -111,12 +111,12 @@ const { title, description, date, updated, toc, tags } = Astro.props;
 
   <body>
     <Header />
-    <main>
+    <main data-pagefind-body>
       <article>
         <div class="prose">
           <div class="title">
             <h1>{title}</h1>
-            <div class="date">
+            <div class="date" data-pagefind-ignore>
               <FormattedDate date={date} />
               {
                 updated && (
@@ -131,7 +131,7 @@ const { title, description, date, updated, toc, tags } = Astro.props;
             <div class="main-content">
               <slot />
             </div>
-            <div class="sidebar">
+            <div class="sidebar" data-pagefind-ignore>
               {toc && <div class="toc" />}
               {toc && <hr />}
               <div class="back-to-top">
@@ -140,7 +140,7 @@ const { title, description, date, updated, toc, tags } = Astro.props;
             </div>
           </div>
           <hr />
-          <ul class="tag-list">
+          <ul class="tag-list" data-pagefind-ignore>
             {
               tags &&
                 tags.map((tag) => (

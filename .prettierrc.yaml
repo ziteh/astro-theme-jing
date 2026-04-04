@@ -11,5 +11,9 @@ trailingComma: all
 bracketSameLine: false
 arrowParens: always
 endOfLine: lf
+overrides:
+  - files: "*.jsonc"
+    options:
+      trailingComma: none
 plugins:
   - prettier-plugin-astro # https://github.com/withastro/prettier-plugin-astro

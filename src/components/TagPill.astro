@@ -3,13 +3,14 @@ interface Props {
   id: string;
   name: string;
   count?: number;
+  active?: boolean;
 }
 
-const { id, name, count } = Astro.props;
+const { id, name, count, active } = Astro.props;
 ---
 
-<a href={`/tags/${id}/`}>
-  <div class="tag-pill">
+<a href={active ? "/blog/" : `/tags/${id}/`}>
+  <div class={`tag-pill ${active ? "active" : ""}`}>
     <span>{name}</span>
     {count !== undefined && <span class="count">{count}</span>}
   </div>
@@ -24,6 +25,10 @@ const { id, name, count } = Astro.props;
     border: 1px solid var(--border);
     font-size: 0.85rem;
     text-decoration: none;
+  }
+  .tag-pill.active {
+    color: var(--text);
+    background-color: var(--text-muted);
   }
   span {
     display: inline-block;

@@ -4,5 +4,8 @@
 export const SITE_TITLE = "Astro Blog";
 export const SITE_DESCRIPTION = "Welcome to my website!";
 
+// BCP 47 language tag
+export const LANG = "en";
+
 export const POSTS_PER_HOMEPAGE = 3;
 export const POSTS_PER_PAGE = 4;

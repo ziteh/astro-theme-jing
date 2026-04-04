@@ -5,9 +5,11 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import PostCard from "../components/PostCard.astro";
+import postFilter from "../utils/postFilter";
 import { SITE_DESCRIPTION, SITE_TITLE, POSTS_PER_HOMEPAGE } from "../consts";
 
 const posts = (await getCollection("blog"))
+  .filter(postFilter)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, POSTS_PER_HOMEPAGE);
 ---

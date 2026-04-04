@@ -9,7 +9,7 @@ interface Props {
 const { id, name, count, active } = Astro.props;
 ---
 
-<a href={active ? "/blog/" : `/tags/${id}/`}>
+<a href={active ? "/posts/" : `/tags/${id}/`}>
   <div class={`tag-pill ${active ? "active" : ""}`}>
     <span>{name}</span>
     {count !== undefined && <span class="count">{count}</span>}

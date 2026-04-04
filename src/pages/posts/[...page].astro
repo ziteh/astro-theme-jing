@@ -39,8 +39,8 @@ interface Props {
 const { posts, currentPage, totalPages, allPosts } = Astro.props;
 const hasPrevPage = currentPage > 1;
 const hasNextPage = currentPage < totalPages;
-const prevPageUrl = currentPage - 1 === 1 ? "/blog" : `/blog/${currentPage - 1}`;
-const nextPageUrl = `/blog/${currentPage + 1}`;
+const prevPageUrl = currentPage - 1 === 1 ? "/posts" : `/posts/${currentPage - 1}`;
+const nextPageUrl = `/posts/${currentPage + 1}`;
 ---
 
 <BaseLayout>

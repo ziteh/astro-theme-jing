@@ -1,6 +1,7 @@
 :root {
   --bg: #f9f7f4;
   --text: #2c2a27;
+  --text-light: #444441;
   --text-muted: #888780;
   --text-faint: #b4b2a9;
   --border: rgba(44, 42, 39, 0.08);
@@ -23,7 +24,7 @@
 }
 body {
   font-family: var(--font-body);
-  font-weight: 400;
+  font-weight: 300;
   margin: 0;
   padding: 0;
   text-align: left;
@@ -62,7 +63,7 @@ h2 {
 }
 h3 {
   font-size: 1.75em;
-  font-style: italic;
+  /* font-style: italic; */
 }
 h4 {
   font-size: 1.25em;

@@ -9,10 +9,20 @@ const blog = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      description: z.string(),
-      // Transform string to Date object
+      subtitle: z.string().optional(),
+      description: z.string().optional(),
+
       date: z.coerce.date(),
       updated: z.coerce.date().optional(),
+
+      tags: z.array(z.string()).default(["Others"]),
+      categories: z.array(z.string()).default([]),
+
+      featured: z.boolean().optional(),
+      draft: z.boolean().optional(),
+      toc: z.boolean().default(false),
+      comments: z.boolean().default(false),
+      math: z.boolean().default(false),
     }),
 });
 

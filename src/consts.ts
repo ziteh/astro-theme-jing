@@ -8,4 +8,4 @@ export const SITE_DESCRIPTION = "Welcome to my website!";
 export const LANG = "en";
 
 export const POSTS_PER_HOMEPAGE = 3;
-export const POSTS_PER_PAGE = 4;
+export const POSTS_PER_PAGE = 5;

@@ -8,12 +8,12 @@ import Header from "../components/Header.astro";
 
 type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, date, updated } = Astro.props;
+const { title, description, date, updated, toc } = Astro.props;
 ---
 
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description || ""} />
     <style>
       main {
         width: calc(100% - 2em);
@@ -123,8 +123,8 @@ const { title, description, date, updated } = Astro.props;
               <slot />
             </div>
             <div class="sidebar">
-              <div class="toc"></div>
-              <hr />
+              {toc && <div class="toc" />}
+              {toc && <hr />}
               <div class="back-to-top">
                 <a href="#top">Back to top</a>
               </div>

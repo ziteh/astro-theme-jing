@@ -4,6 +4,9 @@ import BaseHead from "../../components/BaseHead.astro";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import PostCard from "../../components/PostCard.astro";
+import TagPill from "../../components/TagPill.astro";
+import { slugifyStr } from "../../utils/slugify";
+import getUniqueTags from "../../utils/getUniqueTags";
 import { SITE_DESCRIPTION, SITE_TITLE, POSTS_PER_PAGE } from "../../consts";
 
 const posts = (await getCollection("blog")).sort(
@@ -34,6 +37,15 @@ const posts = (await getCollection("blog")).sort(
         width: 140px;
         padding: 1rem;
       }
+      .sidebar h2 {
+        margin: 0 0 1rem 0;
+        font-size: 1.25rem;
+      }
+      .tags {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
     </style>
   </head>
   <body>
@@ -42,10 +54,14 @@ const posts = (await getCollection("blog")).sort(
       <section class="content-wrapper">
         <div class="sidebar">
           <h2>Tags</h2>
-          <ul>
-            <li>Tag 1</li>
-            <li>Tag 2</li>
-            <li>Tag 3</li>
+          <ul class="tags">
+            {
+              getUniqueTags(posts).map((tag) => (
+                <li>
+                  <TagPill id={tag.id} name={tag.name} count={tag.count} />
+                </li>
+              ))
+            }
           </ul>
         </div>
         <ul class="post-list">

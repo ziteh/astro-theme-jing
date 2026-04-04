@@ -131,13 +131,13 @@ const { title, description, date, updated, toc, tags } = Astro.props;
             <div class="main-content">
               <slot />
             </div>
-            <div class="sidebar" data-pagefind-ignore>
+            <aside class="sidebar" data-pagefind-ignore>
               {toc && <div class="toc" />}
               {toc && <hr />}
               <div class="back-to-top">
                 <a href="#top">Back to top</a>
               </div>
-            </div>
+            </aside>
           </div>
           <hr />
           <ul class="tag-list" data-pagefind-ignore>

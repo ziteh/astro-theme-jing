@@ -1,15 +1,15 @@
 ---
 import { getCollection } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
 import BaseHead from "../../components/BaseHead.astro";
 import Footer from "../../components/Footer.astro";
 import Header from "../../components/Header.astro";
 import PostCard from "../../components/PostCard.astro";
 import TagPill from "../../components/TagPill.astro";
+import { POSTS_PER_PAGE, SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import getUniqueCategories from "../../utils/getUniqueCategories";
 import getUniqueTags from "../../utils/getUniqueTags";
 import postFilter from "../../utils/postFilter";
-import { SITE_DESCRIPTION, SITE_TITLE, POSTS_PER_PAGE } from "../../consts";
-import getUniqueCategories from "../../utils/getUniqueCategories";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog"))

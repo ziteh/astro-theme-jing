@@ -5,5 +5,8 @@
   "search.exclude": {
     "pnpm-lock.yaml": true,
     "**/*.svg": false
+  },
+  "json.schemaDownload.trustedDomains": {
+    "https://biomejs.dev/schemas/": true
   }
 }

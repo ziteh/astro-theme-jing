@@ -23,6 +23,13 @@ const posts = (await getCollection("blog"))
         margin: 0;
         padding: 0;
       }
+      .view-all {
+        margin-top: 2rem;
+        text-align: center;
+      }
+      .view-all a {
+        text-decoration: none;
+      }
     </style>
   </head>
   <body>
@@ -44,6 +51,9 @@ const posts = (await getCollection("blog"))
             ))
           }
         </ul>
+        <div class="view-all">
+          <a href="/posts/">View All Posts</a>
+        </div>
       </section>
     </main>
     <Footer />

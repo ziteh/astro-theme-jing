@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "lint": "biome check --write",
     "lint:check": "biome check"
   },

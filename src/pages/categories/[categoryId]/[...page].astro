@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 import { SITE } from "@/consts";
 import PostListLayout from "@/layouts/PostListLayout.astro";
 import getUniqueCategories from "@/utils/getUniqueCategories";
@@ -29,10 +29,10 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-  posts: any[];
+  posts: CollectionEntry<"blog">[];
   currentPage: number;
   totalPages: number;
-  allPosts: any[];
+  allPosts: CollectionEntry<"blog">[];
   activeCategoryId: string;
 }
 

@@ -50,9 +50,14 @@ const { posts, currentPage, totalPages, allPosts } = Astro.props;
         margin: 0;
         padding: 0;
       }
+      /* :global(main.posts-main) {
+        width: 100%;
+        max-width: 100%;
+      } */
       .content-wrapper {
-        display: flex;
-        gap: 2rem;
+        position: relative;
+        max-width: 720px;
+        margin: 0 auto;
       }
       .post-list {
         display: flex;
@@ -60,24 +65,53 @@ const { posts, currentPage, totalPages, allPosts } = Astro.props;
         gap: 1rem;
       }
       .sidebar {
-        width: 140px;
-        padding: 1rem;
+        position: absolute;
+        left: calc(100% + 1.5rem);
+        top: 0;
+        width: 180px;
       }
       .sidebar h2 {
-        margin: 2rem 0 1rem 0;
-        font-size: 1.25rem;
+        margin: 0 0 0.75rem 0;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      .sidebar h2:not(:first-child) {
+        margin-top: 1.5rem;
       }
       .tags {
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
       }
+      @media (max-width: 1000px) {
+        .sidebar {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
     <Header />
-    <main>
+    <main class="posts-main">
       <section class="content-wrapper">
+        <div>
+          <ul class="post-list">
+            {
+              posts.map((post) => (
+                <li>
+                  <PostCard
+                    id={post.id}
+                    title={post.data.title}
+                    description={post.data.description || getDescription(post.body || "")}
+                    date={post.data.date}
+                    updated={post.data.updated}
+                  />
+                </li>
+              ))
+            }
+          </ul>
+          <Pagination currentPage={currentPage} totalPages={totalPages} />
+        </div>
         <aside class="sidebar">
           <h2>Tags</h2>
           <ul class="tags">
@@ -103,24 +137,6 @@ const { posts, currentPage, totalPages, allPosts } = Astro.props;
             }
           </ul>
         </aside>
-        <div>
-          <ul class="post-list">
-            {
-              posts.map((post) => (
-                <li>
-                  <PostCard
-                    id={post.id}
-                    title={post.data.title}
-                    description={post.data.description || getDescription(post.body || "")}
-                    date={post.data.date}
-                    updated={post.data.updated}
-                  />
-                </li>
-              ))
-            }
-          </ul>
-          <Pagination currentPage={currentPage} totalPages={totalPages} />
-        </div>
       </section>
     </main>
     <Footer />

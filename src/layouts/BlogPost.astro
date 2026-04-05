@@ -15,7 +15,8 @@ type Props = CollectionEntry<"blog">["data"] & {
   nextPost: CollectionEntry<"blog"> | null;
 };
 
-const { title, description, date, updated, toc, tags, prevPost, nextPost } = Astro.props;
+const { title, description, categories, date, updated, toc, tags, prevPost, nextPost } =
+  Astro.props;
 ---
 
 <BaseLayout>
@@ -63,6 +64,18 @@ const { title, description, date, updated, toc, tags, prevPost, nextPost } = Ast
         padding-bottom: 2em;
         flex: 1;
         min-width: 0;
+      }
+      .categories {
+        margin-bottom: 1.25em;
+        font-size: 0.9em;
+      }
+      .categories a {
+        text-decoration: none;
+      }
+      .categories::before {
+        content: "|";
+        display: inline-block;
+        width: 8px;
       }
       .sidebar {
         font-weight: 300;
@@ -147,7 +160,7 @@ const { title, description, date, updated, toc, tags, prevPost, nextPost } = Ast
         <div class="prose">
           <div class="title">
             <h1>{title}</h1>
-            <div class="date" data-pagefind-ignore>
+            <span class="date" data-pagefind-ignore>
               <FormattedDate date={date} />
               {
                 updated && (
@@ -156,7 +169,17 @@ const { title, description, date, updated, toc, tags, prevPost, nextPost } = Ast
                   </div>
                 )
               }
-            </div>
+            </span>
+            <span class="categories">
+              {
+                categories &&
+                  categories.map((category) => (
+                    <a href={`/categories/${slugifyStr(category)}`}>
+                      <span>{category}</span>
+                    </a>
+                  ))
+              }
+            </span>
           </div>
           <div class="content-wrapper">
             <div class="main-content">

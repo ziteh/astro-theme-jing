@@ -5,7 +5,7 @@ import Footer from "../../../components/Footer.astro";
 import Header from "../../../components/Header.astro";
 import PostCard from "../../../components/PostCard.astro";
 import TagPill from "../../../components/TagPill.astro";
-import { POSTS_PER_PAGE, SITE_DESCRIPTION, SITE_TITLE } from "../../../consts";
+import { SITE } from "../../../consts";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import getUniqueTags from "../../../utils/getUniqueTags";
 import postFilter from "../../../utils/postFilter";
@@ -18,12 +18,12 @@ export async function getStaticPaths() {
 
   return tags.flatMap((tag) => {
     const taggedPosts = posts.filter((post) => post.data.tags.includes(tag.name));
-    const totalPages = Math.ceil(taggedPosts.length / POSTS_PER_PAGE);
+    const totalPages = Math.ceil(taggedPosts.length / SITE.postsPerPage);
 
     return Array.from({ length: totalPages }, (_, i) => ({
       params: { tag: tag.id, page: i === 0 ? undefined : String(i + 1) },
       props: {
-        posts: taggedPosts.slice(i * POSTS_PER_PAGE, (i + 1) * POSTS_PER_PAGE),
+        posts: taggedPosts.slice(i * SITE.postsPerPage, (i + 1) * SITE.postsPerPage),
         currentPage: i + 1,
         totalPages,
         allPosts: posts,
@@ -49,7 +49,7 @@ const nextPageUrl = `/posts/${currentPage + 1}`;
 
 <BaseLayout>
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title={SITE.title} description={SITE.description} />
     <style>
       ul {
         list-style-type: none;

@@ -5,7 +5,7 @@ import Footer from "../../../components/Footer.astro";
 import Header from "../../../components/Header.astro";
 import PostCard from "../../../components/PostCard.astro";
 import TagPill from "../../../components/TagPill.astro";
-import { POSTS_PER_PAGE, SITE_DESCRIPTION, SITE_TITLE } from "../../../consts";
+import { SITE } from "../../../consts";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import getUniqueCategories from "../../../utils/getUniqueCategories";
 import getUniqueTags from "../../../utils/getUniqueTags";
@@ -19,12 +19,12 @@ export async function getStaticPaths() {
 
   return categories.flatMap((category) => {
     const categorizedPosts = posts.filter((post) => post.data.categories.includes(category.name));
-    const totalPages = Math.ceil(categorizedPosts.length / POSTS_PER_PAGE);
+    const totalPages = Math.ceil(categorizedPosts.length / SITE.postsPerPage);
 
     return Array.from({ length: totalPages }, (_, i) => ({
       params: { categoryId: category.id, page: i === 0 ? undefined : String(i + 1) },
       props: {
-        posts: categorizedPosts.slice(i * POSTS_PER_PAGE, (i + 1) * POSTS_PER_PAGE),
+        posts: categorizedPosts.slice(i * SITE.postsPerPage, (i + 1) * SITE.postsPerPage),
         currentPage: i + 1,
         totalPages,
         allPosts: posts,
@@ -53,7 +53,7 @@ const nextPageUrl = `/categories/${categoryId}/${currentPage + 1}`;
 
 <BaseLayout>
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title={SITE.title} description={SITE.description} />
     <style>
       ul {
         list-style-type: none;

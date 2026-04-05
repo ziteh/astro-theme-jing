@@ -3,13 +3,13 @@ import SearchComponent from "astro-pagefind/components/Search";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { SITE } from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title={SITE.title} description={SITE.description} />
   </head>
   <body>
     <Header />

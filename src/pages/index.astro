@@ -4,19 +4,19 @@ import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import PostCard from "../components/PostCard.astro";
-import { POSTS_PER_HOMEPAGE, SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { SITE } from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import postFilter from "../utils/postFilter";
 
 const posts = (await getCollection("blog"))
   .filter(postFilter)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, POSTS_PER_HOMEPAGE);
+  .slice(0, SITE.postsPerHomepage);
 ---
 
 <BaseLayout>
   <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <BaseHead title={SITE.title} description={SITE.description} />
     <style>
       ul {
         list-style-type: none;

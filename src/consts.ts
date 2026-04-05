@@ -9,4 +9,7 @@ export const SITE = {
 
   postsPerHomepage: 3,
   postsPerPage: 5,
+
+  getDescriptionCount: 150, // If 'more' tag is not found, use this count of characters
+  getDescriptionMaxLines: 10, // Max number of lines to process
 } as const;

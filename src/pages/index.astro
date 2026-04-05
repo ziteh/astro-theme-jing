@@ -7,6 +7,7 @@ import PostCard from "../components/PostCard.astro";
 import { SITE } from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import postFilter from "../utils/postFilter";
+import getDescription from "../utils/getDescription";
 
 const posts = (await getCollection("blog"))
   .filter(postFilter)
@@ -43,7 +44,7 @@ const posts = (await getCollection("blog"))
                 <PostCard
                   id={post.id}
                   title={post.data.title}
-                  description={post.data.description}
+                  description={post.data.description || getDescription(post.body || "")}
                   date={post.data.date}
                   updated={post.data.updated}
                 />

@@ -22,6 +22,13 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
 <BaseLayout>
   <head>
     <BaseHead title={title} description={description || ""} />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.36.4/tocbot.min.css"
+      integrity="sha512-/ANQiHMqpRl+E0zEAd250N21OOmJsYbhiJWY0Y8yG0TII47yZn1+gDNobMlf+h/FTyImprLXYgXbX3bCYyq/vg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <style>
       main {
         width: calc(100% - 2em);
@@ -30,16 +37,14 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
         padding: 2em 1em 0 1em;
       }
       .prose {
-        width: 720px;
+        width: var(--content-width);
         max-width: calc(100% - 2em);
         margin: auto;
         padding: 1em;
-        color: rgb(var(--gray-dark));
       }
       .title {
         margin-bottom: 3em;
         padding: 1em 0;
-        /* text-align: center; */
         line-height: 1;
       }
       .title h1 {
@@ -48,7 +53,7 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
       }
       .date {
         margin-bottom: 0.5em;
-        color: rgb(var(--gray));
+        color: var(--text-muted);
         font-size: 0.9em;
       }
       .last-updated-on {
@@ -90,13 +95,16 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
       .sidebar .back-to-top a {
         text-decoration: none;
       }
-      /* @media (max-width: 1200px) {
+      @media (max-width: 1024px) {
         .sidebar {
-          position: static;
-          width: 100%;
-          max-height: none;
+          display: none;
         }
-      } */
+      }
+      @media (max-width: 768px) {
+        main {
+          padding: 1em 1em 0 1em;
+        }
+      }
       .tag-list {
         display: flex;
         flex-wrap: wrap;
@@ -129,15 +137,6 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
       .post-nav-title {
         font-size: 0.95em;
       }
-    </style>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.36.4/tocbot.min.css"
-      integrity="sha512-/ANQiHMqpRl+E0zEAd250N21OOmJsYbhiJWY0Y8yG0TII47yZn1+gDNobMlf+h/FTyImprLXYgXbX3bCYyq/vg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <style>
       /* tocbot */
       :global(.toc > .toc-list) {
         padding-left: 0;

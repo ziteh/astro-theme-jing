@@ -1,4 +1,5 @@
 :root {
+  /* Colors */
   --bg: #f9f7f4;
   --text: #2c2a27;
   --text-light: #444441;
@@ -6,22 +7,25 @@
   --text-faint: #b4b2a9;
   --border: rgba(44, 42, 39, 0.08);
 
+  /* Typography */
   --font-body: "Noto Sans", "Noto Sans TC", system-ui, sans-serif;
   --font-mono: "Fira Mono", "Noto Sans TC", monospace;
+  --font-size-main: clamp(1rem, 0.9875rem + 0.0625vw, 1.0625rem);
+  --font-size-h1: clamp(1.75rem, 1.56rem + 0.95vw, 2.7rem);
+  --font-size-h2: clamp(1.5rem, 1.35rem + 0.75vw, 2.25rem);
+  --font-size-h3: clamp(1.25rem, 1.15rem + 0.5vw, 1.75rem);
+  --font-size-h4: clamp(1.125rem, 1.1rem + 0.125vw, 1.25rem);
+  --font-size-h5: clamp(1.0625rem, 1.045rem + 0.0875vw, 1.15rem);
 
+  /* Layout */
+  --content-width: 768px;
+
+  /* Scrollbar */
   overflow-y: scroll;
   scrollbar-color: var(--text-faint) transparent;
   scrollbar-width: thin;
 }
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-::-webkit-scrollbar-thumb {
-  background-color: var(--text-faint);
-}
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--text-muted);
-}
+
 @font-face {
   font-family: "Atkinson";
   src: url("/fonts/atkinson-regular.woff") format("woff");
@@ -36,6 +40,17 @@
   font-style: normal;
   font-display: swap;
 }
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--text-faint);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text-muted);
+}
+
 body {
   font-family: var(--font-body);
   font-weight: 300;
@@ -43,21 +58,21 @@ body {
   padding: 0;
   text-align: left;
   background: var(--bg);
-  /* background-size: 100% 600px; */
   word-wrap: break-word;
   overflow-wrap: break-word;
   color: var(--text);
-  font-size: 16px;
+  font-size: var(--font-size-main);
   line-height: 1.8;
-
   -webkit-font-smoothing: antialiased;
 }
+
 main {
-  width: 720px;
+  width: var(--content-width);
   max-width: calc(100% - 2em);
   margin: auto;
   padding: 3em 1em;
 }
+
 h1,
 h2,
 h3,
@@ -70,41 +85,44 @@ h6 {
   line-height: 1.2;
 }
 h1 {
-  font-size: 2.7em;
+  font-size: var(--font-size-h1);
 }
 h2 {
-  font-size: 2.25em;
+  font-size: var(--font-size-h2);
 }
 h3 {
-  font-size: 1.75em;
-  /* font-style: italic; */
+  font-size: var(--font-size-h3);
 }
 h4 {
-  font-size: 1.25em;
+  font-size: var(--font-size-h4);
 }
 h5 {
-  font-size: 1.15em;
+  font-size: var(--font-size-h5);
 }
 h6 {
-  font-size: 1em;
-  font-style: italic;
+  font-size: var(--font-size-main);
+  /* font-style: italic; */
 }
+
 strong,
 b {
   font-weight: 600;
 }
+
 a {
   color: var(--text);
 }
 a:hover {
   color: var(--text-muted);
 }
+
 p {
   margin-bottom: 1em;
 }
 .prose p {
   margin-bottom: 2em;
 }
+
 textarea {
   width: 100%;
   font-size: 16px;
@@ -122,7 +140,6 @@ img {
 }
 code {
   padding: 2px 5px;
-  /* background-color: var(--bg); */
   border-radius: 2px;
 }
 pre {
@@ -143,10 +160,8 @@ hr {
   border: none;
   border-top: 1px solid var(--border);
 }
-@media (max-width: 720px) {
-  body {
-    font-size: 18px;
-  }
+
+@media (max-width: 768px) {
   main {
     padding: 1em;
   }
@@ -160,12 +175,7 @@ hr {
   height: 1px;
   width: 1px;
   overflow: hidden;
-  /* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-  clip: rect(1px 1px 1px 1px);
-  /* maybe deprecated but we need to support legacy browsers */
   clip: rect(1px, 1px, 1px, 1px);
-  /* modern browsers, clip-path works inwards from each corner */
   clip-path: inset(50%);
-  /* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
   white-space: nowrap;
 }

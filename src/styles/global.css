@@ -1,5 +1,5 @@
 :root {
-  /* Colors */
+  /* Colors - Light (default) */
   --bg: #f9f7f4;
   --text: #2c2a27;
   --text-light: #444441;
@@ -24,6 +24,19 @@
   overflow-y: scroll;
   scrollbar-color: var(--text-faint) transparent;
   scrollbar-width: thin;
+
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #1a1a1a;
+  --text: #e0ddd8;
+  --text-light: #c0bdb6;
+  --text-muted: #888780;
+  --text-faint: #555550;
+  --border: rgba(224, 221, 216, 0.1);
+
+  color-scheme: dark;
 }
 
 ::-webkit-scrollbar-track {

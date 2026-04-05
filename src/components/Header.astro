@@ -1,5 +1,6 @@
 ---
 import HeaderLink from "@/components/HeaderLink.astro";
+import ThemeToggle from "@/components/ThemeToggle.astro";
 import { SITE } from "@/consts";
 import { _t } from "@/i18n/lang";
 ---
@@ -11,6 +12,7 @@ import { _t } from "@/i18n/lang";
       <HeaderLink href="/posts">{_t.posts.title}</HeaderLink>
       <HeaderLink href="/about">{_t.about.title}</HeaderLink>
       <HeaderLink href="/search">{_t.search.title}</HeaderLink>
+      <ThemeToggle />
     </div>
   </nav>
 </header>
@@ -36,6 +38,10 @@ import { _t } from "@/i18n/lang";
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+  .internal-links {
+    display: flex;
+    align-items: center;
   }
   nav a {
     padding: 1em 0.5em;

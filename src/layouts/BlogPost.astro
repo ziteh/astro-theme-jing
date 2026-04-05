@@ -33,7 +33,8 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
             )
           }
         </span>
-        <span class="categories">
+        <span class={"categories"}>
+          <span>{categories.length > 0 ? "|" : ""}</span>
           {
             categories &&
               categories.map((category) => (

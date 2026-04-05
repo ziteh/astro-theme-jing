@@ -18,7 +18,7 @@
   --font-size-h5: clamp(1.0625rem, 1.045rem + 0.0875vw, 1.15rem);
 
   /* Layout */
-  --content-width: 768px;
+  --content-width: 720px;
 
   /* Scrollbar */
   overflow-y: scroll;

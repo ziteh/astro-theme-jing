@@ -69,7 +69,7 @@ const { posts, allPosts, currentPage, totalPages, paginationBase, activeTagId, a
                 class:list={[{ active: category.id === activeCategoryId }]}
               >
                 <span>{category.name}</span>
-                <span>{category.count}</span>
+                <span class="count">{category.count}</span>
               </a>
             </li>
           ))
@@ -97,9 +97,9 @@ const { posts, allPosts, currentPage, totalPages, paginationBase, activeTagId, a
   }
   .sidebar {
     position: absolute;
-    left: calc(100% + 1.5rem);
+    left: calc(100% + 2.5rem);
     top: 0;
-    width: 180px;
+    width: 170px;
   }
   .sidebar h2 {
     margin: 0 0 0.75rem 0;
@@ -111,7 +111,8 @@ const { posts, allPosts, currentPage, totalPages, paginationBase, activeTagId, a
   }
   .tags {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
     gap: 0.5rem;
   }
   .categories li {
@@ -123,9 +124,18 @@ const { posts, allPosts, currentPage, totalPages, paginationBase, activeTagId, a
     font-size: 0.85rem;
     text-decoration: none;
     padding: 0.15rem 0;
+    color: var(--text-muted);
+  }
+  .categories a:hover {
+    color: var(--text);
   }
   .categories a.active {
-    font-weight: 600;
+    color: var(--text);
+  }
+  .categories .count {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    opacity: 0.6;
   }
   @media (max-width: 1024px) {
     .sidebar {

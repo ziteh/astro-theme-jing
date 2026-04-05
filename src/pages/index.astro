@@ -15,6 +15,7 @@ const posts = (await getCollection("blog"))
 
 <BaseLayout title={SITE.title} description={SITE.description}>
   <section>
+    <h1 class="sr-only">{SITE.title}</h1>
     <ul class="post-list">
       {
         posts.map((post) => (

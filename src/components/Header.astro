@@ -6,7 +6,7 @@ import { _t } from "@/i18n/lang";
 
 <header>
   <nav>
-    <h2><a href="/">{SITE.title}</a></h2>
+    <span class="site-title"><a href="/">{SITE.title}</a></span>
     <div class="internal-links">
       <HeaderLink href="/posts">{_t.posts.title}</HeaderLink>
       <HeaderLink href="/about">{_t.about.title}</HeaderLink>
@@ -22,13 +22,14 @@ import { _t } from "@/i18n/lang";
     border-bottom: 1px solid var(--border);
     font-weight: 300;
   }
-  h2 {
+  .site-title {
     margin: 0;
     font-size: 1em;
+    font-weight: 600;
   }
 
-  h2 a,
-  h2 a.active {
+  .site-title a,
+  .site-title a.active {
     text-decoration: none;
   }
   nav {

@@ -1,4 +1,4 @@
-import { SITE } from "../consts";
+import { SITE } from "@/consts";
 
 // `<!-- more -->` tag
 const tagMoreRegex = /^(.*?)<!--\s*more\s*-->/s;

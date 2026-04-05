@@ -1,13 +1,13 @@
 ---
-import Pagination from "../components/Pagination.astro";
-import PostCard from "../components/PostCard.astro";
-import TagPill from "../components/TagPill.astro";
-import { SITE } from "../consts";
-import getDescription from "../utils/getDescription";
-import getUniqueCategories from "../utils/getUniqueCategories";
-import getUniqueTags from "../utils/getUniqueTags";
-import BaseLayout from "./BaseLayout.astro";
-import { _t } from "../i18n/lang";
+import Pagination from "@/components/Pagination.astro";
+import PostCard from "@/components/PostCard.astro";
+import TagPill from "@/components/TagPill.astro";
+import { SITE } from "@/consts";
+import { _t } from "@/i18n/lang";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import getDescription from "@/utils/getDescription";
+import getUniqueCategories from "@/utils/getUniqueCategories";
+import getUniqueTags from "@/utils/getUniqueTags";
 
 interface Props {
   posts: any[];

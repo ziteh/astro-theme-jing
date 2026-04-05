@@ -1,11 +1,11 @@
 ---
 import { getCollection } from "astro:content";
-import PostCard from "../components/PostCard.astro";
-import { SITE } from "../consts";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import getDescription from "../utils/getDescription";
-import postFilter from "../utils/postFilter";
-import { _t } from "../i18n/lang";
+import PostCard from "@/components/PostCard.astro";
+import { SITE } from "@/consts";
+import { _t } from "@/i18n/lang";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import getDescription from "@/utils/getDescription";
+import postFilter from "@/utils/postFilter";
 
 const posts = (await getCollection("blog"))
   .filter(postFilter)

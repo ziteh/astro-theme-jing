@@ -1,9 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import { SITE } from "../../../consts";
-import PostListLayout from "../../../layouts/PostListLayout.astro";
-import getUniqueCategories from "../../../utils/getUniqueCategories";
-import postFilter from "../../../utils/postFilter";
+import { SITE } from "@/consts";
+import PostListLayout from "@/layouts/PostListLayout.astro";
+import getUniqueCategories from "@/utils/getUniqueCategories";
+import postFilter from "@/utils/postFilter";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog"))

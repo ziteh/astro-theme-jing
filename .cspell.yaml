@@ -13,6 +13,7 @@ ignorePaths:
   - package-lock.json
   - "*.svg"
 words:
+  - frontmatter
   - jing
   - kebabcase
   - pagefind

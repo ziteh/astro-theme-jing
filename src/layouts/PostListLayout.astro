@@ -1,15 +1,12 @@
 ---
-import { SITE } from "../consts";
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
+import Pagination from "../components/Pagination.astro";
 import PostCard from "../components/PostCard.astro";
 import TagPill from "../components/TagPill.astro";
-import Pagination from "../components/Pagination.astro";
-import BaseLayout from "./BaseLayout.astro";
+import { SITE } from "../consts";
+import getDescription from "../utils/getDescription";
 import getUniqueCategories from "../utils/getUniqueCategories";
 import getUniqueTags from "../utils/getUniqueTags";
-import getDescription from "../utils/getDescription";
+import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
   posts: any[];
@@ -25,123 +22,113 @@ const { posts, allPosts, currentPage, totalPages, paginationBase, activeTagId, a
   Astro.props;
 ---
 
-<BaseLayout>
-  <head>
-    <BaseHead title={SITE.title} description={SITE.description} />
-    <style>
-      ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-      }
-      .content-wrapper {
-        position: relative;
-        max-width: var(--content-width);
-        margin: 0 auto;
-      }
-      .post-list {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .sidebar {
-        position: absolute;
-        left: calc(100% + 1.5rem);
-        top: 0;
-        width: 180px;
-      }
-      .sidebar h2 {
-        margin: 0 0 0.75rem 0;
-        font-size: 1rem;
-        font-weight: 600;
-      }
-      .sidebar h2:not(:first-child) {
-        margin-top: 2.5rem;
-      }
-      .tags {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      .categories li {
-        margin-bottom: 0.4rem;
-      }
-      .categories a {
-        display: flex;
-        justify-content: space-between;
-        font-size: 0.85rem;
-        text-decoration: none;
-        padding: 0.15rem 0;
-      }
-      .categories a.active {
-        font-weight: 600;
-      }
-      @media (max-width: 1024px) {
-        .sidebar {
-          display: none;
+<BaseLayout title={SITE.title} description={SITE.description}>
+  <section class="content-wrapper">
+    <div>
+      <ul class="post-list">
+        {
+          posts.map((post) => (
+            <li>
+              <PostCard
+                id={post.id}
+                title={post.data.title}
+                description={post.data.description || getDescription(post.body || "")}
+                date={post.data.date}
+                updated={post.data.updated}
+              />
+            </li>
+          ))
         }
-      }
-    </style>
-  </head>
-  <body>
-    <Header />
-    <main>
-      <section class="content-wrapper">
-        <div>
-          <ul class="post-list">
-            {
-              posts.map((post) => (
-                <li>
-                  <PostCard
-                    id={post.id}
-                    title={post.data.title}
-                    description={post.data.description || getDescription(post.body || "")}
-                    date={post.data.date}
-                    updated={post.data.updated}
-                  />
-                </li>
-              ))
-            }
-          </ul>
-          <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl={paginationBase} />
-        </div>
-        <aside class="sidebar">
-          <h2>Tags</h2>
-          <ul class="tags">
-            {
-              getUniqueTags(allPosts).map((tag) => (
-                <li>
-                  <TagPill
-                    id={tag.id}
-                    name={tag.name}
-                    count={tag.count}
-                    active={tag.id === activeTagId}
-                  />
-                </li>
-              ))
-            }
-          </ul>
-          <h2>Categories</h2>
-          <ul class="categories">
-            {
-              getUniqueCategories(allPosts).map((category) => (
-                <li>
-                  <a
-                    href={
-                      category.id === activeCategoryId ? "/posts" : `/categories/${category.id}`
-                    }
-                    class:list={[{ active: category.id === activeCategoryId }]}
-                  >
-                    <span>{category.name}</span>
-                    <span>{category.count}</span>
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </aside>
-      </section>
-    </main>
-    <Footer />
-  </body>
+      </ul>
+      <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl={paginationBase} />
+    </div>
+    <aside class="sidebar">
+      <h2>Tags</h2>
+      <ul class="tags">
+        {
+          getUniqueTags(allPosts).map((tag) => (
+            <li>
+              <TagPill
+                id={tag.id}
+                name={tag.name}
+                count={tag.count}
+                active={tag.id === activeTagId}
+              />
+            </li>
+          ))
+        }
+      </ul>
+      <h2>Categories</h2>
+      <ul class="categories">
+        {
+          getUniqueCategories(allPosts).map((category) => (
+            <li>
+              <a
+                href={category.id === activeCategoryId ? "/posts" : `/categories/${category.id}`}
+                class:list={[{ active: category.id === activeCategoryId }]}
+              >
+                <span>{category.name}</span>
+                <span>{category.count}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </aside>
+  </section>
 </BaseLayout>
+
+<style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  .content-wrapper {
+    position: relative;
+    max-width: var(--content-width);
+    margin: 0 auto;
+  }
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .sidebar {
+    position: absolute;
+    left: calc(100% + 1.5rem);
+    top: 0;
+    width: 180px;
+  }
+  .sidebar h2 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .sidebar h2:not(:first-child) {
+    margin-top: 2.5rem;
+  }
+  .tags {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .categories li {
+    margin-bottom: 0.4rem;
+  }
+  .categories a {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    text-decoration: none;
+    padding: 0.15rem 0;
+  }
+  .categories a.active {
+    font-weight: 600;
+  }
+  @media (max-width: 1024px) {
+    .sidebar {
+      display: none;
+    }
+  }
+</style>

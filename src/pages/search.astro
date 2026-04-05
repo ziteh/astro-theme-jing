@@ -1,21 +1,8 @@
 ---
 import SearchComponent from "astro-pagefind/components/Search";
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
-import { SITE } from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout>
-  <head>
-    <BaseHead title={SITE.title} description={SITE.description} />
-  </head>
-  <body>
-    <Header />
-    <main>
-      <SearchComponent id="search" className="pagefind-ui" uiOptions={{ showImages: false }} />
-    </main>
-    <Footer />
-  </body>
+<BaseLayout title={"Search"} description={"Search through all posts"}>
+  <SearchComponent id="search" className="pagefind-ui" uiOptions={{ showImages: false }} />
 </BaseLayout>

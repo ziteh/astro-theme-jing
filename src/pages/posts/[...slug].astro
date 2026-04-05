@@ -1,12 +1,19 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
 import BlogPost from "../../layouts/BlogPost.astro";
+import getDescription from "../../utils/getDescription";
 import postFilter from "../../utils/postFilter";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog"))
     .filter(postFilter)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+  posts.forEach((post) => {
+    if (!post.data.description) {
+      post.data.description = getDescription(post.body || "");
+    }
+  });
 
   return posts.map((post, index) => ({
     params: { slug: post.id },

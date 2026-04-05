@@ -1,13 +1,10 @@
 ---
 import { getCollection } from "astro:content";
-import BaseHead from "../components/BaseHead.astro";
-import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
 import PostCard from "../components/PostCard.astro";
 import { SITE } from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import postFilter from "../utils/postFilter";
 import getDescription from "../utils/getDescription";
+import postFilter from "../utils/postFilter";
 
 const posts = (await getCollection("blog"))
   .filter(postFilter)
@@ -15,48 +12,40 @@ const posts = (await getCollection("blog"))
   .slice(0, SITE.postsPerHomepage);
 ---
 
-<BaseLayout>
-  <head>
-    <BaseHead title={SITE.title} description={SITE.description} />
-    <style>
-      ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
+<BaseLayout title={SITE.title} description={SITE.description}>
+  <section>
+    <ul>
+      {
+        posts.map((post) => (
+          <li>
+            <PostCard
+              id={post.id}
+              title={post.data.title}
+              description={post.data.description || getDescription(post.body || "")}
+              date={post.data.date}
+              updated={post.data.updated}
+            />
+          </li>
+        ))
       }
-      .view-all {
-        margin-top: 2rem;
-        text-align: center;
-      }
-      .view-all a {
-        text-decoration: none;
-      }
-    </style>
-  </head>
-  <body>
-    <Header />
-    <main>
-      <section>
-        <ul>
-          {
-            posts.map((post) => (
-              <li>
-                <PostCard
-                  id={post.id}
-                  title={post.data.title}
-                  description={post.data.description || getDescription(post.body || "")}
-                  date={post.data.date}
-                  updated={post.data.updated}
-                />
-              </li>
-            ))
-          }
-        </ul>
-        <div class="view-all">
-          <a href="/posts/">View All Posts</a>
-        </div>
-      </section>
-    </main>
-    <Footer />
-  </body>
+    </ul>
+    <div class="view-all">
+      <a href="/posts/">View All Posts</a>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  .view-all {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  .view-all a {
+    text-decoration: none;
+  }
+</style>

@@ -2,27 +2,27 @@
 import { getCollection } from "astro:content";
 import { SITE } from "../../../consts";
 import PostListLayout from "../../../layouts/PostListLayout.astro";
-import getUniqueCategories from "../../../utils/getUniqueCategories";
+import getUniqueTags from "../../../utils/getUniqueTags";
 import postFilter from "../../../utils/postFilter";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog"))
     .filter(postFilter)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-  const categories = getUniqueCategories(posts);
+  const tags = getUniqueTags(posts);
 
-  return categories.flatMap((category) => {
-    const categorizedPosts = posts.filter((post) => post.data.categories.includes(category.name));
-    const totalPages = Math.ceil(categorizedPosts.length / SITE.postsPerPage);
+  return tags.flatMap((tag) => {
+    const taggedPosts = posts.filter((post) => post.data.tags.includes(tag.name));
+    const totalPages = Math.ceil(taggedPosts.length / SITE.postsPerPage);
 
     return Array.from({ length: totalPages }, (_, i) => ({
-      params: { categoryId: category.id, page: i === 0 ? undefined : String(i + 1) },
+      params: { tagId: tag.id, page: i === 0 ? undefined : String(i + 1) },
       props: {
-        posts: categorizedPosts.slice(i * SITE.postsPerPage, (i + 1) * SITE.postsPerPage),
+        posts: taggedPosts.slice(i * SITE.postsPerPage, (i + 1) * SITE.postsPerPage),
         currentPage: i + 1,
         totalPages,
         allPosts: posts,
-        activeCategoryId: category.id,
+        activeTagId: tag.id,
       },
     }));
   });
@@ -33,10 +33,10 @@ interface Props {
   currentPage: number;
   totalPages: number;
   allPosts: any[];
-  activeCategoryId: string;
+  activeTagId: string;
 }
 
-const { posts, currentPage, totalPages, allPosts, activeCategoryId } = Astro.props;
+const { posts, currentPage, totalPages, allPosts, activeTagId } = Astro.props;
 ---
 
 <PostListLayout
@@ -44,6 +44,6 @@ const { posts, currentPage, totalPages, allPosts, activeCategoryId } = Astro.pro
   allPosts={allPosts}
   currentPage={currentPage}
   totalPages={totalPages}
-  paginationBase={`/categories/${activeCategoryId}`}
-  activeCategoryId={activeCategoryId}
+  paginationBase={`/tags/${activeTagId}`}
+  activeTagId={activeTagId}
 />

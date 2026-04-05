@@ -5,13 +5,14 @@ import IconLeft from "../assets/icons/chevron-left.svg";
 interface Props {
   currentPage: number;
   totalPages: number;
+  baseUrl: string;
 }
 
-const { currentPage, totalPages } = Astro.props;
+const { currentPage, totalPages, baseUrl } = Astro.props;
 const hasPrevPage = currentPage > 1;
 const hasNextPage = currentPage < totalPages;
-const prevPageUrl = currentPage - 1 === 1 ? "/posts" : `/posts/${currentPage - 1}`;
-const nextPageUrl = `/posts/${currentPage + 1}`;
+const prevPageUrl = currentPage - 1 === 1 ? baseUrl : `${baseUrl}/${currentPage - 1}`;
+const nextPageUrl = `${baseUrl}/${currentPage + 1}`;
 ---
 
 <>

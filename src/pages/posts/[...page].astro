@@ -1,17 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import BaseHead from "../../components/BaseHead.astro";
-import Footer from "../../components/Footer.astro";
-import Header from "../../components/Header.astro";
-import PostCard from "../../components/PostCard.astro";
-import TagPill from "../../components/TagPill.astro";
 import { SITE } from "../../consts";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import getUniqueCategories from "../../utils/getUniqueCategories";
-import getUniqueTags from "../../utils/getUniqueTags";
+import PostListLayout from "../../layouts/PostListLayout.astro";
 import postFilter from "../../utils/postFilter";
-import Pagination from "../../components/Pagination.astro";
-import getDescription from "../../utils/getDescription";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog"))
@@ -41,104 +32,10 @@ interface Props {
 const { posts, currentPage, totalPages, allPosts } = Astro.props;
 ---
 
-<BaseLayout>
-  <head>
-    <BaseHead title={SITE.title} description={SITE.description} />
-    <style>
-      ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-      }
-      /* :global(main.posts-main) {
-        width: 100%;
-        max-width: 100%;
-      } */
-      .content-wrapper {
-        position: relative;
-        max-width: 720px;
-        margin: 0 auto;
-      }
-      .post-list {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .sidebar {
-        position: absolute;
-        left: calc(100% + 1.5rem);
-        top: 0;
-        width: 180px;
-      }
-      .sidebar h2 {
-        margin: 0 0 0.75rem 0;
-        font-size: 1rem;
-        font-weight: 600;
-      }
-      .sidebar h2:not(:first-child) {
-        margin-top: 1.5rem;
-      }
-      .tags {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      @media (max-width: 1000px) {
-        .sidebar {
-          display: none;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <Header />
-    <main class="posts-main">
-      <section class="content-wrapper">
-        <div>
-          <ul class="post-list">
-            {
-              posts.map((post) => (
-                <li>
-                  <PostCard
-                    id={post.id}
-                    title={post.data.title}
-                    description={post.data.description || getDescription(post.body || "")}
-                    date={post.data.date}
-                    updated={post.data.updated}
-                  />
-                </li>
-              ))
-            }
-          </ul>
-          <Pagination currentPage={currentPage} totalPages={totalPages} />
-        </div>
-        <aside class="sidebar">
-          <h2>Tags</h2>
-          <ul class="tags">
-            {
-              getUniqueTags(allPosts).map((tag) => (
-                <li>
-                  <TagPill id={tag.id} name={tag.name} count={tag.count} />
-                </li>
-              ))
-            }
-          </ul>
-          <h2>Categories</h2>
-          <ul class="categories">
-            {
-              getUniqueCategories(allPosts).map((category) => (
-                <li>
-                  <a href={`/categories/${category.id}`}>
-                    <span>{category.name}</span>
-                    <span>{category.count}</span>
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </aside>
-      </section>
-    </main>
-    <Footer />
-  </body>
-</BaseLayout>
+<PostListLayout
+  posts={posts}
+  allPosts={allPosts}
+  currentPage={currentPage}
+  totalPages={totalPages}
+  paginationBase="/posts"
+/>

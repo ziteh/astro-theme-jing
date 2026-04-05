@@ -43,3 +43,8 @@ pnpm build
 The `src/content/blog` directory contains "collections" of related Markdown and MDX documents. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
 
 Any static assets, like images, can be placed in the `public/` directory.
+
+## Todo
+
+- [ ] On the `posts/` page, tags and categories are displayed on mobile devices and are collapsed by default
+- [ ] On the `posts/[slug]` page, the sidebar becomes a floating button on mobile devices; tap to expand

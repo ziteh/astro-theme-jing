@@ -7,10 +7,15 @@ import Header from "../components/Header.astro";
 import TagPill from "../components/TagPill.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { slugifyStr } from "../utils/slugify";
+import IconRight from "../assets/icons/chevron-right.svg";
+import IconLeft from "../assets/icons/chevron-left.svg";
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<"blog">["data"] & {
+  prevPost: CollectionEntry<"blog"> | null;
+  nextPost: CollectionEntry<"blog"> | null;
+};
 
-const { title, description, date, updated, toc, tags } = Astro.props;
+const { title, description, date, updated, toc, tags, prevPost, nextPost } = Astro.props;
 ---
 
 <BaseLayout>
@@ -86,6 +91,31 @@ const { title, description, date, updated, toc, tags } = Astro.props;
         padding-left: 0;
         list-style-type: none;
       }
+      .post-nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 1em;
+        margin-top: 2em;
+      }
+      .post-nav a {
+        display: flex;
+        flex-direction: row;
+        text-decoration: none;
+      }
+      .post-nav a:hover {
+        border-color: var(--text-muted);
+      }
+      .post-nav-prev {
+        margin-left: auto;
+        text-align: right;
+      }
+      .post-nav-label {
+        font-size: 0.8em;
+        color: var(--text-muted);
+      }
+      .post-nav-title {
+        font-size: 0.95em;
+      }
     </style>
     <link
       rel="stylesheet"
@@ -151,6 +181,28 @@ const { title, description, date, updated, toc, tags } = Astro.props;
                 ))
             }
           </ul>
+          <nav class="post-nav" data-pagefind-ignore>
+            {
+              nextPost && (
+                <a href={`/posts/${nextPost.id}`} class="post-nav-next">
+                  <span class="post-nav-label">
+                    <IconLeft />
+                  </span>
+                  <span class="post-nav-title">{nextPost.data.title}</span>
+                </a>
+              )
+            }
+            {
+              prevPost && (
+                <a href={`/posts/${prevPost.id}`} class="post-nav-prev">
+                  <span class="post-nav-title">{prevPost.data.title}</span>
+                  <span class="post-nav-label">
+                    <IconRight />
+                  </span>
+                </a>
+              )
+            }
+          </nav>
         </div>
       </article>
     </main>

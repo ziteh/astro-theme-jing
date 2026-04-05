@@ -10,6 +10,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import getUniqueCategories from "../../utils/getUniqueCategories";
 import getUniqueTags from "../../utils/getUniqueTags";
 import postFilter from "../../utils/postFilter";
+import Pagination from "../../components/Pagination.astro";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog"))
@@ -37,10 +38,6 @@ interface Props {
 }
 
 const { posts, currentPage, totalPages, allPosts } = Astro.props;
-const hasPrevPage = currentPage > 1;
-const hasNextPage = currentPage < totalPages;
-const prevPageUrl = currentPage - 1 === 1 ? "/posts" : `/posts/${currentPage - 1}`;
-const nextPageUrl = `/posts/${currentPage + 1}`;
 ---
 
 <BaseLayout>
@@ -73,25 +70,6 @@ const nextPageUrl = `/posts/${currentPage + 1}`;
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
-      }
-      .pagination {
-        font-size: 0.85rem;
-        display: flex;
-        gap: 1rem;
-        margin-top: 2rem;
-        justify-content: center;
-        align-items: center;
-      }
-      .pagination a,
-      .pagination span {
-        text-decoration: none;
-      }
-      .pagination .disabled {
-        cursor: not-allowed;
-        color: var(--text-muted);
-      }
-      .pagination .current {
-        font-size: 0.85rem;
       }
     </style>
   </head>
@@ -140,26 +118,7 @@ const nextPageUrl = `/posts/${currentPage + 1}`;
               ))
             }
           </ul>
-          <!-- Pagination -->
-          {
-            totalPages > 1 && (
-              <nav class="pagination">
-                {hasPrevPage ? (
-                  <a href={prevPageUrl}>← Prev</a>
-                ) : (
-                  <span class="disabled">← Prev</span>
-                )}
-                <span class="current">
-                  {currentPage} / {totalPages}
-                </span>
-                {hasNextPage ? (
-                  <a href={nextPageUrl}>Next →</a>
-                ) : (
-                  <span class="disabled">Next →</span>
-                )}
-              </nav>
-            )
-          }
+          <Pagination currentPage={currentPage} totalPages={totalPages} />
         </div>
       </section>
     </main>

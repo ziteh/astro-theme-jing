@@ -1,0 +1,66 @@
+---
+import IconRight from "../assets/icons/chevron-right.svg";
+import IconLeft from "../assets/icons/chevron-left.svg";
+
+interface Props {
+  currentPage: number;
+  totalPages: number;
+}
+
+const { currentPage, totalPages } = Astro.props;
+const hasPrevPage = currentPage > 1;
+const hasNextPage = currentPage < totalPages;
+const prevPageUrl = currentPage - 1 === 1 ? "/posts" : `/posts/${currentPage - 1}`;
+const nextPageUrl = `/posts/${currentPage + 1}`;
+---
+
+<>
+  {
+    totalPages > 1 && (
+      <nav class="pagination">
+        {hasPrevPage ? (
+          <a href={prevPageUrl}>
+            <IconLeft /> Prev
+          </a>
+        ) : (
+          <span class="disabled">
+            <IconLeft /> Prev
+          </span>
+        )}
+
+        <span class="current">
+          {currentPage} / {totalPages}
+        </span>
+
+        {hasNextPage ? (
+          <a href={nextPageUrl}>
+            Next <IconRight />
+          </a>
+        ) : (
+          <span class="disabled">
+            Next <IconRight />
+          </span>
+        )}
+      </nav>
+    )
+  }
+</>
+
+<style>
+  .pagination {
+    font-size: 0.85rem;
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
+    /* align-items: center; */
+  }
+  .pagination a,
+  .pagination span {
+    text-decoration: none;
+    display: flex;
+  }
+  .pagination .disabled {
+    color: var(--text-muted);
+  }
+</style>

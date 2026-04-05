@@ -19,7 +19,7 @@ const nextPageUrl = `${baseUrl}/${currentPage + 1}`;
 <>
   {
     totalPages > 1 && (
-      <nav class="pagination">
+      <nav class="pagination" aria-label="Pagination">
         {hasPrevPage ? (
           <a href={prevPageUrl}>
             <IconLeft /> {_t.pagination.prev}

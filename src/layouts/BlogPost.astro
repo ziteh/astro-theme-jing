@@ -68,7 +68,7 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
             ))
         }
       </ul>
-      <nav class="post-nav">
+      <nav class="post-nav" aria-label="Post navigation">
         {
           nextPost && (
             <a href={`/posts/${nextPost.id}`} class="post-nav-next">

@@ -40,7 +40,7 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
           {
             updated && (
               <div class="last-updated-on">
-                Last updated on <FormattedDate date={updated} />
+                {_t.common.lastUpdatedOn} <FormattedDate date={updated} />
               </div>
             )
           }

@@ -23,6 +23,7 @@ const en = {
     backToTop: "Back to top",
     viewAllPosts: "View all posts",
     rssFeed: "Subscribe to RSS feed",
+    lastUpdatedOn: "Last updated on",
   },
   pagination: {
     next: "Next",
@@ -71,6 +72,7 @@ const zhHant: typeof en = {
     backToTop: "回到頂部",
     viewAllPosts: "所有文章",
     rssFeed: "訂閱 RSS",
+    lastUpdatedOn: "最後更新於",
   },
   pagination: {
     next: "下一頁",

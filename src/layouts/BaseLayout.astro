@@ -7,9 +7,11 @@ import { SITE } from "@/consts";
 interface Props {
   title: string;
   description: string;
+  ogType?: "website" | "article";
+  image?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogType = "website", image } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const showTitle = title === SITE.title ? title : `${title} | ${SITE.title}`;
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -41,18 +43,18 @@ const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
     <meta name="description" content={description} />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={showTitle} />
     <meta property="og:description" content={description} />
-    <!-- <meta property="og:image" content={new URL(image.src, Astro.url)} /> -->
+    {image && <meta property="og:image" content={new URL(image, Astro.url)} />}
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:card" content={image ? "summary_large_image" : "summary"} />
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={showTitle} />
     <meta property="twitter:description" content={description} />
-    <!-- <meta property="twitter:image" content={new URL(image.src, Astro.url)} /> -->
+    {image && <meta property="twitter:image" content={new URL(image, Astro.url)} />}
 
     <!-- https://support.google.com/webmasters/answer/9008080#meta_tag_verification -->
     {

@@ -37,6 +37,10 @@
   font-size: 0.9em;
   color: var(--text-muted);
 }
+.categories::before {
+  content: "|";
+  margin: 0 0.5em;
+}
 .categories a {
   text-decoration: none;
   color: var(--text-muted);

@@ -45,17 +45,15 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
             )
           }
         </span>
-        <span class={"categories"}>
-          <span>{categories.length > 0 ? "|" : ""}</span>
-          {
-            categories &&
-              categories.map((category) => (
-                <a href={`/categories/${slugifyStr(category)}`}>
-                  <span>{category}</span>
-                </a>
-              ))
-          }
-        </span>
+        {
+          categories.length > 0 && (
+            <span class="categories">
+              {categories.map((category) => (
+                <a href={`/categories/${slugifyStr(category)}`}>{category}</a>
+              ))}
+            </span>
+          )
+        }
       </div>
       <div class="content-wrapper">
         <div class="main-content" data-pagefind-body>

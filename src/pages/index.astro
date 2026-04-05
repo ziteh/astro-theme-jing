@@ -15,7 +15,7 @@ const posts = (await getCollection("blog"))
 
 <BaseLayout title={SITE.title} description={SITE.description}>
   <section>
-    <ul>
+    <ul class="post-list">
       {
         posts.map((post) => (
           <li>
@@ -48,5 +48,8 @@ const posts = (await getCollection("blog"))
   }
   .view-all a {
     text-decoration: none;
+  }
+  .post-list {
+    gap: 1rem;
   }
 </style>

@@ -19,6 +19,18 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
 ---
 
 <BaseLayout title={title} description={description || ""} ogType="article">
+  {
+    toc && (
+      <link
+        slot="head"
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.36.4/tocbot.min.css"
+        integrity="sha512-/ANQiHMqpRl+E0zEAd250N21OOmJsYbhiJWY0Y8yG0TII47yZn1+gDNobMlf+h/FTyImprLXYgXbX3bCYyq/vg=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+      />
+    )
+  }
   <article>
     <div class="prose">
       <div class="title">

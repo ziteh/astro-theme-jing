@@ -22,6 +22,8 @@ interface Props {
 
 const { posts, allPosts, currentPage, totalPages, paginationBase, activeTagId, activeCategoryId } =
   Astro.props;
+const categories = getUniqueCategories(allPosts);
+const tags = getUniqueTags(allPosts);
 ---
 
 <BaseLayout title={SITE.title} description={SITE.description}>
@@ -48,7 +50,7 @@ const { posts, allPosts, currentPage, totalPages, paginationBase, activeTagId, a
       <h2>{_t.tags.title}</h2>
       <ul class="tags">
         {
-          getUniqueTags(allPosts).map((tag) => (
+          tags.map((tag) => (
             <li>
               <TagPill
                 id={tag.id}
@@ -60,10 +62,10 @@ const { posts, allPosts, currentPage, totalPages, paginationBase, activeTagId, a
           ))
         }
       </ul>
-      <h2>{_t.categories.title}</h2>
+      {categories.length > 0 && <h2>{_t.categories.title}</h2>}
       <ul class="categories">
         {
-          getUniqueCategories(allPosts).map((category) => (
+          categories.map((category) => (
             <li>
               <a
                 href={category.id === activeCategoryId ? "/posts" : `/categories/${category.id}`}

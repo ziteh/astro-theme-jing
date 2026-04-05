@@ -3,6 +3,7 @@ import IconGitHub from "../assets/icons/brand-github.svg";
 import IconYouTube from "../assets/icons/brand-youtube.svg";
 import IconRss from "../assets/icons/rss.svg";
 import { SITE } from "../consts";
+import { _t } from "../i18n/lang";
 
 const today = new Date();
 ---
@@ -19,7 +20,7 @@ const today = new Date();
       <IconGitHub />
     </a>
     <a href="/rss.xml">
-      <span class="sr-only">Subscribe to RSS feed</span>
+      <span class="sr-only">{_t.common.rssFeed}</span>
       <IconRss />
     </a>
   </div>

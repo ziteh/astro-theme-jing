@@ -1,15 +1,16 @@
 ---
 import { SITE } from "../consts";
 import HeaderLink from "./HeaderLink.astro";
+import { _t } from "../i18n/lang";
 ---
 
 <header>
   <nav>
     <h2><a href="/">{SITE.title}</a></h2>
     <div class="internal-links">
-      <HeaderLink href="/posts">Posts</HeaderLink>
-      <HeaderLink href="/about">About</HeaderLink>
-      <HeaderLink href="/search">Search</HeaderLink>
+      <HeaderLink href="/posts">{_t.posts.title}</HeaderLink>
+      <HeaderLink href="/about">{_t.about.title}</HeaderLink>
+      <HeaderLink href="/search">{_t.search.title}</HeaderLink>
     </div>
   </nav>
 </header>

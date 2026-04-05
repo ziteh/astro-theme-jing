@@ -1,9 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { _t } from "../i18n/lang";
 
 export interface Props {
   frontmatter: {
-    title: string;
+    title?: string;
     description?: string;
   };
 }
@@ -11,9 +12,12 @@ export interface Props {
 const { frontmatter } = Astro.props;
 ---
 
-<BaseLayout title={frontmatter.title} description={frontmatter.description || "About"}>
+<BaseLayout
+  title={frontmatter.title || _t.about.title}
+  description={frontmatter.description || _t.about.desc}
+>
   <section>
-    <h1>{frontmatter.title}</h1>
+    <h1>{frontmatter.title || _t.about.title}</h1>
     <slot />
   </section>
 </BaseLayout>

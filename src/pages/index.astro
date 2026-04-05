@@ -5,6 +5,7 @@ import { SITE } from "../consts";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import getDescription from "../utils/getDescription";
 import postFilter from "../utils/postFilter";
+import { _t } from "../i18n/lang";
 
 const posts = (await getCollection("blog"))
   .filter(postFilter)
@@ -30,7 +31,7 @@ const posts = (await getCollection("blog"))
       }
     </ul>
     <div class="view-all">
-      <a href="/posts/">View All Posts</a>
+      <a href="/posts/">{_t.common.viewAllPosts}</a>
     </div>
   </section>
 </BaseLayout>

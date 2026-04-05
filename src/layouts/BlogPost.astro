@@ -7,6 +7,7 @@ import FormattedDate from "../components/FormattedDate.astro";
 import TagPill from "../components/TagPill.astro";
 import { slugifyStr } from "../utils/slugify";
 import BaseLayout from "./BaseLayout.astro";
+import { _t } from "../i18n/lang";
 
 type Props = CollectionEntry<"blog">["data"] & {
   prevPost: CollectionEntry<"blog"> | null;
@@ -51,7 +52,7 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
           {toc && <div class="toc" />}
           {toc && <hr />}
           <div class="back-to-top">
-            <a href="#top">Back to top</a>
+            <a href="#top">{_t.common.backToTop}</a>
           </div>
         </aside>
       </div>

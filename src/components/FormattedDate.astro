@@ -1,5 +1,5 @@
 ---
-import { SITE } from "../consts";
+import { _t } from "../i18n/lang";
 
 interface Props {
   date: Date;
@@ -9,11 +9,5 @@ const { date } = Astro.props;
 ---
 
 <time datetime={date.toISOString()}>
-  {
-    date.toLocaleDateString(SITE.lang, {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    })
-  }
+  {_t.date.shortFormat(date)}
 </time>

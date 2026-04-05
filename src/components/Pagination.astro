@@ -1,6 +1,7 @@
 ---
 import IconLeft from "../assets/icons/chevron-left.svg";
 import IconRight from "../assets/icons/chevron-right.svg";
+import { _t } from "../i18n/lang";
 
 interface Props {
   currentPage: number;
@@ -21,11 +22,11 @@ const nextPageUrl = `${baseUrl}/${currentPage + 1}`;
       <nav class="pagination">
         {hasPrevPage ? (
           <a href={prevPageUrl}>
-            <IconLeft /> Prev
+            <IconLeft /> {_t.pagination.prev}
           </a>
         ) : (
           <span class="disabled">
-            <IconLeft /> Prev
+            <IconLeft /> {_t.pagination.prev}
           </span>
         )}
 
@@ -35,11 +36,11 @@ const nextPageUrl = `${baseUrl}/${currentPage + 1}`;
 
         {hasNextPage ? (
           <a href={nextPageUrl}>
-            Next <IconRight />
+            {_t.pagination.next} <IconRight />
           </a>
         ) : (
           <span class="disabled">
-            Next <IconRight />
+            {_t.pagination.next} <IconRight />
           </span>
         )}
       </nav>

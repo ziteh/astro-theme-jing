@@ -7,6 +7,7 @@ import getDescription from "../utils/getDescription";
 import getUniqueCategories from "../utils/getUniqueCategories";
 import getUniqueTags from "../utils/getUniqueTags";
 import BaseLayout from "./BaseLayout.astro";
+import { _t } from "../i18n/lang";
 
 interface Props {
   posts: any[];
@@ -43,7 +44,7 @@ const { posts, allPosts, currentPage, totalPages, paginationBase, activeTagId, a
       <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl={paginationBase} />
     </div>
     <aside class="sidebar">
-      <h2>Tags</h2>
+      <h2>{_t.tags.title}</h2>
       <ul class="tags">
         {
           getUniqueTags(allPosts).map((tag) => (
@@ -58,7 +59,7 @@ const { posts, allPosts, currentPage, totalPages, paginationBase, activeTagId, a
           ))
         }
       </ul>
-      <h2>Categories</h2>
+      <h2>{_t.categories.title}</h2>
       <ul class="categories">
         {
           getUniqueCategories(allPosts).map((category) => (

@@ -1,8 +1,9 @@
 ---
 import SearchComponent from "astro-pagefind/components/Search";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { _t } from "../i18n/lang";
 ---
 
-<BaseLayout title={"Search"} description={"Search through all posts"}>
+<BaseLayout title={_t.search.title} description={_t.search.desc}>
   <SearchComponent id="search" className="pagefind-ui" uiOptions={{ showImages: false }} />
 </BaseLayout>

@@ -9,7 +9,10 @@ import expressiveCode from "astro-expressive-code";
 import pagefind from "astro-pagefind";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeExternalLinks from "rehype-external-links";
+import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
+import remarkMath from "remark-math";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://example.com",
@@ -44,7 +47,10 @@ export default defineConfig({
     pagefind(),
   ],
   markdown: {
+    remarkPlugins: [remarkMath],
     rehypePlugins: [
+      // LaTeX math support
+      rehypeKatex,
       // Transform alt text into figure captions
       rehypeFigure,
       // Open external links in a new tab for security
@@ -54,5 +60,7 @@ export default defineConfig({
       // Add anchor links to headings
       [rehypeAutolinkHeadings, { behavior: "append" }],
     ],
+    // Use ExpressiveCode
+    syntaxHighlight: false,
   },
 });

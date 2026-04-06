@@ -15,6 +15,7 @@ ignorePaths:
 words:
   - frontmatter
   - jing
+  - Katex
   - kebabcase
   - microflash
   - noopener

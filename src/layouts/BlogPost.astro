@@ -48,8 +48,11 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
         {
           categories.length > 0 && (
             <span class="categories">
-              {categories.map((category) => (
-                <a href={`/categories/${slugifyStr(category)}`}>{category}</a>
+              {categories.map((category, index) => (
+                <>
+                  {index > 0 && ", "}
+                  <a href={`/categories/${slugifyStr(category)}`}>{category}</a>
+                </>
               ))}
             </span>
           )

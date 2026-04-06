@@ -66,6 +66,9 @@
 }
 @media (max-width: 1024px) {
   .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     position: fixed;
     top: 0;
     right: 0;

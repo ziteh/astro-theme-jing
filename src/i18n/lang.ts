@@ -19,6 +19,10 @@ const en = {
     title: "About",
     desc: "About me",
   },
+  notFound: {
+    title: "Page Not Found",
+    desc: "The page you are looking for does not exist.",
+  },
   common: {
     backToTop: "Back to top",
     viewAllPosts: "View all posts",
@@ -68,6 +72,10 @@ const zhHant: typeof en = {
   about: {
     title: "關於",
     desc: "關於我",
+  },
+  notFound: {
+    title: "找不到頁面",
+    desc: "您正在尋找的頁面不存在。",
   },
   common: {
     backToTop: "回到頂部",

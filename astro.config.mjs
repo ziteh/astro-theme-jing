@@ -3,6 +3,7 @@
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
+import rehypeFigure from "@microflash/rehype-figure";
 import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import pagefind from "astro-pagefind";
@@ -40,4 +41,9 @@ export default defineConfig({
     sitemap(),
     pagefind(),
   ],
+  markdown: {
+    rehypePlugins: [
+      rehypeFigure, // Transform alt text into figure captions
+    ],
+  },
 });

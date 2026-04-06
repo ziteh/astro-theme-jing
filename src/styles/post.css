@@ -11,7 +11,7 @@
 }
 .title h1 {
   margin: 0 0 0.5em 0;
-  font-weight: 400;
+  font-weight: var(--font-weight-normal);
 }
 .date {
   margin-bottom: 0.5em;
@@ -24,7 +24,7 @@
   position: relative;
 }
 .main-content {
-  font-weight: 400;
+  font-weight: var(--font-weight-normal);
   padding-bottom: 2em;
   flex: 1;
   min-width: 0;
@@ -43,11 +43,11 @@
   color: var(--color-700);
 }
 .sidebar {
-  font-weight: 300;
+  font-weight: var(--font-weight-light);
   font-size: 0.85em;
   position: fixed;
-  top: 140px;
-  left: calc(50% + var(--content-width) / 2 + 2.5rem);
+  bottom: 80px;
+  left: calc(50% + var(--content-width) / 2 + 6rem);
   width: 160px;
   max-height: calc(100vh - 100px);
   overflow-y: auto;

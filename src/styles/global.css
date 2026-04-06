@@ -17,6 +17,9 @@
   --font-size-h3: clamp(1.25rem, 1.15rem + 0.5vw, 1.75rem);
   --font-size-h4: clamp(1.125rem, 1.1rem + 0.125vw, 1.25rem);
   --font-size-h5: clamp(1.0625rem, 1.045rem + 0.0875vw, 1.15rem);
+  --font-weight-bold: 600;
+  --font-weight-normal: 400;
+  --font-weight-light: 300;
 
   /* Layout */
   --content-width: 720px;
@@ -49,7 +52,7 @@
 
 body {
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: var(--font-weight-light);
   margin: 0;
   padding: 0;
   text-align: left;
@@ -77,7 +80,7 @@ h5,
 h6 {
   margin: 3.75rem 0 1.2rem 0;
   color: var(--color-900);
-  font-weight: 600;
+  font-weight: var(--font-weight-bold);
   line-height: 1.2;
 }
 h1 {
@@ -102,7 +105,7 @@ h6 {
 
 strong,
 b {
-  font-weight: 600;
+  font-weight: var(--font-weight-bold);
 }
 
 a {

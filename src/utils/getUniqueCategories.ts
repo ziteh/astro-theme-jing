@@ -1,5 +1,4 @@
 import type { CollectionEntry } from "astro:content";
-import postFilter from "@/utils/postFilter";
 import { slugifyStr } from "@/utils/slugify";
 
 interface Category {
@@ -12,7 +11,6 @@ const getUniqueCategories = (posts: CollectionEntry<"blog">[]): Category[] => {
   const categoryMap = new Map<string, Category>();
 
   posts
-    .filter(postFilter)
     .flatMap((post) => post.data.categories)
     .forEach((category) => {
       const id = slugifyStr(category);

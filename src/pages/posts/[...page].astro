@@ -1,14 +1,11 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import { SITE } from "@/consts";
 import PostListLayout from "@/layouts/PostListLayout.astro";
-import postFilter from "@/utils/postFilter";
+import getBlogPosts from "@/utils/getPosts";
 
 export async function getStaticPaths() {
-  const posts = (await getCollection("blog"))
-    .filter(postFilter)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
+  const posts = await getBlogPosts();
   const totalPages = Math.ceil(posts.length / SITE.postsPerPage);
 
   return Array.from({ length: totalPages }, (_, i) => ({

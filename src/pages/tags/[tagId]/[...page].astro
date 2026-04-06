@@ -1,14 +1,12 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import { SITE } from "@/consts";
 import PostListLayout from "@/layouts/PostListLayout.astro";
+import getBlogPosts from "@/utils/getPosts";
 import getUniqueTags from "@/utils/getUniqueTags";
-import postFilter from "@/utils/postFilter";
 
 export async function getStaticPaths() {
-  const posts = (await getCollection("blog"))
-    .filter(postFilter)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  const posts = await getBlogPosts();
   const tags = getUniqueTags(posts);
 
   return tags.flatMap((tag) => {

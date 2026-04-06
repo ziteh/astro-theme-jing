@@ -1,16 +1,12 @@
 ---
-import { getCollection } from "astro:content";
 import PostCard from "@/components/PostCard.astro";
 import { SITE } from "@/consts";
 import { _t } from "@/i18n/lang";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import getDescription from "@/utils/getDescription";
-import postFilter from "@/utils/postFilter";
+import getBlogPosts from "@/utils/getPosts";
 
-const posts = (await getCollection("blog"))
-  .filter(postFilter)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, SITE.postsPerHomepage);
+const posts = (await getBlogPosts()).slice(0, SITE.postsPerHomepage);
 ---
 
 <BaseLayout title={SITE.title} description={SITE.description}>

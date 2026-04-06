@@ -1,6 +1,5 @@
 // @ts-check
 
-import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import rehypeFigure from "@microflash/rehype-figure";
@@ -71,7 +70,6 @@ export default defineConfig({
     sitemap(),
     // Search engine
     pagefind(),
-    mdx(),
     // Compression
     playformCompress(),
     astroCompressor({ gzip: true, zstd: true, brotli: true }),

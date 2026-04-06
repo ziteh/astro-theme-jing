@@ -7,6 +7,8 @@ import rehypeFigure from "@microflash/rehype-figure";
 import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import pagefind from "astro-pagefind";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeSlug from "rehype-slug";
 
 // https://astro.build/config
 export default defineConfig({
@@ -44,6 +46,8 @@ export default defineConfig({
   markdown: {
     rehypePlugins: [
       rehypeFigure, // Transform alt text into figure captions
+      rehypeSlug, // Add id attributes to headings (rehypeAutolinkHeadings)
+      [rehypeAutolinkHeadings, { behavior: "append" }],
     ],
   },
 });

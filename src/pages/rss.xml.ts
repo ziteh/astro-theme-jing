@@ -9,10 +9,13 @@ export const GET: APIRoute = async ({ site }) => {
   }
 
   const posts = await getBlogPosts();
+
+  // https://docs.astro.build/en/recipes/rss/
   return rss({
     title: SITE.title,
     description: SITE.description,
     site,
+    trailingSlash: false,
     items: posts.map((post) => ({
       ...post.data,
       link: `/posts/${post.id}`,

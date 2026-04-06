@@ -22,7 +22,7 @@ const en = {
   archives: {
     title: "Archives",
     desc: "All posts",
-    total(count: number) {
+    total(count: number): string {
       return `Total ${count} posts`;
     },
   },
@@ -35,6 +35,8 @@ const en = {
     viewAllPosts: "View all posts",
     rssFeed: "Subscribe to RSS feed",
     lastUpdatedOn: "Last updated on",
+    featuredPost: "Featured",
+    recentPost: "Recent",
   },
   pagination: {
     next: "Next",
@@ -83,7 +85,7 @@ const zhHant: typeof en = {
   archives: {
     title: "封存",
     desc: "所有文章",
-    total(count: number) {
+    total(count: number): string {
       return `總共 ${count} 篇文章`;
     },
   },
@@ -96,6 +98,8 @@ const zhHant: typeof en = {
     viewAllPosts: "所有文章",
     rssFeed: "訂閱 RSS",
     lastUpdatedOn: "最後更新於",
+    featuredPost: "精選",
+    recentPost: "最新",
   },
   pagination: {
     next: "下一頁",

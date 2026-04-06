@@ -14,12 +14,10 @@ const getUniqueCategories = (posts: CollectionEntry<"blog">[]): Category[] => {
     .flatMap((post) => post.data.categories)
     .forEach((category) => {
       const id = slugifyStr(category);
-      if (categoryMap.has(id)) {
-        // Existing
-        const existingCategory = categoryMap.get(id)!;
+      const existingCategory = categoryMap.get(id);
+      if (existingCategory) {
         existingCategory.count += 1;
       } else {
-        // New
         categoryMap.set(id, {
           id,
           name: category,

@@ -47,6 +47,7 @@ const en = {
   },
 };
 
+// biome-ignore lint/correctness/noUnusedVariables: for example
 const zhHant: typeof en = {
   posts: {
     title: "文章",

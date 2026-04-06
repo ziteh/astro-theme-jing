@@ -62,7 +62,7 @@ const getDescription = (markdownContent: string): string => {
   // Otherwise, use the first `SITE.getDescriptionCount` characters
   let short = moreTagMatch
     ? moreTagMatch[1]
-    : processedContent.substring(0, SITE.getDescriptionCount) + " ...";
+    : `${processedContent.substring(0, SITE.getDescriptionCount)} ...`;
 
   // Remove Markdown syntax
   for (const patternKey in regexReplacers) {

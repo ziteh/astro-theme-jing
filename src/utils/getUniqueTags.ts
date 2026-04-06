@@ -14,12 +14,10 @@ const getUniqueTags = (posts: CollectionEntry<"blog">[]): Tag[] => {
     .flatMap((post) => post.data.tags)
     .forEach((tag) => {
       const id = slugifyStr(tag);
-      if (tagMap.has(id)) {
-        // Existing
-        const existingTag = tagMap.get(id)!;
+      const existingTag = tagMap.get(id);
+      if (existingTag) {
         existingTag.count += 1;
       } else {
-        // New
         tagMap.set(id, {
           id,
           name: tag,

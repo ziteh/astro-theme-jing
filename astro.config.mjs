@@ -67,7 +67,21 @@ export default defineConfig({
       },
     }),
     // Sitemap generation
-    sitemap(),
+    sitemap({
+      serialize(item) {
+        if (/\/posts\//.test(item.url)) {
+          // Blog posts
+          item.priority = 0.9;
+        } else if (/\/$/.test(item.url)) {
+          // Home page
+          item.priority = 0.8;
+        } else {
+          // Default priority for all other pages
+          item.priority = 0.2;
+        }
+        return item;
+      },
+    }),
     // Search engine
     pagefind(),
     // Compression

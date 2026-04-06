@@ -1,5 +1,3 @@
-// @ts-check
-
 import sitemap from "@astrojs/sitemap";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import rehypeFigure from "@microflash/rehype-figure";

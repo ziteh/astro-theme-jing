@@ -15,7 +15,7 @@
 }
 .date {
   margin-bottom: 0.5em;
-  color: var(--text-muted);
+  color: var(--color-700);
   font-size: 0.9em;
 }
 .content-wrapper {
@@ -32,7 +32,7 @@
 .categories {
   margin-bottom: 1.25em;
   font-size: 0.9em;
-  color: var(--text-muted);
+  color: var(--color-700);
 }
 .categories::before {
   content: "|";
@@ -40,7 +40,7 @@
 }
 .categories a {
   text-decoration: none;
-  color: var(--text-muted);
+  color: var(--color-700);
 }
 .sidebar {
   font-weight: 300;
@@ -73,8 +73,8 @@
     width: 260px;
     height: 100vh;
     max-height: 100vh;
-    background: var(--bg);
-    border-left: 1px solid var(--border);
+    background: var(--color-100);
+    border-left: 1px solid var(--color-500);
     padding: 1.5em;
     z-index: 1001;
     transform: translateX(100%);
@@ -108,9 +108,9 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    border: 1px solid var(--border);
-    background: var(--bg);
-    color: var(--text);
+    border: 1px solid var(--color-500);
+    background: var(--color-100);
+    color: var(--color-900);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     cursor: pointer;
     z-index: 999;
@@ -142,7 +142,7 @@
   text-decoration: none;
 }
 .post-nav a:hover {
-  border-color: var(--text-muted);
+  border-color: var(--color-700);
 }
 .post-nav-prev {
   margin-left: auto;
@@ -152,7 +152,7 @@
   display: flex;
   align-items: center;
   font-size: 0.8em;
-  color: var(--text-muted);
+  color: var(--color-700);
 }
 .post-nav-title {
   font-size: 0.95em;

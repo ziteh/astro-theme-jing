@@ -15,8 +15,31 @@ import remarkMath from "remark-math";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.com",
+  site: "https://example.com", // Replace with your site's URL, e.g. https://username.github.io
+  compressHTML: true,
+  trailingSlash: "never",
+  build: {
+    format: "file", // generate `page.html` instead of `page/index.html`
+  },
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [
+      // LaTeX math support
+      rehypeKatex,
+      // Transform alt text into figure captions
+      rehypeFigure,
+      // Open external links in a new tab for security
+      [rehypeExternalLinks, { target: "_blank", rel: "noopener noreferrer" }],
+      // Add id attributes to headings (rehypeAutolinkHeadings)
+      rehypeSlug,
+      // Add anchor links to headings
+      [rehypeAutolinkHeadings, { behavior: "append" }],
+    ],
+    // Use ExpressiveCode instead of built-in syntax highlighting
+    syntaxHighlight: false,
+  },
   integrations: [
+    // Syntax highlighting
     expressiveCode({
       plugins: [pluginLineNumbers()],
       themes: ["one-dark-pro", "min-light"],
@@ -42,25 +65,9 @@ export default defineConfig({
         },
       },
     }),
+    // Search engine
+    pagefind(),
     mdx(),
     sitemap(),
-    pagefind(),
   ],
-  markdown: {
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [
-      // LaTeX math support
-      rehypeKatex,
-      // Transform alt text into figure captions
-      rehypeFigure,
-      // Open external links in a new tab for security
-      [rehypeExternalLinks, { target: "_blank", rel: "noopener noreferrer" }],
-      // Add id attributes to headings (rehypeAutolinkHeadings)
-      rehypeSlug,
-      // Add anchor links to headings
-      [rehypeAutolinkHeadings, { behavior: "append" }],
-    ],
-    // Use ExpressiveCode
-    syntaxHighlight: false,
-  },
 });

@@ -19,7 +19,7 @@ const { id, title, description, date, updated } = Astro.props;
     <h2>{title}</h2>
     {description && <p class="desc">{description}</p>}
     <p class="date">
-      <FormattedDate date={updated || date} />
+      <FormattedDate date={updated ?? date} />
     </p>
   </div>
 </a>

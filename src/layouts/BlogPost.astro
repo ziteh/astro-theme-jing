@@ -37,14 +37,8 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
       <div class="title">
         <h1>{title}</h1>
         <span class="date">
-          <FormattedDate date={date} />
-          {
-            updated && (
-              <div class="last-updated-on">
-                {_t.common.lastUpdatedOn} <FormattedDate date={updated} />
-              </div>
-            )
-          }
+          <FormattedDate date={updated ?? date} />
+          {updated && <span>, {_t.date.postedOn(_t.date.shortFormat(date))}</span>}
         </span>
         {
           categories.length > 0 && (

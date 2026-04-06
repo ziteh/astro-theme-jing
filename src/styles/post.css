@@ -18,9 +18,6 @@
   color: var(--text-muted);
   font-size: 0.9em;
 }
-.last-updated-on {
-  font-style: italic;
-}
 .content-wrapper {
   display: flex;
   gap: 2em;

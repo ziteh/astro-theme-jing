@@ -34,7 +34,6 @@ const en = {
     backToTop: "Back to top",
     viewAllPosts: "View all posts",
     rssFeed: "Subscribe to RSS feed",
-    lastUpdatedOn: "Last updated on",
     featuredPost: "Featured",
     recentPost: "Recent",
   },
@@ -56,6 +55,9 @@ const en = {
         month: "long",
         day: "numeric",
       });
+    },
+    postedOn(date: string): string {
+      return `Posted on ${date}`;
     },
   },
 };
@@ -97,7 +99,6 @@ const zhHant: typeof en = {
     backToTop: "回到頂部",
     viewAllPosts: "所有文章",
     rssFeed: "訂閱 RSS",
-    lastUpdatedOn: "最後更新於",
     featuredPost: "精選",
     recentPost: "最新",
   },
@@ -119,6 +120,9 @@ const zhHant: typeof en = {
         month: "long",
         day: "numeric",
       });
+    },
+    postedOn(date: string): string {
+      return `發佈於${date}`;
     },
   },
 };

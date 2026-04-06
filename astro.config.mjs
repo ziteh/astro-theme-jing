@@ -5,6 +5,7 @@ import sitemap from "@astrojs/sitemap";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import rehypeFigure from "@microflash/rehype-figure";
 import { defineConfig } from "astro/config";
+import astroCompressor from "astro-compressor";
 import expressiveCode from "astro-expressive-code";
 import pagefind from "astro-pagefind";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -65,9 +66,12 @@ export default defineConfig({
         },
       },
     }),
+    // Sitemap generation
+    sitemap(),
     // Search engine
     pagefind(),
+    // Compression
+    astroCompressor({ gzip: true, zstd: true, brotli: true }),
     mdx(),
-    sitemap(),
   ],
 });

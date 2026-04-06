@@ -16,7 +16,13 @@ const postFilter = ({ data }: CollectionEntry<"blog">) => {
 
 const getBlogPosts = async (): Promise<CollectionEntry<"blog">[]> => {
   const posts = await getCollection("blog");
-  return posts.filter(postFilter).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return posts
+    .filter(postFilter)
+    .sort(
+      (a, b) =>
+        Math.floor(new Date(b.data.updated ?? b.data.date).getTime()) -
+        Math.floor(new Date(a.data.updated ?? a.data.date).getTime()),
+    );
 };
 
 export default getBlogPosts;

@@ -19,6 +19,13 @@ const en = {
     title: "About",
     desc: "About me",
   },
+  archives: {
+    title: "Archives",
+    desc: "All posts",
+    total(count: number) {
+      return `Total ${count} posts`;
+    },
+  },
   notFound: {
     title: "Page Not Found",
     desc: "The page you are looking for does not exist.",
@@ -72,6 +79,13 @@ const zhHant: typeof en = {
   about: {
     title: "關於",
     desc: "關於我",
+  },
+  archives: {
+    title: "封存",
+    desc: "所有文章",
+    total(count: number) {
+      return `總共 ${count} 篇文章`;
+    },
   },
   notFound: {
     title: "找不到頁面",

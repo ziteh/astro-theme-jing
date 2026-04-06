@@ -1,0 +1,91 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Pagination from "@/components/Pagination.astro";
+import { SITE } from "@/consts";
+import { _t } from "@/i18n/lang";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import getBlogPosts from "@/utils/getPosts";
+
+export async function getStaticPaths() {
+  const posts = await getBlogPosts();
+  const totalPages = Math.ceil(posts.length / SITE.postsPerArchives);
+
+  return Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: i === 0 ? undefined : String(i + 1) },
+    props: {
+      posts: posts.slice(i * SITE.postsPerArchives, (i + 1) * SITE.postsPerArchives),
+      currentPage: i + 1,
+      totalPages,
+      allPosts: posts,
+    },
+  }));
+}
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+  currentPage: number;
+  totalPages: number;
+  allPosts: CollectionEntry<"blog">[];
+}
+
+const { posts, currentPage, totalPages, allPosts } = Astro.props;
+---
+
+<BaseLayout title={_t.archives.title} description={_t.archives.desc}>
+  <section>
+    <div class="title">
+      <h1>{_t.archives.title}</h1>
+      <span>{_t.archives.total(allPosts.length)}</span>
+    </div>
+    <ul class="post-list">
+      {
+        posts.map((post) => (
+          <li>
+            <a href={`/posts/${post.id}`} class="post-item">
+              <span>{post.data.title}</span>
+              <time datetime={post.data.date.toISOString()}>
+                {_t.date.shortFormat(post.data.date)}
+              </time>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl="/archives" />
+  </section>
+</BaseLayout>
+
+<style>
+  .title {
+    margin-bottom: 2.5em;
+    padding: 1em 0;
+    line-height: 1;
+  }
+  .title h1 {
+    margin: 0 0 0.5em 0;
+    font-weight: 400;
+  }
+  .post-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  .post-list li {
+    margin-bottom: 1rem;
+  }
+  .post-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    padding: 0.25em 0.5em;
+  }
+  .post-item:hover {
+    background-color: var(--border);
+    border-radius: 4px;
+  }
+  .post-item time {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+</style>

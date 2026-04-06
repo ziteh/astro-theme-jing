@@ -8,6 +8,7 @@ export const SITE = {
   timezone: "UTC", // IANA time zone name (see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 
   postsPerHomepage: 3,
+  postsPerArchives: 10,
   postsPerPage: 5,
 
   getDescriptionCount: 150, // If 'more' tag is not found, use this count of characters

@@ -78,6 +78,8 @@ const tags = getUniqueTags(allPosts);
           ))
         }
       </ul>
+      <h2>{_t.archives.title}</h2>
+      <a class="archives-link" href="/archives">{_t.archives.desc}</a>
     </aside>
   </section>
 </BaseLayout>
@@ -137,6 +139,14 @@ const tags = getUniqueTags(allPosts);
     font-family: var(--font-mono);
     font-size: 0.72rem;
     opacity: 0.6;
+  }
+  .archives-link {
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: var(--text-muted);
+  }
+  .archives-link:hover {
+    color: var(--text);
   }
   @media (max-width: 1024px) {
     .sidebar {

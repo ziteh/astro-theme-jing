@@ -4,6 +4,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import rehypeFigure from "@microflash/rehype-figure";
+import playformCompress from "@playform/compress";
 import { defineConfig } from "astro/config";
 import astroCompressor from "astro-compressor";
 import expressiveCode from "astro-expressive-code";
@@ -70,8 +71,9 @@ export default defineConfig({
     sitemap(),
     // Search engine
     pagefind(),
-    // Compression
-    astroCompressor({ gzip: true, zstd: true, brotli: true }),
     mdx(),
+    // Compression
+    playformCompress(),
+    astroCompressor({ gzip: true, zstd: true, brotli: true }),
   ],
 });

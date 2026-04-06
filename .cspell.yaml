@@ -17,6 +17,8 @@ words:
   - jing
   - kebabcase
   - microflash
+  - noopener
+  - noreferrer
   - pagefind
   - rehype
   - tocbot

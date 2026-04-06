@@ -8,8 +8,8 @@ import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import pagefind from "astro-pagefind";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeExternalLinks from "rehype-external-links";
 import rehypeSlug from "rehype-slug";
-
 // https://astro.build/config
 export default defineConfig({
   site: "https://example.com",
@@ -45,8 +45,13 @@ export default defineConfig({
   ],
   markdown: {
     rehypePlugins: [
-      rehypeFigure, // Transform alt text into figure captions
-      rehypeSlug, // Add id attributes to headings (rehypeAutolinkHeadings)
+      // Transform alt text into figure captions
+      rehypeFigure,
+      // Open external links in a new tab for security
+      [rehypeExternalLinks, { target: "_blank", rel: "noopener noreferrer" }],
+      // Add id attributes to headings (rehypeAutolinkHeadings)
+      rehypeSlug,
+      // Add anchor links to headings
       [rehypeAutolinkHeadings, { behavior: "append" }],
     ],
   },

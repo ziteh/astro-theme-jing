@@ -9,8 +9,8 @@
   --color-100: #fcfcfc;
 
   /* Typography */
-  --font-body: "Noto Sans", "Noto Sans TC", system-ui, sans-serif;
-  --font-mono: "Fira Mono", "Noto Sans TC", monospace;
+  --font-body: "Noto Sans", sans-serif;
+  --font-mono: "Fira Mono", monospace;
   --font-size-main: clamp(1rem, 0.9875rem + 0.0625vw, 1.0625rem);
   --font-size-h1: clamp(1.75rem, 1.56rem + 0.95vw, 2.7rem);
   --font-size-h2: clamp(1.5rem, 1.35rem + 0.75vw, 2.25rem);
@@ -19,7 +19,7 @@
   --font-size-h5: clamp(1.0625rem, 1.045rem + 0.0875vw, 1.15rem);
   --font-weight-bold: 600;
   --font-weight-normal: 400;
-  --font-weight-light: 300;
+  --font-weight-light: 400;
 
   /* Layout */
   --content-width: 720px;

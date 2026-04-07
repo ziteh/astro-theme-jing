@@ -62,7 +62,7 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
           {toc && <div class="toc" />}
           {toc && <hr />}
           <div class="back-to-top">
-            <a href="#top">{_t.common.backToTop}</a>
+            <button id="back-to-top" type="button">{_t.common.backToTop}</button>
           </div>
         </aside>
         <button class="sidebar-fab" aria-label="Toggle sidebar" type="button">
@@ -134,6 +134,16 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
     }
     fab.addEventListener("click", toggle);
     overlay.addEventListener("click", toggle);
+  })();
+</script>
+<script is:inline>
+  (function () {
+    const backToTop = document.getElementById("back-to-top");
+    if (!backToTop) return;
+    backToTop.addEventListener("click", () => {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
   })();
 </script>
 <script is:inline>

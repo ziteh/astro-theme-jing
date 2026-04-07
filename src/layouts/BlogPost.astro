@@ -29,6 +29,8 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
         integrity="sha512-/ANQiHMqpRl+E0zEAd250N21OOmJsYbhiJWY0Y8yG0TII47yZn1+gDNobMlf+h/FTyImprLXYgXbX3bCYyq/vg=="
         crossorigin="anonymous"
         referrerpolicy="no-referrer"
+        media="print"
+        onload="this.media='all'"
       />
     )
   }
@@ -162,6 +164,7 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
 </script>
 <script
   is:inline
+  async
   src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.36.4/tocbot.min.js"
   integrity="sha512-BZUSsJAPNtkd+kdY/bD7hvQKZ5zlgWt++KGy/Pa/5uEJNgs0jZ6JaX6MuclRUanowuxmhb5S3LRPEa3QmrUVfA=="
   crossorigin="anonymous"

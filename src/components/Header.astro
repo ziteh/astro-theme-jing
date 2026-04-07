@@ -12,7 +12,9 @@ import { _t } from "@/i18n/lang";
     <div class="internal-links">
       <HeaderLink href="/posts">{_t.posts.title}</HeaderLink>
       <HeaderLink href="/about">{_t.about.title}</HeaderLink>
-      <HeaderLink href="/search" class="icon-link-header"><IconSearch /></HeaderLink>
+      <HeaderLink href="/search" class="icon-link-header" aria-label={_t.search.title}
+        ><IconSearch /></HeaderLink
+      >
       <ThemeToggle />
     </div>
   </nav>

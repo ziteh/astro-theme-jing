@@ -10,9 +10,20 @@ interface Props {
   ogType?: "website" | "article";
   image?: string;
   math?: boolean;
+  pubDate?: Date;
+  updatedDate?: Date;
 }
 
-const { title, description, ogType = "website", image, math = false } = Astro.props;
+const {
+  title,
+  description,
+  ogType = "website",
+  image,
+  math = false,
+  pubDate,
+  updatedDate,
+} = Astro.props;
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const showTitle = title === SITE.title ? title : `${title} | ${SITE.title}`;
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -26,6 +37,7 @@ const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="canonical" href={canonicalURL} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link
       rel="alternate"
@@ -35,40 +47,58 @@ const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
     />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Canonical URL -->
-    <link rel="canonical" href={canonicalURL} />
-
     <!-- Primary Meta Tags -->
     <title>{showTitle}</title>
     <meta name="title" content={showTitle} />
     <meta name="description" content={description} />
+    <meta name="author" content={SITE.author} />
+    {pubDate && <meta name="article:published_time" content={pubDate.toISOString()} />}
+    {updatedDate && <meta name="article:modified_time" content={updatedDate.toISOString()} />}
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={showTitle} />
     <meta property="og:description" content={description} />
+    <meta property="og:locale" content={SITE.langOg ?? "en_US"} />
     {image && <meta property="og:image" content={new URL(image, Astro.url)} />}
 
     <!-- Twitter -->
-    <meta property="twitter:card" content={image ? "summary_large_image" : "summary"} />
-    <meta property="twitter:url" content={Astro.url} />
-    <meta property="twitter:title" content={showTitle} />
-    <meta property="twitter:description" content={description} />
-    {image && <meta property="twitter:image" content={new URL(image, Astro.url)} />}
+    <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+    <meta name="twitter:url" content={Astro.url} />
+    <meta name="twitter:title" content={showTitle} />
+    <meta name="twitter:description" content={description} />
+    {image && <meta name="twitter:image" content={new URL(image, Astro.url)} />}
 
-    <!--
-    Google Search Console
-    https://support.google.com/webmasters/answer/9008080#meta_tag_verification
-    -->
-    {
-      googleSiteVerification && (
-        <meta name="google-site-verification" content={googleSiteVerification} />
-      )
-    }
+    <!-- Google JSON-LD https://json-ld.org/ -->
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": ogType === "article" ? "BlogPosting" : "WebSite",
+        headline: title,
+        description: description,
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": canonicalURL,
+        },
+        author: {
+          "@type": "Person",
+          name: SITE.author,
+          url: `${new URL("/about/", Astro.site).toString()}`,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: SITE.title,
+        },
+        ...(pubDate && { datePublished: pubDate.toISOString() }),
+        ...(updatedDate && { dateModified: updatedDate.toISOString() }),
+        ...(image && { image: new URL(image, Astro.url).toString() }),
+      })}
+    />
 
-    <slot name="head" />
-
+    <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -88,6 +118,19 @@ const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
         />
       )
     }
+
+    <!-- Google Search Console https://support.google.com/webmasters/answer/9008080#meta_tag_verification -->
+    {
+      googleSiteVerification && (
+        <meta name="google-site-verification" content={googleSiteVerification} />
+      )
+    }
+
+    <!-- CSP -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" /> -->
+
+    <!-- Custom head content -->
+    <slot name="head" />
 
     <!-- Theme toggle -->
     <script is:inline>

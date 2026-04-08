@@ -13,11 +13,14 @@ ignorePaths:
   - package-lock.json
   - "*.svg"
 words:
+  - autorun
   - fontsource
   - frontmatter
   - jing
   - Katex
   - kebabcase
+  - lhci
+  - lighthouseci
   - microflash
   - noopener
   - noreferrer

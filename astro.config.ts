@@ -40,7 +40,17 @@ export default defineConfig({
   integrations: [
     // Syntax highlighting
     expressiveCode({
-      plugins: [pluginLineNumbers()],
+      plugins: [
+        pluginLineNumbers(),
+        {
+          name: "a11y-pre-tabindex",
+          hooks: {
+            postprocessRenderedBlock: ({ renderData }) => {
+              renderData.blockAst.properties.tabindex = 0;
+            },
+          },
+        },
+      ],
       themes: ["one-dark-pro", "min-light"],
       defaultProps: {
         wrap: false,

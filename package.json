@@ -13,6 +13,8 @@
     "lint:check": "biome check",
     "test:a11y": "playwright test",
     "test:lh": "pnpm build && lhci autorun",
+    "seonaut:up": "podman compose -f docker-compose-seonaut.yml up -d",
+    "seonaut:down": "podman compose -f docker-compose-seonaut.yml down",
     "prepare": "husky"
   },
   "dependencies": {

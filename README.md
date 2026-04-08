@@ -44,6 +44,18 @@ The `src/content/blog` directory contains "collections" of related Markdown and 
 
 Any static assets, like images, can be placed in the `public/` directory.
 
+### SEOnaut
+
+```bash
+pnpm seonaut:up
+
+pnpm dev --host
+```
+
+<http://localhost:9000/signin>
+
+<http://host.containers.internal:4321>
+
 ## Todo
 
 - [ ] On the `posts/` page, tags and categories are displayed on mobile devices and are collapsed by default

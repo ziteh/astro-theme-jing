@@ -86,4 +86,9 @@ export default defineConfig({
     playformCompress(),
     astroCompressor({ gzip: true, zstd: true, brotli: true }),
   ],
+  vite: {
+    server: {
+      allowedHosts: ["host.containers.internal"],
+    },
+  },
 });

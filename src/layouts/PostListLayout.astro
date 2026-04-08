@@ -29,6 +29,7 @@ const tags = getUniqueTags(allPosts);
 <BaseLayout title={SITE.title} description={SITE.description}>
   <main class="content-wrapper">
     <section>
+      <h1 class="sr-only">{_t.posts.title}</h1>
       <ul class="post-list">
         {
           posts.map((post) => (

@@ -17,12 +17,14 @@ const { frontmatter } = Astro.props;
   title={frontmatter.title || _t.about.title}
   description={frontmatter.description || _t.about.desc}
 >
-  <section>
-    <div class="title">
-      <h1>{frontmatter.title || _t.about.title}</h1>
-    </div>
-    <div class="main-content" data-pagefind-body>
-      <slot />
-    </div>
-  </section>
+  <main>
+    <section>
+      <div class="title">
+        <h1>{frontmatter.title || _t.about.title}</h1>
+      </div>
+      <div class="main-content" data-pagefind-body>
+        <slot />
+      </div>
+    </section>
+  </main>
 </BaseLayout>

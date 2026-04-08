@@ -5,5 +5,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title={_t.search.title} description={_t.search.desc}>
-  <SearchComponent id="search" className="pagefind-ui" uiOptions={{ showImages: false }} />
+  <main>
+    <SearchComponent id="search" className="pagefind-ui" uiOptions={{ showImages: false }} />
+  </main>
 </BaseLayout>

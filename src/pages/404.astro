@@ -4,12 +4,14 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title={_t.notFound.title} description={_t.notFound.desc}>
-  <div class="not-found">
-    <span><code class="not-found-404">404</code></span>
-    <h1 class="not-found-title">{_t.notFound.title}</h1>
-    <p class="not-found-desc">{_t.notFound.desc}</p>
-    <p class="not-found-search"><a href="/search">{_t.search.title}</a></p>
-  </div>
+  <main>
+    <div class="not-found">
+      <span><code class="not-found-404">404</code></span>
+      <h1 class="not-found-title">{_t.notFound.title}</h1>
+      <p class="not-found-desc">{_t.notFound.desc}</p>
+      <p class="not-found-search"><a href="/search">{_t.search.title}</a></p>
+    </div>
+  </main>
 </BaseLayout>
 
 <style>

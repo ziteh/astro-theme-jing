@@ -34,78 +34,80 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
       />
     )
   }
-  <article>
-    <div class="prose">
-      <div class="title">
-        <h1>{title}</h1>
-        <span class="date">
-          <FormattedDate date={updated ?? date} />
-          {updated && <span>, {_t.date.postedOn(_t.date.shortFormat(date))}</span>}
-        </span>
-        {
-          categories.length > 0 && (
-            <span class="categories">
-              {categories.map((category, index) => (
-                <>
-                  {index > 0 && ", "}
-                  <a href={`/categories/${slugifyStr(category)}`}>{category}</a>
-                </>
-              ))}
-            </span>
-          )
-        }
-      </div>
-      <div class="content-wrapper">
-        <div class="main-content" data-pagefind-body>
-          <slot />
+  <main>
+    <article>
+      <div class="prose">
+        <div class="title">
+          <h1>{title}</h1>
+          <span class="date">
+            <FormattedDate date={updated ?? date} />
+            {updated && <span>, {_t.date.postedOn(_t.date.shortFormat(date))}</span>}
+          </span>
+          {
+            categories.length > 0 && (
+              <span class="categories">
+                {categories.map((category, index) => (
+                  <>
+                    {index > 0 && ", "}
+                    <a href={`/categories/${slugifyStr(category)}`}>{category}</a>
+                  </>
+                ))}
+              </span>
+            )
+          }
         </div>
-        <div class="sidebar-overlay" aria-hidden="true"></div>
-        <aside class="sidebar">
-          {toc && <div class="toc" />}
-          {toc && <hr />}
-          <div class="back-to-top">
-            <button id="back-to-top" type="button">{_t.common.backToTop}</button>
+        <div class="content-wrapper">
+          <div class="main-content" data-pagefind-body>
+            <slot />
           </div>
-        </aside>
-        <button class="sidebar-fab" aria-label="Toggle sidebar" type="button">
-          <IconMenu />
-        </button>
+          <div class="sidebar-overlay" aria-hidden="true"></div>
+          <button class="sidebar-fab" aria-label="Toggle sidebar" type="button">
+            <IconMenu />
+          </button>
+        </div>
+        <hr />
+        <ul class="tag-list">
+          {
+            tags &&
+              tags.map((tag) => (
+                <li>
+                  <TagPill id={slugifyStr(tag)} name={tag} />
+                </li>
+              ))
+          }
+        </ul>
+        <nav class="post-nav" aria-label="Post navigation">
+          {
+            nextPost && (
+              <a href={`/posts/${nextPost.id}`} class="post-nav-next">
+                <span class="post-nav-label">
+                  <IconLeft />
+                </span>
+                <span class="post-nav-title">{nextPost.data.title}</span>
+              </a>
+            )
+          }
+          {
+            prevPost && (
+              <a href={`/posts/${prevPost.id}`} class="post-nav-prev">
+                <span class="post-nav-title">{prevPost.data.title}</span>
+                <span class="post-nav-label">
+                  <IconRight />
+                </span>
+              </a>
+            )
+          }
+        </nav>
       </div>
-      <hr />
-      <ul class="tag-list">
-        {
-          tags &&
-            tags.map((tag) => (
-              <li>
-                <TagPill id={slugifyStr(tag)} name={tag} />
-              </li>
-            ))
-        }
-      </ul>
-      <nav class="post-nav" aria-label="Post navigation">
-        {
-          nextPost && (
-            <a href={`/posts/${nextPost.id}`} class="post-nav-next">
-              <span class="post-nav-label">
-                <IconLeft />
-              </span>
-              <span class="post-nav-title">{nextPost.data.title}</span>
-            </a>
-          )
-        }
-        {
-          prevPost && (
-            <a href={`/posts/${prevPost.id}`} class="post-nav-prev">
-              <span class="post-nav-title">{prevPost.data.title}</span>
-              <span class="post-nav-label">
-                <IconRight />
-              </span>
-            </a>
-          )
-        }
-      </nav>
+    </article>
+  </main>
+  <aside class="sidebar">
+    {toc && <div class="toc" />}
+    {toc && <hr />}
+    <div class="back-to-top">
+      <button id="back-to-top" type="button">{_t.common.backToTop}</button>
     </div>
-  </article>
+  </aside>
 </BaseLayout>
 
 <style>

@@ -10,14 +10,32 @@ const posts = (await getBlogPosts()).slice(0, SITE.postsPerHomepage);
 ---
 
 <BaseLayout title={SITE.title} description={SITE.description}>
-  <section>
-    <h1 class="sr-only">{SITE.title}</h1>
-    <h2>{_t.common.featuredPost}</h2>
-    <ul>
-      {
-        posts
-          .filter((post) => post.data.featured)
-          .map((post) => (
+  <main>
+    <section>
+      <h1 class="sr-only">{SITE.title}</h1>
+      <h2>{_t.common.featuredPost}</h2>
+      <ul>
+        {
+          posts
+            .filter((post) => post.data.featured)
+            .map((post) => (
+              <li>
+                <PostCard
+                  id={post.id}
+                  title={post.data.title}
+                  description={post.data.description || getDescription(post.body || "")}
+                  date={post.data.date}
+                  updated={post.data.updated}
+                />
+              </li>
+            ))
+        }
+      </ul>
+      <hr />
+      <h2>{_t.common.recentPost}</h2>
+      <ul class="post-list">
+        {
+          posts.map((post) => (
             <li>
               <PostCard
                 id={post.id}
@@ -28,29 +46,13 @@ const posts = (await getBlogPosts()).slice(0, SITE.postsPerHomepage);
               />
             </li>
           ))
-      }
-    </ul>
-    <hr />
-    <h2>{_t.common.recentPost}</h2>
-    <ul class="post-list">
-      {
-        posts.map((post) => (
-          <li>
-            <PostCard
-              id={post.id}
-              title={post.data.title}
-              description={post.data.description || getDescription(post.body || "")}
-              date={post.data.date}
-              updated={post.data.updated}
-            />
-          </li>
-        ))
-      }
-    </ul>
-    <div class="view-all">
-      <a href="/posts">{_t.common.viewAllPosts}</a>
-    </div>
-  </section>
+        }
+      </ul>
+      <div class="view-all">
+        <a href="/posts">{_t.common.viewAllPosts}</a>
+      </div>
+    </section>
+  </main>
 </BaseLayout>
 
 <style>

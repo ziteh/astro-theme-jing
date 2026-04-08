@@ -27,8 +27,8 @@ const tags = getUniqueTags(allPosts);
 ---
 
 <BaseLayout title={SITE.title} description={SITE.description}>
-  <section class="content-wrapper">
-    <div>
+  <main class="content-wrapper">
+    <section>
       <ul class="post-list">
         {
           posts.map((post) => (
@@ -45,43 +45,43 @@ const tags = getUniqueTags(allPosts);
         }
       </ul>
       <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl={paginationBase} />
-    </div>
-    <aside class="sidebar">
-      <h2>{_t.tags.title}</h2>
-      <ul class="tags">
-        {
-          tags.map((tag) => (
-            <li>
-              <TagPill
-                id={tag.id}
-                name={tag.name}
-                count={tag.count}
-                active={tag.id === activeTagId}
-              />
-            </li>
-          ))
-        }
-      </ul>
-      {categories.length > 0 && <h2>{_t.categories.title}</h2>}
-      <ul class="categories">
-        {
-          categories.map((category) => (
-            <li>
-              <a
-                href={category.id === activeCategoryId ? "/posts" : `/categories/${category.id}`}
-                class:list={[{ active: category.id === activeCategoryId }]}
-              >
-                <span>{category.name}</span>
-                <span class="count">{category.count}</span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-      <h2>{_t.archives.title}</h2>
-      <a class="archives-link" href="/archives">{_t.archives.desc}</a>
-    </aside>
-  </section>
+    </section>
+  </main>
+  <aside class="sidebar">
+    <h2>{_t.tags.title}</h2>
+    <ul class="tags">
+      {
+        tags.map((tag) => (
+          <li>
+            <TagPill
+              id={tag.id}
+              name={tag.name}
+              count={tag.count}
+              active={tag.id === activeTagId}
+            />
+          </li>
+        ))
+      }
+    </ul>
+    {categories.length > 0 && <h2>{_t.categories.title}</h2>}
+    <ul class="categories">
+      {
+        categories.map((category) => (
+          <li>
+            <a
+              href={category.id === activeCategoryId ? "/posts" : `/categories/${category.id}`}
+              class:list={[{ active: category.id === activeCategoryId }]}
+            >
+              <span>{category.name}</span>
+              <span class="count">{category.count}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <h2>{_t.archives.title}</h2>
+    <a class="archives-link" href="/archives">{_t.archives.desc}</a>
+  </aside>
 </BaseLayout>
 
 <style>
@@ -91,7 +91,6 @@ const tags = getUniqueTags(allPosts);
     padding: 0;
   }
   .content-wrapper {
-    position: relative;
     max-width: var(--content-width);
     margin: 0 auto;
   }

@@ -1,7 +1,7 @@
 :root {
   color-scheme: light;
 
-  /* Colors */
+  /* Colors, from https://www.radix-ui.com/colors */
   --color-900: #202020;
   --color-700: #646464;
   --color-500: #cecece;

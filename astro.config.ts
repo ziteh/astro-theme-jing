@@ -78,8 +78,8 @@ export default defineConfig({
         },
       },
       styleOverrides: {
-        codeFontFamily: "var(--font-mono), var(--font-emoji)",
-        uiFontFamily: "var(--font-sans), var(--font-emoji)",
+        codeFontFamily: "var(--font-mono)",
+        uiFontFamily: "var(--font-body)",
         borderWidth: "0",
         textMarkers: {
           backgroundOpacity: "33%",
@@ -88,7 +88,7 @@ export default defineConfig({
         frames: {
           editorTabBarBackground: "transparent",
           frameBoxShadowCssValue: "transparent",
-          tooltipSuccessBackground: "#6b7280",
+          tooltipSuccessBackground: "var(--color-700)",
         },
       },
     }),

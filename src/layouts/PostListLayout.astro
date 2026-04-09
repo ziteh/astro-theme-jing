@@ -27,62 +27,64 @@ const tags = getUniqueTags(allPosts);
 ---
 
 <BaseLayout title={SITE.title} description={SITE.description}>
-  <main class="content-wrapper">
-    <section>
-      <h1 class="sr-only">{_t.posts.title}</h1>
-      <ul class="post-list">
+  <div class="page-layout">
+    <main class="content-wrapper">
+      <section>
+        <h1 class="sr-only">{_t.posts.title}</h1>
+        <ul class="post-list">
+          {
+            posts.map((post) => (
+              <li>
+                <PostCard
+                  id={post.id}
+                  title={post.data.title}
+                  description={post.data.description || getDescription(post.body || "")}
+                  date={post.data.date}
+                  updated={post.data.updated}
+                />
+              </li>
+            ))
+          }
+        </ul>
+        <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl={paginationBase} />
+      </section>
+    </main>
+    <aside class="sidebar">
+      <h2>{_t.tags.title}</h2>
+      <ul class="tags">
         {
-          posts.map((post) => (
+          tags.map((tag) => (
             <li>
-              <PostCard
-                id={post.id}
-                title={post.data.title}
-                description={post.data.description || getDescription(post.body || "")}
-                date={post.data.date}
-                updated={post.data.updated}
+              <TagPill
+                id={tag.id}
+                name={tag.name}
+                count={tag.count}
+                active={tag.id === activeTagId}
               />
             </li>
           ))
         }
       </ul>
-      <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl={paginationBase} />
-    </section>
-  </main>
-  <aside class="sidebar">
-    <h2>{_t.tags.title}</h2>
-    <ul class="tags">
-      {
-        tags.map((tag) => (
-          <li>
-            <TagPill
-              id={tag.id}
-              name={tag.name}
-              count={tag.count}
-              active={tag.id === activeTagId}
-            />
-          </li>
-        ))
-      }
-    </ul>
-    {categories.length > 0 && <h2>{_t.categories.title}</h2>}
-    <ul class="categories">
-      {
-        categories.map((category) => (
-          <li>
-            <a
-              href={category.id === activeCategoryId ? "/posts" : `/categories/${category.id}`}
-              class:list={[{ active: category.id === activeCategoryId }]}
-            >
-              <span>{category.name}</span>
-              <span class="count">{category.count}</span>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-    <h2>{_t.archives.title}</h2>
-    <a class="archives-link" href="/archives">{_t.archives.desc}</a>
-  </aside>
+      {categories.length > 0 && <h2>{_t.categories.title}</h2>}
+      <ul class="categories">
+        {
+          categories.map((category) => (
+            <li>
+              <a
+                href={category.id === activeCategoryId ? "/posts" : `/categories/${category.id}`}
+                class:list={[{ active: category.id === activeCategoryId }]}
+              >
+                <span>{category.name}</span>
+                <span class="count">{category.count}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <h2>{_t.archives.title}</h2>
+      <a class="archives-link" href="/archives">{_t.archives.desc}</a>
+    </aside>
+  </div>
 </BaseLayout>
 
 <style>
@@ -90,6 +92,11 @@ const tags = getUniqueTags(allPosts);
     list-style-type: none;
     margin: 0;
     padding: 0;
+  }
+  .page-layout {
+    position: relative;
+    max-width: var(--content-width);
+    margin: 0 auto;
   }
   .content-wrapper {
     max-width: var(--content-width);
@@ -103,6 +110,7 @@ const tags = getUniqueTags(allPosts);
     left: calc(100% + 2.5rem);
     top: 0;
     width: 170px;
+    padding: 3em 1em;
   }
   .sidebar h2 {
     margin: 0 0 0.75rem 0;

@@ -6,36 +6,40 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import getDescription from "@/utils/getDescription";
 import getBlogPosts from "@/utils/getPosts";
 
-const posts = (await getBlogPosts()).slice(0, SITE.postsPerHomepage);
+const posts = await getBlogPosts();
+const featuredPosts = posts.filter((post) => post.data.featured);
+const recentPosts = posts.filter((post) => !post.data.featured).slice(0, SITE.postsPerHomepage);
 ---
 
 <BaseLayout title={SITE.title} description={SITE.description}>
   <main>
     <section>
       <h1 class="sr-only">{SITE.title}</h1>
-      <h2>{_t.common.featuredPost}</h2>
-      <ul>
-        {
-          posts
-            .filter((post) => post.data.featured)
-            .map((post) => (
-              <li>
-                <PostCard
-                  id={post.id}
-                  title={post.data.title}
-                  description={post.data.description || getDescription(post.body || "")}
-                  date={post.data.date}
-                  updated={post.data.updated}
-                />
-              </li>
-            ))
-        }
-      </ul>
-      <hr />
+      {
+        featuredPosts.length > 0 && (
+          <>
+            <h2>{_t.common.featuredPost}</h2>
+            <ul>
+              {featuredPosts.map((post) => (
+                <li>
+                  <PostCard
+                    id={post.id}
+                    title={post.data.title}
+                    description={post.data.description || getDescription(post.body || "")}
+                    date={post.data.date}
+                    updated={post.data.updated}
+                  />
+                </li>
+              ))}
+            </ul>
+            <hr />
+          </>
+        )
+      }
       <h2>{_t.common.recentPost}</h2>
       <ul class="post-list">
         {
-          posts.map((post) => (
+          recentPosts.map((post) => (
             <li>
               <PostCard
                 id={post.id}

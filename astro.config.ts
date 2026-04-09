@@ -2,7 +2,7 @@ import sitemap from "@astrojs/sitemap";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import rehypeFigure from "@microflash/rehype-figure";
 import playformCompress from "@playform/compress";
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import astroCompressor from "astro-compressor";
 import expressiveCode from "astro-expressive-code";
 import pagefind from "astro-pagefind";
@@ -118,6 +118,25 @@ export default defineConfig({
     // Compression
     playformCompress(),
     astroCompressor({ gzip: true, zstd: true, brotli: true }),
+  ],
+  // https://docs.astro.build/en/guides/fonts/
+  fonts: [
+    {
+      cssVariable: "--font-body",
+      name: "Noto Sans",
+      weights: [400, 600],
+      fallbacks: ["sans-serif"],
+      formats: ["woff2", "woff"],
+      provider: fontProviders.fontsource(),
+    },
+    {
+      cssVariable: "--font-mono",
+      name: "Fira Mono",
+      weights: [400, 700],
+      fallbacks: ["monospace"],
+      formats: ["woff2", "woff"],
+      provider: fontProviders.fontsource(),
+    },
   ],
   vite: {
     server: {

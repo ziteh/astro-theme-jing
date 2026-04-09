@@ -1,5 +1,5 @@
 ---
-import "@/styles/fonts.css";
+import { Font } from "astro:assets";
 import "@/styles/global.css";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
@@ -101,7 +101,8 @@ const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
     />
 
     <!-- Font -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <Font cssVariable="--font-body" preload />
+    <Font cssVariable="--font-mono" />
 
     <!-- KaTeX -->
     {

@@ -46,7 +46,19 @@ export default defineConfig({
           name: "a11y-pre-tabindex",
           hooks: {
             postprocessRenderedBlock: ({ renderData }) => {
-              renderData.blockAst.properties.tabindex = 0;
+              const findPre = (
+                node: typeof renderData.blockAst,
+              ): typeof renderData.blockAst | undefined => {
+                if (node.tagName === "pre") return node;
+                for (const child of node.children ?? []) {
+                  if (typeof child === "object" && "tagName" in child) {
+                    const found = findPre(child as typeof renderData.blockAst);
+                    if (found) return found;
+                  }
+                }
+              };
+              const pre = findPre(renderData.blockAst);
+              if (pre) pre.properties.tabindex = 0;
             },
           },
         },

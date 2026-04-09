@@ -21,6 +21,10 @@ export default defineConfig({
     format: "file", // generate `page.html` instead of `page/index.html`
   },
   prefetch: true,
+  image: {
+    layout: "constrained",
+    responsiveStyles: true,
+  },
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [

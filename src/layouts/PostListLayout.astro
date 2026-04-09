@@ -136,16 +136,16 @@ const tags = getUniqueTags(allPosts);
     text-decoration: none;
     padding: 0.15rem 0;
     color: var(--color-700);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
   }
+  .categories a.active,
   .categories a:hover {
     color: var(--color-900);
-  }
-  .categories a.active {
-    color: var(--color-900);
+    background-color: var(--color-300);
   }
   .categories .count {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
     opacity: 0.6;
   }
   .archives-link {

@@ -6,7 +6,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 <BaseLayout title={_t.notFound.title} description={_t.notFound.desc}>
   <main>
     <div class="not-found">
-      <span><code class="not-found-404">404</code></span>
+      <span class="not-found-404">404</span>
       <h1 class="not-found-title">{_t.notFound.title}</h1>
       <p class="not-found-desc">{_t.notFound.desc}</p>
       <p class="not-found-search"><a href="/search">{_t.search.title}</a></p>
@@ -22,8 +22,9 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     align-items: center;
   }
   .not-found-404 {
+    font-family: var(--font-mono);
     font-size: 4rem;
-    background-color: var(--color-100);
+    /* background-color: var(--color-100); */
   }
   .not-found-title {
     font-size: 2rem;
@@ -32,6 +33,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
   .not-found-desc {
     font-size: 1.25rem;
     margin-bottom: 2rem;
+    color: var(--color-700);
   }
   .not-found-search {
     font-size: 1.25rem;

@@ -181,7 +181,7 @@ figcaption {
   content: "#";
   margin-left: 0.25em;
   display: inline-block;
-  color: var(--color-700);
+  color: var(--color-500);
   text-decoration: none;
   opacity: 0;
   transition: opacity 0.2s;

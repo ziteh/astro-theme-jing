@@ -68,6 +68,9 @@ const { posts, currentPage, totalPages, allPosts } = Astro.props;
     margin: 0 0 0.5em 0;
     font-weight: var(--font-weight-normal);
   }
+  .title span {
+    color: var(--color-700);
+  }
   .post-list {
     list-style-type: none;
     margin: 0;
@@ -84,7 +87,7 @@ const { posts, currentPage, totalPages, allPosts } = Astro.props;
     padding: 0.25em 0.5em;
   }
   .post-item:hover {
-    background-color: var(--color-500);
+    background-color: var(--color-300);
     border-radius: 4px;
   }
   .post-item time {

@@ -12,7 +12,7 @@ const recentPosts = posts.filter((post) => !post.data.featured).slice(0, SITE.po
 ---
 
 <BaseLayout title={SITE.title} description={SITE.description}>
-  <main>
+  <main id="main-content">
     <section>
       <h1 class="sr-only">{SITE.title}</h1>
       {

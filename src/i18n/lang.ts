@@ -36,6 +36,7 @@ const en = {
     rssFeed: "Subscribe to RSS feed",
     featuredPost: "Featured",
     recentPost: "Recent",
+    skipToMain: "Skip to main content",
   },
   pagination: {
     next: "Next",
@@ -101,6 +102,7 @@ const zhHant: typeof en = {
     rssFeed: "訂閱 RSS",
     featuredPost: "精選",
     recentPost: "最新",
+    skipToMain: "跳到主要內容",
   },
   pagination: {
     next: "下一頁",

@@ -4,6 +4,7 @@ import "@/styles/global.css";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
 import { SITE } from "@/consts";
+import { _t } from "@/i18n/lang";
 
 interface Props {
   title: string;
@@ -140,6 +141,7 @@ const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
   </head>
 
   <body>
+    <a href="#main-content" class="skip-link">{_t.common.skipToMain}</a>
     <Header />
     <slot />
     <Footer />

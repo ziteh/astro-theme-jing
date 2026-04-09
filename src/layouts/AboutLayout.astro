@@ -17,7 +17,7 @@ const { frontmatter } = Astro.props;
   title={frontmatter.title || _t.about.title}
   description={frontmatter.description || _t.about.desc}
 >
-  <main>
+  <main id="main-content">
     <section>
       <div class="title">
         <h1>{frontmatter.title || _t.about.title}</h1>

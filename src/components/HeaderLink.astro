@@ -10,7 +10,7 @@ const { href, class: className, ...props } = Astro.props;
 const isActive = false;
 ---
 
-<a href={href} class:list={[className, { active: isActive }]} {...props}>
+<a href={href} class:list={[className, { active: isActive }]} {...props} data-astro-prefetch>
   <slot />
 </a>
 <style>

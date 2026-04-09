@@ -49,7 +49,9 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
                 {categories.map((category, index) => (
                   <>
                     {index > 0 && ", "}
-                    <a href={`/categories/${slugifyStr(category)}`}>{category}</a>
+                    <a href={`/categories/${slugifyStr(category)}`} data-astro-prefetch>
+                      {category}
+                    </a>
                   </>
                 ))}
               </span>
@@ -79,7 +81,7 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
         <nav class="post-nav" aria-label="Post navigation">
           {
             nextPost && (
-              <a href={`/posts/${nextPost.id}`} class="post-nav-next">
+              <a href={`/posts/${nextPost.id}`} class="post-nav-next" data-astro-prefetch>
                 <span class="post-nav-label">
                   <IconLeft />
                 </span>
@@ -89,7 +91,7 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
           }
           {
             prevPost && (
-              <a href={`/posts/${prevPost.id}`} class="post-nav-prev">
+              <a href={`/posts/${prevPost.id}`} class="post-nav-prev" data-astro-prefetch>
                 <span class="post-nav-title">{prevPost.data.title}</span>
                 <span class="post-nav-label">
                   <IconRight />

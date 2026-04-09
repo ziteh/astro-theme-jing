@@ -14,7 +14,7 @@ interface Props {
 const { id, title, description, date, updated } = Astro.props;
 ---
 
-<a href={`/posts/${id}`}>
+<a href={`/posts/${id}`} data-astro-prefetch>
   <div class="card">
     <h2>{title}</h2>
     {description && <p class="desc">{description}</p>}

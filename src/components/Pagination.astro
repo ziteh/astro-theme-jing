@@ -21,7 +21,7 @@ const nextPageUrl = `${baseUrl}/${currentPage + 1}`;
     totalPages > 1 && (
       <nav class="pagination" aria-label="Pagination">
         {hasPrevPage ? (
-          <a href={prevPageUrl}>
+          <a href={prevPageUrl} data-astro-prefetch>
             <IconLeft /> {_t.pagination.prev}
           </a>
         ) : (
@@ -35,7 +35,7 @@ const nextPageUrl = `${baseUrl}/${currentPage + 1}`;
         </span>
 
         {hasNextPage ? (
-          <a href={nextPageUrl}>
+          <a href={nextPageUrl} data-astro-prefetch>
             {_t.pagination.next} <IconRight />
           </a>
         ) : (

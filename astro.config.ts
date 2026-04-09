@@ -20,6 +20,7 @@ export default defineConfig({
   build: {
     format: "file", // generate `page.html` instead of `page/index.html`
   },
+  prefetch: true,
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [

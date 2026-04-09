@@ -73,6 +73,7 @@ const tags = getUniqueTags(allPosts);
               <a
                 href={category.id === activeCategoryId ? "/posts" : `/categories/${category.id}`}
                 class:list={[{ active: category.id === activeCategoryId }]}
+                data-astro-prefetch
               >
                 <span>{category.name}</span>
                 <span class="count">{category.count}</span>

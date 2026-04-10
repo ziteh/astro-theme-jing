@@ -4,8 +4,10 @@ import type { CollectionEntry } from "astro:content";
 import IconLeft from "@/assets/icons/chevron-left.svg";
 import IconRight from "@/assets/icons/chevron-right.svg";
 import IconMenu from "@/assets/icons/menu-2.svg";
+import Disqus from "@/components/comments/Disqus.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
 import TagPill from "@/components/TagPill.astro";
+import { SITE } from "@/consts";
 import { _t } from "@/i18n/lang";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { slugifyStr } from "@/utils/slugify";
@@ -15,7 +17,7 @@ type Props = CollectionEntry<"blog">["data"] & {
   nextPost: CollectionEntry<"blog"> | null;
 };
 
-const { title, description, categories, date, updated, toc, tags, prevPost, nextPost } =
+const { title, description, categories, date, updated, toc, comments, tags, prevPost, nextPost } =
   Astro.props;
 ---
 
@@ -102,6 +104,16 @@ const { title, description, categories, date, updated, toc, tags, prevPost, next
         </nav>
       </div>
     </article>
+    <!-- Comments -->
+    {
+      comments && (
+        <div id="comments">
+          {SITE.disqusShortname && (
+            <Disqus url={new URL(Astro.url.pathname, Astro.site).toString()} identifier={title} />
+          )}
+        </div>
+      )
+    }
   </main>
   <aside class="sidebar">
     {toc && <div class="toc" />}

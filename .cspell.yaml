@@ -15,6 +15,7 @@ ignorePaths:
 words:
   - autorun
   - catppuccin
+  - disqus
   - Fira
   - fontsource
   - frontmatter

@@ -24,4 +24,6 @@ export const SITE = {
   defaultFmToc: false,
   defaultFmComments: false,
   defaultFmMath: false,
+
+  disqusShortname: "", // Your Disqus shortname (without https:// and .disqus.com)
 } as const;

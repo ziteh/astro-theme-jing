@@ -29,6 +29,8 @@ export const SITE = {
   defaultFmComments: false,
   defaultFmMath: false,
 
+  transitions: false, // View transitions (https://docs.astro.build/en/guides/view-transitions/)
+
   // Disqus comments
   disqusShortname: "", // Your Disqus shortname (without https:// and .disqus.com)
 

@@ -1,3 +1,7 @@
+import IconGitHub from "@/assets/icons/brand-github.svg";
+import IconYouTube from "@/assets/icons/brand-youtube.svg";
+import IconRss from "@/assets/icons/rss.svg";
+
 export const SITE = {
   // Basic information
   title: "Astro Jing", // Your blog title
@@ -40,3 +44,24 @@ export const SITE = {
   giscusInputPosition: "bottom",
   giscusTheme: "preferred_color_scheme",
 } as const;
+
+export const SOCIALS = [
+  {
+    name: "YouTube",
+    href: "https://www.youtube.com",
+    title: `YouTube - ${SITE.title}`,
+    icon: IconYouTube,
+  },
+  {
+    name: "GitHub",
+    href: "https://github.com/ziteh/astro-theme-jing",
+    title: `GitHub - ${SITE.title}`,
+    icon: IconGitHub,
+  },
+  {
+    name: "RSS",
+    href: "/rss.xml",
+    title: "RSS Feed",
+    icon: IconRss,
+  },
+] as const;

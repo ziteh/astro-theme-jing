@@ -1,8 +1,5 @@
 ---
-import IconGitHub from "@/assets/icons/brand-github.svg";
-import IconYouTube from "@/assets/icons/brand-youtube.svg";
-import IconRss from "@/assets/icons/rss.svg";
-import { SITE } from "@/consts";
+import { SITE, SOCIALS } from "@/consts";
 import { _t } from "@/i18n/lang";
 
 const today = new Date();
@@ -11,20 +8,17 @@ const today = new Date();
 <footer>
   &copy;&nbsp;{today.getFullYear()}&nbsp;{SITE.author}. All rights reserved.
   <div class="social-links">
-    <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
-      <span class="sr-only">YouTube</span>
-      <IconYouTube />
-    </a>
-    <a href="https://github.com/withastro/astro" target="_blank" rel="noopener noreferrer">
-      <span class="sr-only">GitHub</span>
-      <IconGitHub />
-    </a>
-    <a href="/rss.xml">
-      <span class="sr-only">{_t.common.rssFeed}</span>
-      <IconRss />
-    </a>
+    {
+      SOCIALS.map((social) => (
+        <a href={social.href} title={social.title} target="_blank" rel="noopener noreferrer">
+          <span class="sr-only">{social.title}</span>
+          <social.icon />
+        </a>
+      ))
+    }
   </div>
 </footer>
+
 <style>
   footer {
     padding: 1em 1em 6em 1em;

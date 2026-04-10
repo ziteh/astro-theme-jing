@@ -14,5 +14,10 @@ export const SITE = {
   getDescriptionCount: 150, // If 'more' tag is not found, use this count of characters
   getDescriptionMaxLines: 10, // Max number of lines to process
 
-  defaultTag: "Others",
+  // Default values for frontmatter fields
+  defaultFmTag: "Others",
+  defaultFmCategory: undefined,
+  defaultFmToc: false,
+  defaultFmComments: false,
+  defaultFmMath: false,
 } as const;

@@ -16,14 +16,16 @@ const blog = defineCollection({
       date: z.coerce.date(),
       updated: z.coerce.date().optional(),
 
-      tags: z.array(z.string()).default([SITE.defaultTag]),
-      categories: z.array(z.string()).default([]),
+      tags: z.array(z.string()).default(SITE.defaultFmTag ? [SITE.defaultFmTag] : []),
+      categories: z
+        .array(z.string())
+        .default(SITE.defaultFmCategory ? [SITE.defaultFmCategory] : []),
 
       featured: z.boolean().optional(),
       draft: z.boolean().optional(),
-      toc: z.boolean().default(false),
-      comments: z.boolean().default(false),
-      math: z.boolean().default(false),
+      toc: z.boolean().default(SITE.defaultFmToc),
+      comments: z.boolean().default(SITE.defaultFmComments),
+      math: z.boolean().default(SITE.defaultFmMath),
     }),
 });
 

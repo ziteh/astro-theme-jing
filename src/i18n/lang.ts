@@ -1,3 +1,5 @@
+import { SITE } from "@/consts";
+
 const en = {
   posts: {
     title: "Posts",
@@ -48,6 +50,7 @@ const en = {
         year: "numeric",
         month: "short",
         day: "numeric",
+        timeZone: SITE.timeZone,
       });
     },
     longFormat(date: Date): string {
@@ -55,6 +58,7 @@ const en = {
         year: "numeric",
         month: "long",
         day: "numeric",
+        timeZone: SITE.timeZone,
       });
     },
     postedOn(date: string): string {
@@ -114,6 +118,7 @@ const zhHant: typeof en = {
         year: "numeric",
         month: "short",
         day: "numeric",
+        timeZone: SITE.timeZone,
       });
     },
     longFormat(date: Date): string {
@@ -121,6 +126,7 @@ const zhHant: typeof en = {
         year: "numeric",
         month: "long",
         day: "numeric",
+        timeZone: SITE.timeZone,
       });
     },
     postedOn(date: string): string {

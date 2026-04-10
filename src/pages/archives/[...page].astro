@@ -44,9 +44,11 @@ const { posts, currentPage, totalPages, allPosts } = Astro.props;
             <li>
               <a href={`/posts/${post.id}`} class="post-item">
                 <span>{post.data.title}</span>
-                <time datetime={post.data.date.toISOString()}>
-                  {/* YYYY-MM-DD */}
-                  {post.data.date.toISOString().split("T")[0]}
+                {/* HACK: Use "sv-SE" locale to get the date in "YYYY-MM-DD" format */}
+                <time
+                  datetime={post.data.date.toLocaleDateString("sv-SE", { timeZone: SITE.timeZone })}
+                >
+                  {post.data.date.toLocaleDateString("sv-SE", { timeZone: SITE.timeZone })}
                 </time>
               </a>
             </li>

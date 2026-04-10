@@ -5,6 +5,7 @@ import IconLeft from "@/assets/icons/chevron-left.svg";
 import IconRight from "@/assets/icons/chevron-right.svg";
 import IconMenu from "@/assets/icons/menu-2.svg";
 import Disqus from "@/components/comments/Disqus.astro";
+import Giscus from "@/components/comments/Giscus.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
 import TagPill from "@/components/TagPill.astro";
 import { SITE } from "@/consts";
@@ -111,6 +112,7 @@ const { title, description, categories, date, updated, toc, comments, tags, prev
           {SITE.disqusShortname && (
             <Disqus url={new URL(Astro.url.pathname, Astro.site).toString()} identifier={title} />
           )}
+          {SITE.giscusRepo && <Giscus />}
         </div>
       )
     }

@@ -25,5 +25,18 @@ export const SITE = {
   defaultFmComments: false,
   defaultFmMath: false,
 
+  // Disqus comments
   disqusShortname: "", // Your Disqus shortname (without https:// and .disqus.com)
+
+  // Giscus comments
+  giscusRepo: "", // e.g. "user/repo"
+  giscusRepoId: "",
+  giscusCategory: "",
+  giscusCategoryId: "",
+  giscusMapping: "title",
+  giscusStrict: "0",
+  giscusReactionsEnabled: "1",
+  giscusEmitMetadata: "0",
+  giscusInputPosition: "bottom",
+  giscusTheme: "preferred_color_scheme",
 } as const;

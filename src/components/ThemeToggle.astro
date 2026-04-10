@@ -40,12 +40,17 @@ import IconSun from "@/assets/icons/sun.svg";
       localStorage.setItem("theme", theme);
     }
 
-    var toggle = document.querySelector(".theme-toggle");
-    if (toggle) {
-      toggle.addEventListener("click", function () {
-        var isDark = document.documentElement.getAttribute("data-theme") === "dark";
-        setTheme(isDark ? "light" : "dark");
-      });
+    function init() {
+      var toggle = document.querySelector(".theme-toggle");
+      if (toggle) {
+        toggle.addEventListener("click", function () {
+          var isDark = document.documentElement.getAttribute("data-theme") === "dark";
+          setTheme(isDark ? "light" : "dark");
+        });
+      }
     }
+
+    init();
+    document.addEventListener("astro:page-load", init);
   })();
 </script>

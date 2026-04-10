@@ -136,15 +136,23 @@ const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
     <!-- Theme toggle -->
     <script is:inline>
       (function () {
-        var theme =
-          localStorage.getItem("theme") ||
-          (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-        if (theme === "dark") document.documentElement.setAttribute("data-theme", "dark");
+        function applyTheme() {
+          var theme =
+            localStorage.getItem("theme") ||
+            (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          if (theme === "dark") {
+            document.documentElement.setAttribute("data-theme", "dark");
+          } else {
+            document.documentElement.removeAttribute("data-theme");
+          }
+        }
+        applyTheme();
+        document.addEventListener("astro:after-swap", applyTheme);
       })();
     </script>
   </head>
 
-  <body>
+  <body transition:animate="none">
     <a href="#main-content" class="skip-link">{_t.common.skipToMain}</a>
     <Header />
     <slot />

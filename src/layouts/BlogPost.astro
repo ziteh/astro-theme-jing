@@ -146,42 +146,60 @@ const { title, description, categories, date, updated, toc, comments, tags, prev
 
 <script is:inline>
   (function () {
-    const fab = document.querySelector(".sidebar-fab");
-    const sidebar = document.querySelector(".sidebar");
-    const overlay = document.querySelector(".sidebar-overlay");
-    if (!fab || !sidebar || !overlay) return;
+    function initSidebar() {
+      const fab = document.querySelector(".sidebar-fab");
+      const sidebar = document.querySelector(".sidebar");
+      const overlay = document.querySelector(".sidebar-overlay");
+      if (!fab || !sidebar || !overlay) return;
 
-    function toggle() {
-      sidebar.classList.toggle("open");
-      overlay.classList.toggle("open");
+      function toggle() {
+        sidebar.classList.toggle("open");
+        overlay.classList.toggle("open");
+      }
+      fab.addEventListener("click", toggle);
+      overlay.addEventListener("click", toggle);
     }
-    fab.addEventListener("click", toggle);
-    overlay.addEventListener("click", toggle);
+
+    initSidebar();
+    document.addEventListener("astro:page-load", initSidebar);
   })();
 </script>
 <script is:inline>
   (function () {
-    const backToTop = document.getElementById("back-to-top");
-    if (!backToTop) return;
-    backToTop.addEventListener("click", () => {
-      document.body.scrollTop = 0; // For Safari
-      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-    });
+    function initBackToTop() {
+      const backToTop = document.getElementById("back-to-top");
+      if (!backToTop) return;
+      backToTop.addEventListener("click", () => {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      });
+    }
+
+    initBackToTop();
+    document.addEventListener("astro:page-load", initBackToTop);
   })();
 </script>
 <script is:inline>
   window.initTocbot = function () {
-    window.tocbot.init({
-      tocSelector: ".toc",
-      contentSelector: ".main-content",
-      headingSelector: "h2, h3, h4",
-      hasInnerContainers: true,
-      scrollSmoothDuration: 250,
-      headingsOffset: 20,
-      scrollSmoothOffset: -20,
-      scrollHandlerTimeout: 10,
-    });
+    if (window.tocbot) {
+      window.tocbot.destroy();
+      window.tocbot.init({
+        tocSelector: ".toc",
+        contentSelector: ".main-content",
+        headingSelector: "h2, h3, h4",
+        hasInnerContainers: true,
+        scrollSmoothDuration: 250,
+        headingsOffset: 20,
+        scrollSmoothOffset: -20,
+        scrollHandlerTimeout: 10,
+      });
+    }
   };
+  document.addEventListener("astro:page-load", function () {
+    if (window.tocbot && document.querySelector(".toc")) {
+      window.initTocbot();
+    }
+  });
 </script>
 <script
   is:inline

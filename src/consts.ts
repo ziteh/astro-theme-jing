@@ -23,8 +23,8 @@ export const SITE = {
   getDescriptionMaxLines: 10, // Max number of lines to process
 
   // Default values for frontmatter fields
-  defaultFmTag: "Others", // String or undefined
-  defaultFmCategory: undefined, // String or undefined
+  defaultFmTag: "Others",
+  defaultFmCategory: "",
   defaultFmToc: false,
   defaultFmComments: false,
   defaultFmMath: false,

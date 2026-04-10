@@ -4,7 +4,7 @@ A simple blog theme, powered by [Astro](https://astro.build/).
 
 Features:
 
-- Auto-generate post description based on word count or up to the `<!-- more -->` tag
+- Auto-generate post description based on characters count or up to the `<!-- more -->` tag
 - Auto-expanding & collapsing table of contents (Tocbot)
 - Search (Pagefind)
 - Syntax highlighting (Expressive Code)

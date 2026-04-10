@@ -6,12 +6,12 @@ import getBlogPosts from "@/utils/getPosts";
 
 export async function getStaticPaths() {
   const posts = await getBlogPosts();
-  const totalPages = Math.ceil(posts.length / SITE.postsPerPage);
+  const totalPages = Math.ceil(posts.length / SITE.postsPerAllPosts);
 
   return Array.from({ length: totalPages }, (_, i) => ({
     params: { page: i === 0 ? undefined : String(i + 1) },
     props: {
-      posts: posts.slice(i * SITE.postsPerPage, (i + 1) * SITE.postsPerPage),
+      posts: posts.slice(i * SITE.postsPerAllPosts, (i + 1) * SITE.postsPerAllPosts),
       currentPage: i + 1,
       totalPages,
       allPosts: posts,

@@ -11,12 +11,12 @@ export async function getStaticPaths() {
 
   return tags.flatMap((tag) => {
     const taggedPosts = posts.filter((post) => post.data.tags.includes(tag.name));
-    const totalPages = Math.ceil(taggedPosts.length / SITE.postsPerPage);
+    const totalPages = Math.ceil(taggedPosts.length / SITE.postsPerAllPosts);
 
     return Array.from({ length: totalPages }, (_, i) => ({
       params: { tagId: tag.id, page: i === 0 ? undefined : String(i + 1) },
       props: {
-        posts: taggedPosts.slice(i * SITE.postsPerPage, (i + 1) * SITE.postsPerPage),
+        posts: taggedPosts.slice(i * SITE.postsPerAllPosts, (i + 1) * SITE.postsPerAllPosts),
         currentPage: i + 1,
         totalPages,
         allPosts: posts,

@@ -11,12 +11,12 @@ export async function getStaticPaths() {
 
   return categories.flatMap((category) => {
     const categorizedPosts = posts.filter((post) => post.data.categories.includes(category.name));
-    const totalPages = Math.ceil(categorizedPosts.length / SITE.postsPerPage);
+    const totalPages = Math.ceil(categorizedPosts.length / SITE.postsPerAllPosts);
 
     return Array.from({ length: totalPages }, (_, i) => ({
       params: { categoryId: category.id, page: i === 0 ? undefined : String(i + 1) },
       props: {
-        posts: categorizedPosts.slice(i * SITE.postsPerPage, (i + 1) * SITE.postsPerPage),
+        posts: categorizedPosts.slice(i * SITE.postsPerAllPosts, (i + 1) * SITE.postsPerAllPosts),
         currentPage: i + 1,
         totalPages,
         allPosts: posts,

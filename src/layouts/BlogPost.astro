@@ -126,20 +126,20 @@ const { title, description, categories, date, updated, toc, comments, tags, prev
   </aside>
 </BaseLayout>
 
-<style>
+<style is:global>
   /* tocbot */
-  :global(.toc > .toc-list) {
+  .toc > .toc-list {
     padding-left: 0;
   }
-  :global(.toc-link) {
+  .toc-link {
     text-decoration: none;
     overflow: hidden;
     white-space: nowrap;
   }
-  /* :global(a.toc-link) {
+  /* a.toc-link {
     color: var(--color-700);
   } */
-  :global(.toc-link::before) {
+  .toc-link::before {
     display: none;
   }
 </style>

@@ -17,7 +17,7 @@
   --font-size-h3: clamp(1.25rem, 1.15rem + 0.5vw, 1.75rem);
   --font-size-h4: clamp(1.125rem, 1.1rem + 0.125vw, 1.25rem);
   --font-size-h5: clamp(1.0625rem, 1.045rem + 0.0875vw, 1.15rem);
-  --font-weight-bold: 600;
+  --font-weight-bold: 700;
   --font-weight-normal: 400;
   --font-weight-light: 400;
 

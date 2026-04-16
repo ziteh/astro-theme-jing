@@ -45,6 +45,13 @@ const en = {
     prev: "Prev",
   },
   date: {
+    monthDay(date: Date): string {
+      return date.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        timeZone: SITE.timeZone,
+      });
+    },
     shortFormat(date: Date): string {
       return date.toLocaleDateString("en-US", {
         year: "numeric",
@@ -113,6 +120,13 @@ const zhHant: typeof en = {
     prev: "上一頁",
   },
   date: {
+    monthDay(date: Date): string {
+      return date.toLocaleDateString("zh-Hant", {
+        month: "short",
+        day: "numeric",
+        timeZone: SITE.timeZone,
+      });
+    },
     shortFormat(date: Date): string {
       return date.toLocaleDateString("zh-Hant", {
         year: "numeric",

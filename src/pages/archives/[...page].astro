@@ -29,6 +29,17 @@ interface Props {
 }
 
 const { posts, currentPage, totalPages, allPosts } = Astro.props;
+
+// Group posts by year, preserving sort order
+const postsByYear = posts.reduce<Record<number, typeof posts>>((acc, post) => {
+  const year = post.data.date.getFullYear();
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(post);
+  return acc;
+}, {});
+const years = Object.keys(postsByYear)
+  .map(Number)
+  .sort((a, b) => b - a);
 ---
 
 <BaseLayout title={_t.archives.title} description={_t.archives.desc}>
@@ -38,23 +49,30 @@ const { posts, currentPage, totalPages, allPosts } = Astro.props;
         <h1>{_t.archives.title}</h1>
         <span>{_t.archives.total(allPosts.length)}</span>
       </div>
-      <ul class="post-list">
-        {
-          posts.map((post) => (
-            <li>
-              <a href={`/posts/${post.id}`} class="post-item">
-                <span>{post.data.title}</span>
-                {/* HACK: Use "sv-SE" locale to get the date in "YYYY-MM-DD" format */}
-                <time
-                  datetime={post.data.date.toLocaleDateString("sv-SE", { timeZone: SITE.timeZone })}
-                >
-                  {post.data.date.toLocaleDateString("sv-SE", { timeZone: SITE.timeZone })}
-                </time>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+      {
+        years.map((year) => (
+          <div class="year-group">
+            <h2 class="year-heading">{year}</h2>
+            <ul class="post-list">
+              {postsByYear[year].map((post) => (
+                <li>
+                  <a href={`/posts/${post.id}`} class="post-item">
+                    <span>{post.data.title}</span>
+                    {/* HACK: Use "sv-SE" locale to get the date in "YYYY-MM-DD" format */}
+                    <time
+                      datetime={post.data.date.toLocaleDateString("sv-SE", {
+                        timeZone: SITE.timeZone,
+                      })}
+                    >
+                      {_t.date.monthDay(post.data.date)}
+                    </time>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
       <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl="/archives" />
     </section>
   </main>
@@ -73,13 +91,23 @@ const { posts, currentPage, totalPages, allPosts } = Astro.props;
   .title span {
     color: var(--color-700);
   }
+  .year-group {
+    margin-bottom: 2.5rem;
+  }
+  .year-heading {
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-normal);
+    color: var(--color-700);
+    margin: 0 0 0.75rem 0;
+    padding: 0.25em 0.5em;
+  }
   .post-list {
     list-style-type: none;
     margin: 0;
     padding: 0;
   }
   .post-list li {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
   .post-item {
     display: flex;

@@ -15,7 +15,7 @@ export const SITE = {
 
   // Pagination
   postsPerHomepage: 3,
-  postsPerArchives: 10,
+  postsPerArchives: 3,
   postsPerAllPosts: 5,
 
   // Description generation

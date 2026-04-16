@@ -11,6 +11,16 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
   </main>
 </BaseLayout>
 
+<style is:global>
+  .pagefind-ui {
+    --pagefind-ui-primary: var(--color-900);
+    --pagefind-ui-text: var(--color-900);
+    --pagefind-ui-background: var(--color-100);
+    --pagefind-ui-border: var(--color-500);
+    --pagefind-ui-tag: var(--color-300);
+  }
+</style>
+
 <script>
   document.addEventListener("astro:page-load", () => {
     const input = document.querySelector<HTMLInputElement>(".pagefind-ui__search-input");

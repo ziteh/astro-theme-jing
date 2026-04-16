@@ -29,6 +29,10 @@
   flex: 1;
   min-width: 0;
 }
+.main-content a {
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+}
 .categories {
   margin-bottom: 1.25em;
   font-size: 0.9em;

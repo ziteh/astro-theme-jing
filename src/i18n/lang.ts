@@ -25,6 +25,8 @@ const en = {
     title: "Archives",
     desc: "All posts",
     total(count: number): string {
+      if (count === 0) return "No posts yet";
+      if (count === 1) return "Total 1 post";
       return `Total ${count} posts`;
     },
   },
@@ -100,6 +102,7 @@ const zhHant: typeof en = {
     title: "封存",
     desc: "所有文章",
     total(count: number): string {
+      if (count === 0) return "目前沒有文章";
       return `總共 ${count} 篇文章`;
     },
   },

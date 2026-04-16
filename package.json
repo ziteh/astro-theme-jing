@@ -44,7 +44,8 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "prettier": "3.8.1",
-    "prettier-plugin-astro": "0.14.1"
+    "prettier-plugin-astro": "0.14.1",
+    "satori": "^0.26.0"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",

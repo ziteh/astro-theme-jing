@@ -1,0 +1,133 @@
+import { type APIRequestContext, expect, test } from "@playwright/test";
+
+// Must match `site` in astro.config.ts — used only to validate the sitemap itself
+const SITE_URL = "https://example.com";
+
+/** Remove a trailing slash from the path unless the URL is a bare origin */
+function normalizeUrl(url: string): string {
+  return url.replace(/\/$/, "");
+}
+
+/** Fetch all page URLs listed across every sitemap referenced in the sitemap index. */
+async function getSitemapPageUrls(request: APIRequestContext): Promise<string[]> {
+  const indexRes = await request.get("/sitemap-index.xml");
+  expect(indexRes.status(), "sitemap-index.xml must return 200").toBe(200);
+  const indexText = await indexRes.text();
+
+  const sitemapLocs = [...indexText.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
+  expect(sitemapLocs.length, "sitemap index must reference at least one sitemap").toBeGreaterThan(
+    0,
+  );
+
+  const pageUrls: string[] = [];
+  for (const sitemapUrl of sitemapLocs) {
+    const path = new URL(sitemapUrl).pathname;
+    const res = await request.get(path);
+    expect(res.status(), `sitemap ${path} must return 200`).toBe(200);
+    const text = await res.text();
+    const locs = [...text.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]);
+    pageUrls.push(...locs);
+  }
+
+  return pageUrls;
+}
+
+test.describe("Sitemap (source of truth)", () => {
+  test("all sitemap <loc> values are absolute and use the configured site URL", async ({
+    request,
+  }) => {
+    const urls = await getSitemapPageUrls(request);
+    expect(urls.length, "sitemap must list at least one page").toBeGreaterThan(0);
+
+    for (const url of urls) {
+      expect(url, `"${url}" must be an absolute URL`).toMatch(/^https?:\/\//);
+      expect(url, `"${url}" must use the configured site base URL`).toContain(SITE_URL);
+    }
+  });
+});
+
+test.describe("Canonical URL consistency with sitemap", () => {
+  test("canonical URL on every sitemap page matches the sitemap URL exactly", async ({
+    page,
+    request,
+  }) => {
+    const sitemapUrls = await getSitemapPageUrls(request);
+
+    for (const sitemapUrl of sitemapUrls) {
+      const path = new URL(sitemapUrl).pathname;
+      await page.goto(path);
+
+      const canonical = await page.locator('link[rel="canonical"]').getAttribute("href");
+      expect(
+        canonical ? normalizeUrl(canonical) : canonical,
+        `canonical on ${path} must exist and match sitemap URL "${sitemapUrl}"`,
+      ).toBe(normalizeUrl(sitemapUrl));
+    }
+  });
+});
+
+test.describe("RSS feed consistency with sitemap", () => {
+  test("RSS feed returns XML with status 200", async ({ request }) => {
+    const res = await request.get("/rss.xml");
+    expect(res.status()).toBe(200);
+    expect(res.headers()["content-type"], "content-type must be XML").toContain("xml");
+  });
+
+  test("every RSS item link matches a URL in the sitemap", async ({ request }) => {
+    const sitemapUrls = await getSitemapPageUrls(request);
+    const rssText = await (await request.get("/rss.xml")).text();
+
+    const itemLinks = [...rssText.matchAll(/<item>[\s\S]*?<link>(.*?)<\/link>/g)].map((m) => m[1]);
+    expect(itemLinks.length, "RSS feed must have at least one item").toBeGreaterThan(0);
+
+    for (const link of itemLinks) {
+      expect(sitemapUrls, `RSS item link "${link}" must appear in sitemap`).toContain(link);
+    }
+  });
+});
+
+test.describe("OG image URL consistency with sitemap", () => {
+  test("og:image path on each post page equals its sitemap URL path + '-og.png'", async ({
+    page,
+    request,
+  }) => {
+    const sitemapUrls = await getSitemapPageUrls(request);
+    const postPaths = sitemapUrls
+      .filter((url) => new URL(url).pathname.startsWith("/posts/"))
+      .map((url) => new URL(url).pathname);
+
+    expect(postPaths.length, "sitemap must include at least one post").toBeGreaterThan(0);
+
+    for (const postPath of postPaths) {
+      await page.goto(postPath);
+
+      const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
+      expect(ogImage, `${postPath} must have og:image`).toBeTruthy();
+      if (!ogImage) continue;
+
+      // og:image is absolute to the request host; compare only the pathname
+      const ogPath = new URL(ogImage).pathname;
+      expect(ogPath, `og:image path for ${postPath} must be "${postPath}-og.png"`).toBe(
+        `${postPath}-og.png`,
+      );
+    }
+  });
+
+  test("og:image resources are accessible (HTTP 200)", async ({ page, request }) => {
+    const sitemapUrls = await getSitemapPageUrls(request);
+    const postPaths = sitemapUrls
+      .filter((url) => new URL(url).pathname.startsWith("/posts/"))
+      .map((url) => new URL(url).pathname);
+
+    for (const postPath of postPaths) {
+      await page.goto(postPath);
+
+      const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
+      if (!ogImage) continue;
+
+      const ogPath = new URL(ogImage).pathname;
+      const res = await request.get(ogPath);
+      expect(res.status(), `og:image resource "${ogPath}" must return 200`).toBe(200);
+    }
+  });
+});

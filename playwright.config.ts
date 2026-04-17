@@ -6,11 +6,11 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   use: {
-    baseURL: "http://localhost:4321",
+    baseURL: "http://localhost:14321",
   },
   webServer: {
-    command: "pnpm build && pnpm preview",
-    url: "http://localhost:4321",
+    command: "pnpm build && pnpm preview --port 14321",
+    url: "http://localhost:14321",
     reuseExistingServer: !process.env.CI,
   },
 });

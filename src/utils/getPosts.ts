@@ -1,23 +1,27 @@
 import { type CollectionEntry, getCollection } from "astro:content";
+import getDescription from "@/utils/getDescription";
 
-const postFilter = ({ data }: CollectionEntry<"blog">) => {
-  // Future posts are not shown
-  if (data.date > new Date()) {
-    return false;
-  }
-
-  // Draft posts are not shown
-  if (data.draft) {
-    return false;
-  }
-
-  return true;
+export type BlogPost = Omit<CollectionEntry<"blog">, "data"> & {
+  data: Omit<CollectionEntry<"blog">["data"], "description"> & {
+    description: string;
+  };
 };
 
-const getBlogPosts = async (): Promise<CollectionEntry<"blog">[]> => {
+const getBlogPosts = async (): Promise<BlogPost[]> => {
   const posts = await getCollection("blog");
   return posts
-    .filter(postFilter)
+    .filter((post) => {
+      if (post.data.draft) return false;
+      if (post.data.date > new Date()) return false;
+      return true;
+    })
+    .map((post) => ({
+      ...post,
+      data: {
+        ...post.data,
+        description: post.data.description ?? getDescription(post.body ?? ""),
+      },
+    }))
     .sort(
       (a, b) =>
         Math.floor(new Date(b.data.updated ?? b.data.date).getTime()) -

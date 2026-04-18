@@ -17,7 +17,9 @@ export const GET: APIRoute = async ({ site }) => {
     site,
     trailingSlash: false,
     items: posts.map((post) => ({
-      ...post.data,
+      title: post.data.title,
+      description: post.data.description,
+      pubDate: new Date(post.data.date),
       link: `/posts/${post.id}`,
     })),
   });

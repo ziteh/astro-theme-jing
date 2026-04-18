@@ -1,17 +1,10 @@
 ---
 import { type CollectionEntry, render } from "astro:content";
 import BlogPost from "@/layouts/BlogPost.astro";
-import getDescription from "@/utils/getDescription";
 import getBlogPosts from "@/utils/getPosts";
 
 export async function getStaticPaths() {
   const posts = await getBlogPosts();
-  posts.forEach((post) => {
-    if (!post.data.description) {
-      post.data.description = getDescription(post.body || "");
-    }
-  });
-
   return posts.map((post, index) => ({
     params: { slug: post.id },
     props: {

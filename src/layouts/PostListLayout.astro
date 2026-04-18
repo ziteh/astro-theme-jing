@@ -1,18 +1,17 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import Pagination from "@/components/Pagination.astro";
 import PostCard from "@/components/PostCard.astro";
 import TagPill from "@/components/TagPill.astro";
 import { SITE } from "@/consts";
 import { _t } from "@/i18n/lang";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import getDescription from "@/utils/getDescription";
+import type { BlogPost } from "@/utils/getPosts";
 import getUniqueCategories from "@/utils/getUniqueCategories";
 import getUniqueTags from "@/utils/getUniqueTags";
 
 interface Props {
-  posts: CollectionEntry<"blog">[];
-  allPosts: CollectionEntry<"blog">[];
+  posts: BlogPost[];
+  allPosts: BlogPost[];
   currentPage: number;
   totalPages: number;
   paginationBase: string;
@@ -38,7 +37,7 @@ const tags = getUniqueTags(allPosts);
                 <PostCard
                   id={post.id}
                   title={post.data.title}
-                  description={post.data.description || getDescription(post.body || "")}
+                  description={post.data.description}
                   date={post.data.date}
                   updated={post.data.updated}
                 />

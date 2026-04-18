@@ -1,62 +1,80 @@
 # Astro Theme Jing
 
-A simple blog theme, powered by [Astro](https://astro.build/).
+A clean and quiet blog theme powered by [Astro](https://astro.build/).
 
 Features:
 
-- Auto-generate post description based on characters count or up to the `<!-- more -->` tag
-- Auto-expanding & collapsing table of contents (Tocbot)
-- Generate Open Graph images (Satori)
-- Search (Pagefind)
-- Syntax highlighting (Expressive Code)
-- Sitemap & RSS support
+- Auto-generate post descriptions based on character count or up to the `<!-- more -->` tag
+- Auto-expanding & collapsing table of contents
+- Open Graph image generation
+- Full-text search
+- Syntax highlighting
+- Math equations
+- Internationalization (i18n)
+- Comment systems (Giscus / Disqus)
+- Sitemap & RSS feed
 
 ## Usage
 
-```sh
-# Installs dependencies
-pnpm i
-
-# Starts local dev server
-pnpm dev
-
-# Build your production site
-pnpm build
+```bash
+pnpm i          # Install dependencies
+pnpm dev        # Start dev server
+pnpm build      # Production build
+pnpm preview    # Preview built site
 ```
 
-## Project Structure
+## Development
+
+Tech stack:
+
+- Colors: [Radix Colors](https://www.radix-ui.com/colors)
+- Icons: [Tabler](https://tabler.io/icons)
+- TOC: [Tocbot](https://tscanlin.github.io/tocbot/)
+- Math: [KaTeX](https://katex.org/)
+- OG image: [Satori](https://github.com/vercel/satori)
+- Search: [astro-pagefind](https://github.com/shishkin/astro-pagefind)
+- Syntax highlighting: [Expressive Code](https://expressive-code.com/)
+- A11y testing: [axe-core](https://github.com/dequelabs/axe-core)
+- Linter: [Biome](https://biomejs.dev/)
+- Formatter: [Prettier](https://prettier.io/)
+
+### Project Structure
+
+Refer to [Astro project structure](https://docs.astro.build/en/basics/project-structure/).
 
 ```text
-├── public/
+├── public/             # Unprocessed assets
+├── tests/
 ├── src/
-│   ├── content/blog/
-│   ├── components/
-│   ├── layouts/
-│   ├── pages/
-│   └── consts.ts
-├── astro.config.mjs
-├── README.md
+│   ├── assets/
+│   ├── content/blog/   # Markdown posts
+│   ├── components/
+│   ├── layouts/
+│   ├── pages/
+│   ├── i18n/           # I18n config
+│   ├── utils/
+│   ├── styles/
+│   ├── socials.ts      # Social link
+│   └── consts.ts       # Site config
+├── astro.config.ts     # Astro config
 ├── package.json
-└── tsconfig.json
+└── README.md
 ```
 
-The `src/content/blog` directory contains "collections" of related Markdown and MDX documents. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+## Testing
 
-Any static assets, like images, can be placed in the `public/` directory.
+```bash
+pnpm test       # All tests
+pnpm test:lh    # Lighthouse
+pnpm test:urls  # URLs 
+pnpm test:a11y  # Accessibility
+```
 
 ### SEOnaut
 
 ```bash
 pnpm seonaut:up
-
 pnpm dev --host
 ```
 
-<http://localhost:9000/signin>
-
-<http://host.containers.internal:4321>
-
-## Todo
-
-- [ ] On the `posts/` page, tags and categories are displayed on mobile devices and are collapsed by default
-- [ ] On the `posts/[slug]` page, the sidebar becomes a floating button on mobile devices; tap to expand
+Open <http://localhost:9000/signin> and enter <http://host.containers.internal:4321> as the target URL.

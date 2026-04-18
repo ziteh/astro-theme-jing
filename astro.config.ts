@@ -11,10 +11,11 @@ import rehypeExternalLinks from "rehype-external-links";
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import remarkMath from "remark-math";
+import { SITE } from "./src/consts";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.com", // Replace with your site's URL, e.g. https://username.github.io
+  site: SITE.url,
   compressHTML: true,
   trailingSlash: "never",
   build: {

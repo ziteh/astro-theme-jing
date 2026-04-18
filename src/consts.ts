@@ -1,9 +1,6 @@
-import IconGitHub from "@/assets/icons/brand-github.svg";
-import IconYouTube from "@/assets/icons/brand-youtube.svg";
-import IconRss from "@/assets/icons/rss.svg";
-
 export const SITE = {
   // Basic information
+  url: "https://example.com", // Your site's URL, e.g. https://username.github.io
   title: "Astro Jing", // Your blog title
   description: "An Astro theme for blogging.", // Your blog description
   author: "Your Name", // 君の名は ~
@@ -29,6 +26,7 @@ export const SITE = {
   defaultFmComments: false,
   defaultFmMath: false,
 
+  // Config
   transitions: true, // View transitions (https://docs.astro.build/en/guides/view-transitions/)
 
   // Disqus comments
@@ -46,24 +44,3 @@ export const SITE = {
   giscusInputPosition: "bottom",
   giscusTheme: "preferred_color_scheme",
 } as const;
-
-export const SOCIALS = [
-  {
-    name: "YouTube",
-    href: "https://www.youtube.com",
-    title: `YouTube - ${SITE.title}`,
-    icon: IconYouTube,
-  },
-  {
-    name: "GitHub",
-    href: "https://github.com/ziteh/astro-theme-jing",
-    title: `GitHub - ${SITE.title}`,
-    icon: IconGitHub,
-  },
-  {
-    name: "RSS",
-    href: "/rss.xml",
-    title: "RSS Feed",
-    icon: IconRss,
-  },
-] as const;

@@ -1,7 +1,5 @@
 import { type APIRequestContext, expect, test } from "@playwright/test";
-
-// Must match `site` in astro.config.ts — used only to validate the sitemap itself
-const SITE_URL = "https://example.com";
+import { SITE } from "@/consts";
 
 /** Remove a trailing slash from the path unless the URL is a bare origin */
 function normalizeUrl(url: string): string {
@@ -41,7 +39,7 @@ test.describe("Sitemap (source of truth)", () => {
 
     for (const url of urls) {
       expect(url, `"${url}" must be an absolute URL`).toMatch(/^https?:\/\//);
-      expect(url, `"${url}" must use the configured site base URL`).toContain(SITE_URL);
+      expect(url, `"${url}" must use the configured site base URL`).toContain(SITE.url);
     }
   });
 });
@@ -87,45 +85,70 @@ test.describe("RSS feed consistency with sitemap", () => {
 });
 
 test.describe("OG image URL consistency with sitemap", () => {
-  test("og:image path on each post page equals its sitemap URL path + '-og.png'", async ({
+  test("article pages: og:image path equals page path (stripped) + '-og.png'", async ({
     page,
     request,
   }) => {
     const sitemapUrls = await getSitemapPageUrls(request);
-    const postPaths = sitemapUrls
-      .filter((url) => new URL(url).pathname.startsWith("/posts/"))
-      .map((url) => new URL(url).pathname);
 
-    expect(postPaths.length, "sitemap must include at least one post").toBeGreaterThan(0);
+    let articleCount = 0;
+    for (const sitemapUrl of sitemapUrls) {
+      const path = new URL(sitemapUrl).pathname;
+      await page.goto(path);
 
-    for (const postPath of postPaths) {
-      await page.goto(postPath);
+      const ogType = await page.locator('meta[property="og:type"]').getAttribute("content");
+      if (ogType !== "article") continue;
+      articleCount++;
 
       const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
-      expect(ogImage, `${postPath} must have og:image`).toBeTruthy();
+      expect(ogImage, `${path} must have og:image`).toBeTruthy();
       if (!ogImage) continue;
 
-      // og:image is absolute to the request host; compare only the pathname
       const ogPath = new URL(ogImage).pathname;
-      expect(ogPath, `og:image path for ${postPath} must be "${postPath}-og.png"`).toBe(
-        `${postPath}-og.png`,
+      const cleanPath = path.replace(/\/$/, "");
+      expect(ogPath, `og:image path for ${path} must be "${cleanPath}-og.png"`).toBe(
+        `${cleanPath}-og.png`,
       );
+    }
+
+    expect(articleCount, "sitemap must include at least one article page").toBeGreaterThan(0);
+  });
+
+  test("non-article pages: og:image path is /og.png", async ({ page, request }) => {
+    const sitemapUrls = await getSitemapPageUrls(request);
+
+    for (const sitemapUrl of sitemapUrls) {
+      const path = new URL(sitemapUrl).pathname;
+      await page.goto(path);
+
+      const ogType = await page.locator('meta[property="og:type"]').getAttribute("content");
+      if (ogType === "article") continue;
+
+      const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
+      expect(ogImage, `${path} must have og:image`).toBeTruthy();
+      if (!ogImage) continue;
+
+      const ogPath = new URL(ogImage).pathname;
+      expect(ogPath, `og:image path for ${path} must be "/og.png"`).toBe("/og.png");
     }
   });
 
   test("og:image resources are accessible (HTTP 200)", async ({ page, request }) => {
     const sitemapUrls = await getSitemapPageUrls(request);
-    const postPaths = sitemapUrls
-      .filter((url) => new URL(url).pathname.startsWith("/posts/"))
-      .map((url) => new URL(url).pathname);
 
-    for (const postPath of postPaths) {
-      await page.goto(postPath);
+    // Collect all unique og:image paths across all sitemap pages
+    const checked = new Set<string>();
+    for (const sitemapUrl of sitemapUrls) {
+      const path = new URL(sitemapUrl).pathname;
+      await page.goto(path);
 
       const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
       if (!ogImage) continue;
 
       const ogPath = new URL(ogImage).pathname;
+      if (checked.has(ogPath)) continue;
+      checked.add(ogPath);
+
       const res = await request.get(ogPath);
       expect(res.status(), `og:image resource "${ogPath}" must return 200`).toBe(200);
     }

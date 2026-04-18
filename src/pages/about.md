@@ -4,4 +4,16 @@ title: About
 description: About me
 ---
 
-[GitHub](https://github.com/ziteh/astro-theme-jing)
+[Astro Theme Jing](https://github.com/ziteh/astro-theme-jing) is a calm blog theme powered by [Astro](https://astro.build/).
+
+Features:
+
+- Auto-generate post descriptions based on character count or up to the `<!-- more -->` tag
+- Auto-expanding & collapsing table of contents
+- Open Graph image generation
+- Full-text search
+- Syntax highlighting
+- Math equations
+- Internationalization (i18n)
+- Comment systems (Giscus / Disqus)
+- Sitemap & RSS feed

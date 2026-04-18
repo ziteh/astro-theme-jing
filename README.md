@@ -1,6 +1,6 @@
 # Astro Theme Jing
 
-A clean and quiet blog theme powered by [Astro](https://astro.build/).
+A calm blog theme powered by [Astro](https://astro.build/).
 
 Features:
 

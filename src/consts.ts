@@ -1,9 +1,9 @@
 export const SITE = {
   // Basic information
-  url: "https://example.com", // Your site's URL, e.g. https://username.github.io
+  url: "https://astro-theme-jing.ziteh.dev", // Your site's URL, e.g. https://username.github.io
   title: "Astro Jing", // Your blog title
-  description: "An Astro theme for blogging.", // Your blog description
-  author: "Your Name", // 君の名は ~
+  description: "A calm Astro theme for blogging.", // Your blog description
+  author: "ZiTe", // 君の名は ~
 
   // Localization
   lang: "en", // BCP 47 language tag

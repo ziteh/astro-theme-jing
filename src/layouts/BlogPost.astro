@@ -20,7 +20,7 @@ type Props = CollectionEntry<"blog">["data"] & {
 
 const { title, description, categories, date, updated, toc, comments, tags, prevPost, nextPost } =
   Astro.props;
-const ogImage = `${Astro.url.pathname}-og.png`;
+const ogImage = `${Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "")}-og.png`;
 ---
 
 <BaseLayout title={title} description={description || ""} ogType="article" image={ogImage}>

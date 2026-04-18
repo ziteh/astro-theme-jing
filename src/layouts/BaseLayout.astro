@@ -27,7 +27,8 @@ const {
   updatedDate,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const cleanPathname = Astro.url.pathname.replace(/\/index\.html$/, "/").replace(/\.html$/, "");
+const canonicalURL = new URL(cleanPathname, Astro.site);
 const showTitle = title === SITE.title ? title : `${title} | ${SITE.title}`;
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 ---

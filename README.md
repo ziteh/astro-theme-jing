@@ -6,10 +6,10 @@ Features:
 
 - Auto-generate post description based on characters count or up to the `<!-- more -->` tag
 - Auto-expanding & collapsing table of contents (Tocbot)
+- Generate Open Graph images (Satori)
 - Search (Pagefind)
 - Syntax highlighting (Expressive Code)
 - Sitemap & RSS support
-- Markdown & MDX support
 
 ## Usage
 

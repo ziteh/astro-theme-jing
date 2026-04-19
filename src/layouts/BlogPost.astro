@@ -137,9 +137,17 @@ const ogImage = `${Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "")}
     overflow: hidden;
     white-space: nowrap;
   }
-  /* a.toc-link {
+  a.toc-link {
     color: var(--color-700);
-  } */
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  a.toc-link:hover {
+    color: var(--color-900);
+  }
+  a.is-active-link {
+    color: var(--color-900);
+  }
   .toc-link::before {
     display: none;
   }

@@ -1,4 +1,5 @@
 ---
+import IconMenu from "@/assets/icons/menu-2.svg";
 import Pagination from "@/components/Pagination.astro";
 import PostCard from "@/components/PostCard.astro";
 import TagPill from "@/components/TagPill.astro";
@@ -84,6 +85,10 @@ const tags = getUniqueTags(allPosts);
       <h2>{_t.archives.title}</h2>
       <a class="archives-link" href="/archives">{_t.archives.desc}</a>
     </aside>
+    <div class="sidebar-overlay" aria-hidden="true"></div>
+    <button class="sidebar-fab" aria-label="Toggle sidebar" type="button">
+      <IconMenu />
+    </button>
   </div>
 </BaseLayout>
 
@@ -155,6 +160,12 @@ const tags = getUniqueTags(allPosts);
   .archives-link:hover {
     color: var(--color-900);
   }
+  .sidebar-fab {
+    display: none;
+  }
+  .sidebar-overlay {
+    display: none;
+  }
   @media (max-width: 1280px) {
     .sidebar {
       left: calc(100% + 1rem);
@@ -163,7 +174,77 @@ const tags = getUniqueTags(allPosts);
   }
   @media (max-width: 1024px) {
     .sidebar {
-      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: auto;
+      width: 260px;
+      height: 100vh;
+      max-height: 100vh;
+      background: var(--color-100);
+      padding: 1.5rem 1.5rem 3rem 1.5rem;
+      overflow-y: auto;
+      z-index: 1001;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      box-sizing: border-box;
+    }
+    .sidebar.open {
+      transform: translateX(0);
+    }
+    .sidebar-overlay {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .sidebar-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .sidebar-fab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      background: var(--color-100);
+      color: var(--color-900);
+      box-shadow: 0 2px 8px var(--color-500);
+      cursor: pointer;
+      z-index: 999;
     }
   }
 </style>
+
+<script is:inline>
+  (function () {
+    function initSidebar() {
+      const fab = document.querySelector(".sidebar-fab");
+      const sidebar = document.querySelector(".page-layout .sidebar");
+      const overlay = document.querySelector(".sidebar-overlay");
+      if (!fab || !sidebar || !overlay) return;
+      if (fab.dataset.sidebarInit) return;
+      fab.dataset.sidebarInit = "1";
+
+      function toggle() {
+        sidebar.classList.toggle("open");
+        overlay.classList.toggle("open");
+      }
+      fab.addEventListener("click", toggle);
+      overlay.addEventListener("click", toggle);
+    }
+
+    initSidebar();
+    document.addEventListener("astro:page-load", initSidebar);
+  })();
+</script>

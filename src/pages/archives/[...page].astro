@@ -32,7 +32,7 @@ const { posts, currentPage, totalPages, allPosts } = Astro.props;
 
 // Group posts by year, preserving sort order
 const postsByYear = posts.reduce<Record<number, typeof posts>>((acc, post) => {
-  const year = post.data.date.getFullYear();
+  const year = post.data.updated ? post.data.updated.getFullYear() : post.data.date.getFullYear();
   if (!acc[year]) acc[year] = [];
   acc[year].push(post);
   return acc;
@@ -60,11 +60,17 @@ const years = Object.keys(postsByYear)
                     <span>{post.data.title}</span>
                     {/* HACK: Use "sv-SE" locale to get the date in "YYYY-MM-DD" format */}
                     <time
-                      datetime={post.data.date.toLocaleDateString("sv-SE", {
-                        timeZone: SITE.timeZone,
-                      })}
+                      datetime={
+                        post.data.updated
+                          ? post.data.updated.toLocaleDateString("sv-SE", {
+                              timeZone: SITE.timeZone,
+                            })
+                          : post.data.date.toLocaleDateString("sv-SE", {
+                              timeZone: SITE.timeZone,
+                            })
+                      }
                     >
-                      {_t.date.monthDay(post.data.date)}
+                      {_t.date.monthDay(post.data.updated ?? post.data.date)}
                     </time>
                   </a>
                 </li>

@@ -121,9 +121,7 @@ const ogImage = `${Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "")}
   <aside class="sidebar">
     {toc && <div class="toc" />}
     {toc && <hr />}
-    <div class="back-to-top">
-      <button id="back-to-top" type="button">{_t.common.backToTop}</button>
-    </div>
+    <button class="back-to-top" id="back-to-top" type="button">{_t.common.backToTop}</button>
   </aside>
 </BaseLayout>
 

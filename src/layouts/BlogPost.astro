@@ -8,6 +8,7 @@ import Disqus from "@/components/comments/Disqus.astro";
 import Giscus from "@/components/comments/Giscus.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
 import TagPill from "@/components/TagPill.astro";
+import TocScript from "@/components/TocScript.astro";
 import { SITE } from "@/consts";
 import { _t } from "@/i18n/lang";
 import BaseLayout from "@/layouts/BaseLayout.astro";
@@ -24,20 +25,6 @@ const ogImage = `${Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "")}
 ---
 
 <BaseLayout title={title} description={description || ""} ogType="article" image={ogImage}>
-  {
-    toc && (
-      <link
-        slot="head"
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.36.4/tocbot.min.css"
-        integrity="sha512-/ANQiHMqpRl+E0zEAd250N21OOmJsYbhiJWY0Y8yG0TII47yZn1+gDNobMlf+h/FTyImprLXYgXbX3bCYyq/vg=="
-        crossorigin="anonymous"
-        referrerpolicy="no-referrer"
-        media="print"
-        onload="this.media='all'"
-      />
-    )
-  }
   <main id="main-content">
     <article>
       <div class="prose">
@@ -125,32 +112,6 @@ const ogImage = `${Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "")}
   </aside>
 </BaseLayout>
 
-<style is:global>
-  /* tocbot */
-  .toc > .toc-list {
-    padding-left: 0;
-  }
-  .toc-link {
-    text-decoration: none;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  a.toc-link {
-    color: var(--color-700);
-    user-select: none;
-    -webkit-user-drag: none;
-  }
-  a.toc-link:hover {
-    color: var(--color-900);
-  }
-  a.is-active-link {
-    color: var(--color-900);
-  }
-  .toc-link::before {
-    display: none;
-  }
-</style>
-
 <script is:inline>
   (function () {
     function initSidebar() {
@@ -186,33 +147,5 @@ const ogImage = `${Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "")}
     document.addEventListener("astro:page-load", initBackToTop);
   })();
 </script>
-<script is:inline>
-  window.initTocbot = function () {
-    if (window.tocbot) {
-      window.tocbot.destroy();
-      window.tocbot.init({
-        tocSelector: ".toc",
-        contentSelector: ".main-content",
-        headingSelector: "h2, h3, h4",
-        hasInnerContainers: true,
-        scrollSmoothDuration: 250,
-        headingsOffset: 20,
-        scrollSmoothOffset: -20,
-        scrollHandlerTimeout: 10,
-      });
-    }
-  };
-  document.addEventListener("astro:page-load", function () {
-    if (window.tocbot && document.querySelector(".toc")) {
-      window.initTocbot();
-    }
-  });
-</script>
-<script
-  is:inline
-  async
-  src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.36.4/tocbot.min.js"
-  integrity="sha512-BZUSsJAPNtkd+kdY/bD7hvQKZ5zlgWt++KGy/Pa/5uEJNgs0jZ6JaX6MuclRUanowuxmhb5S3LRPEa3QmrUVfA=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-  onload="window.initTocbot()"></script>
+
+{toc && <TocScript />}

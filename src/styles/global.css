@@ -9,14 +9,13 @@
   --color-100: #fcfcfc;
 
   /* Typography */
-  /* --font-body: "Noto Sans", sans-serif; */
-  /* --font-mono: "Fira Mono", monospace; */
-  --font-size-main: clamp(1rem, 0.9875rem + 0.0625vw, 1.0625rem);
-  --font-size-h1: clamp(1.75rem, 1.56rem + 0.95vw, 2.7rem);
-  --font-size-h2: clamp(1.5rem, 1.35rem + 0.75vw, 2.25rem);
-  --font-size-h3: clamp(1.25rem, 1.15rem + 0.5vw, 1.75rem);
-  --font-size-h4: clamp(1.175rem, 1.1rem + 0.125vw, 1.5rem);
-  --font-size-h5: clamp(1.0625rem, 1.045rem + 0.0875vw, 1.15rem);
+  --font-size-h1: clamp(2.225rem, 2.2176rem + 0.037vw, 2.25rem);
+  --font-size-h2: clamp(2rem, 1.9333rem + 0.3333vw, 2.225rem);
+  --font-size-h3: clamp(1.5rem, 1.463rem + 0.1852vw, 1.625rem);
+  --font-size-h4: clamp(1.15rem, 1.1204rem + 0.1481vw, 1.25rem);
+  --font-size-h5: clamp(1rem, 0.963rem + 0.1852vw, 1.125rem);
+  --font-size-main: clamp(0.9375rem, 0.919rem + 0.0926vw, 1rem);
+  --font-size-small: clamp(0.75rem, 0.7352rem + 0.0741vw, 0.8rem);
   --font-weight-bold: 700;
   --font-weight-normal: 400;
   --font-weight-light: 400;

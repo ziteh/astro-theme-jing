@@ -33,17 +33,17 @@ const { id, title, description, date, updated } = Astro.props;
   }
   h2 {
     margin: 0 0 0.5rem 0;
-    font-size: 1.25rem;
+    font-size: var(--font-size-h4);
   }
   p {
     margin: 0.125rem 0 0 0;
   }
   .desc {
     color: var(--color-700);
-    font-size: 1rem;
+    font-size: var(--font-size-main);
   }
   .date {
     color: var(--color-700);
-    font-size: 0.85rem;
+    font-size: var(--font-size-small);
   }
 </style>

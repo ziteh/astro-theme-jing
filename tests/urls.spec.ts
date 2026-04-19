@@ -53,7 +53,7 @@ test.describe("Canonical URL consistency with sitemap", () => {
 
     for (const sitemapUrl of sitemapUrls) {
       const path = new URL(sitemapUrl).pathname;
-      await page.goto(path);
+      await page.goto(path, { waitUntil: "domcontentloaded" });
 
       const canonical = await page.locator('link[rel="canonical"]').getAttribute("href");
       expect(
@@ -94,7 +94,7 @@ test.describe("OG image URL consistency with sitemap", () => {
     let articleCount = 0;
     for (const sitemapUrl of sitemapUrls) {
       const path = new URL(sitemapUrl).pathname;
-      await page.goto(path);
+      await page.goto(path, { waitUntil: "domcontentloaded" });
 
       const ogType = await page.locator('meta[property="og:type"]').getAttribute("content");
       if (ogType !== "article") continue;
@@ -119,7 +119,7 @@ test.describe("OG image URL consistency with sitemap", () => {
 
     for (const sitemapUrl of sitemapUrls) {
       const path = new URL(sitemapUrl).pathname;
-      await page.goto(path);
+      await page.goto(path, { waitUntil: "domcontentloaded" });
 
       const ogType = await page.locator('meta[property="og:type"]').getAttribute("content");
       if (ogType === "article") continue;
@@ -140,7 +140,7 @@ test.describe("OG image URL consistency with sitemap", () => {
     const checked = new Set<string>();
     for (const sitemapUrl of sitemapUrls) {
       const path = new URL(sitemapUrl).pathname;
-      await page.goto(path);
+      await page.goto(path, { waitUntil: "domcontentloaded" });
 
       const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
       if (!ogImage) continue;

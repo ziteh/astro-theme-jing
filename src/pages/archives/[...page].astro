@@ -1,10 +1,9 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import Pagination from "@/components/Pagination.astro";
 import { SITE } from "@/consts";
 import { _t } from "@/i18n/lang";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import getBlogPosts from "@/utils/getPosts";
+import getBlogPosts, { type BlogPost } from "@/utils/getPosts";
 
 export async function getStaticPaths() {
   const posts = await getBlogPosts();
@@ -22,10 +21,10 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-  posts: CollectionEntry<"blog">[];
+  posts: BlogPost[];
   currentPage: number;
   totalPages: number;
-  allPosts: CollectionEntry<"blog">[];
+  allPosts: BlogPost[];
 }
 
 const { posts, currentPage, totalPages, allPosts } = Astro.props;

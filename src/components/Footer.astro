@@ -7,7 +7,7 @@ const today = new Date();
 ---
 
 <footer>
-  &copy;&nbsp;{today.getFullYear()}&nbsp;{SITE.author}. All rights reserved.
+  <p>&copy;&nbsp;{today.getFullYear()}&nbsp;{SITE.author}. All rights reserved.</p>
   <div class="social-links">
     {
       SOCIALS.map((social) => (
@@ -27,6 +27,9 @@ const today = new Date();
     color: var(--color-700);
     font-size: var(--font-size-small);
     font-weight: var(--font-weight-light);
+  }
+  footer p {
+    margin: 0;
   }
   .social-links {
     display: flex;

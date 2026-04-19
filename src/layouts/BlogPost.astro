@@ -26,10 +26,10 @@ const ogImage = `${Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "")}
 
 <BaseLayout title={title} description={description || ""} ogType="article" image={ogImage}>
   <main id="main-content">
-    <article>
-      <div class="prose">
-        <div class="title">
-          <h1>{title}</h1>
+    <article class="prose">
+      <header class="title">
+        <h1>{title}</h1>
+        <p class="meta">
           <span class="date">
             <FormattedDate date={updated ?? date} />
             {updated && <span>, {_t.date.postedOn(_t.date.shortFormat(date))}</span>}
@@ -48,16 +48,12 @@ const ogImage = `${Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "")}
               </span>
             )
           }
-        </div>
-        <div class="content-wrapper">
-          <div class="main-content" data-pagefind-body>
-            <slot />
-          </div>
-          <div class="sidebar-overlay" aria-hidden="true"></div>
-          <button class="sidebar-fab" aria-label="Toggle sidebar" type="button">
-            <IconMenu />
-          </button>
-        </div>
+        </p>
+      </header>
+      <div class="main-content" data-pagefind-body>
+        <slot />
+      </div>
+      <footer>
         <hr />
         <ul class="tag-list">
           {
@@ -91,22 +87,25 @@ const ogImage = `${Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "")}
             )
           }
         </nav>
-      </div>
+      </footer>
     </article>
-    <!-- Comments -->
+    <div class="sidebar-overlay" aria-hidden="true"></div>
+    <button class="sidebar-fab" aria-label="Toggle sidebar" type="button">
+      <IconMenu />
+    </button>
     {
       comments && (
-        <div id="comments">
+        <section id="comments" aria-label="Comments">
           {SITE.disqusShortname && (
             <Disqus url={new URL(Astro.url.pathname, Astro.site).toString()} identifier={title} />
           )}
           {SITE.giscusRepo && <Giscus />}
-        </div>
+        </section>
       )
     }
   </main>
   <aside class="sidebar">
-    {toc && <div class="toc" />}
+    {toc && <nav class="toc" aria-label="Table of contents" />}
     {toc && <hr />}
     <button class="back-to-top" id="back-to-top" type="button">{_t.common.backToTop}</button>
   </aside>

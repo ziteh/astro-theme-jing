@@ -53,11 +53,13 @@ const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
     <!-- Primary Meta Tags -->
     <title>{showTitle}</title>
-    <meta name="title" content={showTitle} />
     <meta name="description" content={description} />
     <meta name="author" content={SITE.author} />
     {pubDate && <meta name="article:published_time" content={pubDate.toISOString()} />}
     {updatedDate && <meta name="article:modified_time" content={updatedDate.toISOString()} />}
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#fcfcfc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#191919" media="(prefers-color-scheme: dark)" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={ogType} />
@@ -90,7 +92,7 @@ const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
         author: {
           "@type": "Person",
           name: SITE.author,
-          url: `${new URL("/about/", Astro.site).toString()}`,
+          url: `${new URL("/about", Astro.site).toString()}`,
         },
         publisher: {
           "@type": "Organization",

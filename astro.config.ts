@@ -21,7 +21,10 @@ export default defineConfig({
   build: {
     format: "file", // generate `page.html` instead of `page/index.html`
   },
-  prefetch: true,
+  prefetch: {
+    // Keep prefetch, but only prefetch for links with `data-astro-prefetch`
+    prefetchAll: false,
+  },
   image: {
     layout: "constrained",
     responsiveStyles: true,

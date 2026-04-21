@@ -111,38 +111,38 @@ const ogImage = `${Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "")}
   </aside>
 </BaseLayout>
 
-<script is:inline>
+<script is:inline define:vars={{ __DEV__: import.meta.env.DEV }}>
   (function () {
     function initSidebar() {
+      if (__DEV__) console.debug("init sidebar");
+
       const fab = document.querySelector(".sidebar-fab");
       const sidebar = document.querySelector(".sidebar");
       const overlay = document.querySelector(".sidebar-overlay");
       if (!fab || !sidebar || !overlay) return;
 
       function toggle() {
+        if (__DEV__) console.debug("toggle sidebar");
         sidebar.classList.toggle("open");
         overlay.classList.toggle("open");
       }
       fab.addEventListener("click", toggle);
       overlay.addEventListener("click", toggle);
     }
-
-    initSidebar();
     document.addEventListener("astro:page-load", initSidebar);
-  })();
-</script>
-<script is:inline>
-  (function () {
+
     function initBackToTop() {
+      if (__DEV__) console.debug("init back to top button");
+
       const backToTop = document.getElementById("back-to-top");
       if (!backToTop) return;
+
       backToTop.addEventListener("click", () => {
-        document.body.scrollTop = 0; // For Safari
-        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        if (__DEV__) console.debug("back to top");
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
       });
     }
-
-    initBackToTop();
     document.addEventListener("astro:page-load", initBackToTop);
   })();
 </script>

@@ -1,5 +1,6 @@
 ---
 import { SITE } from "@/consts";
+import { _t } from "@/i18n/lang";
 import PostListLayout from "@/layouts/PostListLayout.astro";
 import getBlogPosts, { type BlogPost } from "@/utils/getPosts";
 import getUniqueTags from "@/utils/getUniqueTags";
@@ -20,6 +21,7 @@ export async function getStaticPaths() {
         totalPages,
         allPosts: posts,
         activeTagId: tag.id,
+        activeTagName: tag.name,
       },
     }));
   });
@@ -31,9 +33,10 @@ interface Props {
   totalPages: number;
   allPosts: BlogPost[];
   activeTagId: string;
+  activeTagName: string;
 }
 
-const { posts, currentPage, totalPages, allPosts, activeTagId } = Astro.props;
+const { posts, currentPage, totalPages, allPosts, activeTagId, activeTagName } = Astro.props;
 ---
 
 <PostListLayout
@@ -43,4 +46,5 @@ const { posts, currentPage, totalPages, allPosts, activeTagId } = Astro.props;
   totalPages={totalPages}
   paginationBase={`/tags/${activeTagId}`}
   activeTagId={activeTagId}
+  title={_t.tags.pageTitle(activeTagName)}
 />

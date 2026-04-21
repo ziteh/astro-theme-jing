@@ -1,5 +1,6 @@
 ---
 import { SITE } from "@/consts";
+import { _t } from "@/i18n/lang";
 import PostListLayout from "@/layouts/PostListLayout.astro";
 import getBlogPosts, { type BlogPost } from "@/utils/getPosts";
 
@@ -34,4 +35,5 @@ const { posts, currentPage, totalPages, allPosts } = Astro.props;
   currentPage={currentPage}
   totalPages={totalPages}
   paginationBase="/posts"
+  title={_t.posts.title}
 />

@@ -8,10 +8,16 @@ const en = {
   tags: {
     title: "Tags",
     desc: "All tags",
+    pageTitle(name: string): string {
+      return `Tag: ${name}`;
+    },
   },
   categories: {
     title: "Categories",
     desc: "All categories",
+    pageTitle(name: string): string {
+      return `Category: ${name}`;
+    },
   },
   search: {
     title: "Search",
@@ -85,10 +91,16 @@ const zhHant: typeof en = {
   tags: {
     title: "標籤",
     desc: "所有標籤",
+    pageTitle(name: string): string {
+      return `標籤：${name}`;
+    },
   },
   categories: {
     title: "分類",
     desc: "所有分類",
+    pageTitle(name: string): string {
+      return `分類：${name}`;
+    },
   },
   search: {
     title: "搜尋",

@@ -120,6 +120,8 @@ const ogImage = `${Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "")}
       const sidebar = document.querySelector(".sidebar");
       const overlay = document.querySelector(".sidebar-overlay");
       if (!fab || !sidebar || !overlay) return;
+      if (fab.dataset.sidebarInit) return;
+      fab.dataset.sidebarInit = "1";
 
       function toggle() {
         if (__DEV__) console.debug("toggle sidebar");
@@ -129,6 +131,10 @@ const ogImage = `${Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "")}
       fab.addEventListener("click", toggle);
       overlay.addEventListener("click", toggle);
     }
+    if (window.__sidebarListener) {
+      document.removeEventListener("astro:page-load", window.__sidebarListener);
+    }
+    window.__sidebarListener = initSidebar;
     document.addEventListener("astro:page-load", initSidebar);
 
     function initBackToTop() {

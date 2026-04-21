@@ -237,9 +237,11 @@ const tags = getUniqueTags(allPosts);
   }
 </style>
 
-<script is:inline>
+<script is:inline define:vars={{ __DEV__: import.meta.env.DEV }}>
   (function () {
     function initSidebar() {
+      if (__DEV__) console.debug("init sidebar");
+
       const fab = document.querySelector(".sidebar-fab");
       const sidebar = document.querySelector(".page-layout .sidebar");
       const overlay = document.querySelector(".sidebar-overlay");
@@ -248,6 +250,7 @@ const tags = getUniqueTags(allPosts);
       fab.dataset.sidebarInit = "1";
 
       function toggle() {
+        if (__DEV__) console.debug("toggle sidebar");
         sidebar.classList.toggle("open");
         overlay.classList.toggle("open");
       }
@@ -255,7 +258,10 @@ const tags = getUniqueTags(allPosts);
       overlay.addEventListener("click", toggle);
     }
 
-    initSidebar();
+    if (window.__sidebarListener) {
+      document.removeEventListener("astro:page-load", window.__sidebarListener);
+    }
+    window.__sidebarListener = initSidebar;
     document.addEventListener("astro:page-load", initSidebar);
   })();
 </script>

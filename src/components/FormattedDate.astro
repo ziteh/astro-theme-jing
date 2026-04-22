@@ -1,5 +1,4 @@
 ---
-import { SITE } from "@/consts";
 import { _t } from "@/i18n/lang";
 
 interface Props {
@@ -9,7 +8,7 @@ interface Props {
 const { date } = Astro.props;
 
 // HACK: Use "sv-SE" locale to get the date in "YYYY-MM-DD" format
-const dtAttr = date.toLocaleDateString("sv-SE", { timeZone: SITE.timeZone });
+const dtAttr = date.toLocaleDateString("sv-SE", { timeZone: _t.timeZone });
 ---
 
 <time datetime={dtAttr}>

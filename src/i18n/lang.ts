@@ -1,168 +1,247 @@
-import { SITE } from "@/consts";
+interface langPack {
+  /**
+   * BCP 47 language tag, https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag
+   */
+  lang: string;
 
-const en = {
+  /**
+   * Open Graph locale tag (language_TERRITORY), https://ogp.me/#optional
+   */
+  langOg: string;
+
+  /**
+   *  IANA time zone, https://timeapi.io/documentation/iana-timezones
+   */
+  timeZone: string;
   posts: {
-    title: "Posts",
-    desc: "All posts",
-  },
+    title: string;
+    desc: string;
+  };
   tags: {
-    title: "Tags",
-    desc: "All tags",
-    pageTitle(name: string): string {
-      return `Tag: ${name}`;
-    },
-  },
+    title: string;
+    desc: string;
+    pageTitle: (name: string) => string;
+  };
   categories: {
-    title: "Categories",
-    desc: "All categories",
-    pageTitle(name: string): string {
-      return `Category: ${name}`;
-    },
-  },
+    title: string;
+    desc: string;
+    pageTitle: (name: string) => string;
+  };
   search: {
-    title: "Search",
-    desc: "Search posts",
-  },
+    title: string;
+    desc: string;
+  };
   about: {
-    title: "About",
-    desc: "About me",
-  },
+    title: string;
+    desc: string;
+  };
   archives: {
-    title: "Archives",
-    desc: "All posts",
-    total(count: number): string {
-      if (count === 0) return "No posts yet";
-      if (count === 1) return "Total 1 post";
-      return `Total ${count} posts`;
-    },
-  },
+    title: string;
+    desc: string;
+    total: (count: number) => string;
+  };
   notFound: {
-    title: "Page Not Found",
-    desc: "The page you are looking for does not exist.",
-  },
+    title: string;
+    desc: string;
+  };
   common: {
-    backToTop: "Back to top",
-    viewAllPosts: "View all posts",
-    rssFeed: "Subscribe to RSS feed",
-    featuredPost: "Featured",
-    recentPost: "Recent",
-    skipToMain: "Skip to main content",
-  },
+    backToTop: string;
+    viewAllPosts: string;
+    rssFeed: string;
+    featuredPost: string;
+    recentPost: string;
+    skipToMain: string;
+  };
   pagination: {
-    next: "Next",
-    prev: "Prev",
-  },
+    next: string;
+    prev: string;
+  };
   date: {
-    monthDay(date: Date): string {
-      return date.toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        timeZone: SITE.timeZone,
-      });
-    },
-    shortFormat(date: Date): string {
-      return date.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        timeZone: SITE.timeZone,
-      });
-    },
-    longFormat(date: Date): string {
-      return date.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        timeZone: SITE.timeZone,
-      });
-    },
-    postedOn(date: string): string {
-      return `Posted on ${date}`;
-    },
-  },
-};
+    monthDay: (date: Date) => string;
+    shortFormat: (date: Date) => string;
+    longFormat: (date: Date) => string;
+    postedOn: (date: string) => string;
+  };
+}
 
-// biome-ignore lint/correctness/noUnusedVariables: for example
-const zhHant: typeof en = {
-  posts: {
-    title: "文章",
-    desc: "所有文章",
-  },
-  tags: {
-    title: "標籤",
-    desc: "所有標籤",
-    pageTitle(name: string): string {
-      return `標籤：${name}`;
+// You can create your own language pack by modifying the `myLang` object
+const myLang: langPack = (() => {
+  const lang = "en";
+  const timeZone = "America/New_York";
+  return {
+    lang,
+    langOg: "en_US",
+    timeZone,
+    posts: {
+      title: "Posts",
+      desc: "All posts",
     },
-  },
-  categories: {
-    title: "分類",
-    desc: "所有分類",
-    pageTitle(name: string): string {
-      return `分類：${name}`;
+    tags: {
+      title: "Tags",
+      desc: "All tags",
+      pageTitle(name: string): string {
+        return `Tag: ${name}`;
+      },
     },
-  },
-  search: {
-    title: "搜尋",
-    desc: "搜尋文章",
-  },
-  about: {
-    title: "關於",
-    desc: "關於我",
-  },
-  archives: {
-    title: "封存",
-    desc: "所有文章",
-    total(count: number): string {
-      if (count === 0) return "目前沒有文章";
-      return `總共 ${count} 篇文章`;
+    categories: {
+      title: "Categories",
+      desc: "All categories",
+      pageTitle(name: string): string {
+        return `Category: ${name}`;
+      },
     },
-  },
-  notFound: {
-    title: "找不到頁面",
-    desc: "您正在尋找的頁面不存在。",
-  },
-  common: {
-    backToTop: "回到頂部",
-    viewAllPosts: "所有文章",
-    rssFeed: "訂閱 RSS",
-    featuredPost: "精選",
-    recentPost: "最新",
-    skipToMain: "跳到主要內容",
-  },
-  pagination: {
-    next: "下一頁",
-    prev: "上一頁",
-  },
-  date: {
-    monthDay(date: Date): string {
-      return date.toLocaleDateString("zh-Hant", {
-        month: "short",
-        day: "numeric",
-        timeZone: SITE.timeZone,
-      });
+    search: {
+      title: "Search",
+      desc: "Search posts",
     },
-    shortFormat(date: Date): string {
-      return date.toLocaleDateString("zh-Hant", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        timeZone: SITE.timeZone,
-      });
+    about: {
+      title: "About",
+      desc: "About me",
     },
-    longFormat(date: Date): string {
-      return date.toLocaleDateString("zh-Hant", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        timeZone: SITE.timeZone,
-      });
+    archives: {
+      title: "Archives",
+      desc: "All posts",
+      total(count: number): string {
+        if (count === 0) return "No posts yet";
+        if (count === 1) return "Total 1 post";
+        return `Total ${count} posts`;
+      },
     },
-    postedOn(date: string): string {
-      return `發佈於${date}`;
+    notFound: {
+      title: "Page Not Found",
+      desc: "The page you are looking for does not exist.",
     },
-  },
-};
+    common: {
+      backToTop: "Back to top",
+      viewAllPosts: "View all posts",
+      rssFeed: "Subscribe to RSS feed",
+      featuredPost: "Featured",
+      recentPost: "Recent",
+      skipToMain: "Skip to main content",
+    },
+    pagination: {
+      next: "Next",
+      prev: "Prev",
+    },
+    date: {
+      monthDay(date: Date): string {
+        return date.toLocaleDateString(lang, {
+          month: "short",
+          day: "numeric",
+          timeZone,
+        });
+      },
+      shortFormat(date: Date): string {
+        return date.toLocaleDateString(lang, {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          timeZone,
+        });
+      },
+      longFormat(date: Date): string {
+        return date.toLocaleDateString(lang, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          timeZone,
+        });
+      },
+      postedOn(date: string): string {
+        return `Posted on ${date}`;
+      },
+    },
+  };
+})();
 
-// Select the language
-export const _t: typeof en = en;
+/*
+const myLangExample: langPack = (() => {
+  const lang = "zh-TW";
+  const timeZone = "Asia/Taipei";
+  return {
+    lang,
+    langOg: "zh_TW",
+    timeZone,
+    posts: {
+      title: "文章",
+      desc: "所有文章",
+    },
+    tags: {
+      title: "標籤",
+      desc: "所有標籤",
+      pageTitle(name: string): string {
+        return `標籤：${name}`;
+      },
+    },
+    categories: {
+      title: "分類",
+      desc: "所有分類",
+      pageTitle(name: string): string {
+        return `分類：${name}`;
+      },
+    },
+    search: {
+      title: "搜尋",
+      desc: "搜尋文章",
+    },
+    about: {
+      title: "關於",
+      desc: "關於我",
+    },
+    archives: {
+      title: "封存",
+      desc: "所有文章",
+      total(count: number): string {
+        if (count === 0) return "目前沒有文章";
+        return `總共 ${count} 篇文章`;
+      },
+    },
+    notFound: {
+      title: "找不到頁面",
+      desc: "您正在尋找的頁面不存在。",
+    },
+    common: {
+      backToTop: "回到頂部",
+      viewAllPosts: "所有文章",
+      rssFeed: "訂閱 RSS",
+      featuredPost: "精選",
+      recentPost: "最新",
+      skipToMain: "跳到主要內容",
+    },
+    pagination: {
+      next: "下一頁",
+      prev: "上一頁",
+    },
+    date: {
+      monthDay(date: Date): string {
+        return date.toLocaleDateString(lang, {
+          month: "short",
+          day: "numeric",
+          timeZone,
+        });
+      },
+      shortFormat(date: Date): string {
+        return date.toLocaleDateString(lang, {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          timeZone,
+        });
+      },
+      longFormat(date: Date): string {
+        return date.toLocaleDateString(lang, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          timeZone,
+        });
+      },
+      postedOn(date: string): string {
+        return `發佈於${date}`;
+      },
+    },
+  };
+})();
+*/
+
+export const _t: langPack = myLang;

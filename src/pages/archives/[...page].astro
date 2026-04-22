@@ -62,10 +62,10 @@ const years = Object.keys(postsByYear)
                       datetime={
                         post.data.updated
                           ? post.data.updated.toLocaleDateString("sv-SE", {
-                              timeZone: SITE.timeZone,
+                              timeZone: _t.timeZone,
                             })
                           : post.data.date.toLocaleDateString("sv-SE", {
-                              timeZone: SITE.timeZone,
+                              timeZone: _t.timeZone,
                             })
                       }
                     >

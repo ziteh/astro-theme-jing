@@ -46,16 +46,18 @@ Refer to [Astro project structure](https://docs.astro.build/en/basics/project-st
 ├── public/             # Unprocessed assets
 ├── tests/
 ├── src/
+│   ├── config/
+│   │   ├── site.ts     # Site config
+│   │   ├── lang.ts     # I18n and locale config
+│   │   └── socials.ts  # Social media links
 │   ├── assets/
 │   ├── content/blog/   # Markdown posts
 │   ├── components/
 │   ├── layouts/
-│   ├── pages/
-│   ├── i18n/           # I18n config
+│   ├── pages/          # Routes
 │   ├── utils/
-│   ├── styles/
-│   ├── socials.ts      # Social link
-│   └── consts.ts       # Site config
+│   ├── styles/         # CSS
+│   └── content.config.ts  # Content collection
 ├── astro.config.ts     # Astro config
 ├── package.json
 └── README.md

@@ -1,6 +1,5 @@
 import type { APIRoute, GetStaticPaths } from "astro";
-import { SITE } from "@/consts";
-import { _t } from "@/i18n/lang";
+import { _t, SITE } from "@/config";
 import getPosts from "@/utils/getPosts";
 import { OG_COLORS, OG_FONT_FAMILY, renderOgImage } from "@/utils/ogImage";
 

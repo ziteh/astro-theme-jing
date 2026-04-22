@@ -1,3 +1,7 @@
+/**
+ * Basic site configuration.
+ */
+
 export const SITE = {
   // Basic information
   url: "https://astro-theme-jing.ziteh.dev", // Your site's URL, e.g. https://username.github.io

@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { SITE } from "@/consts";
+import { SITE } from "@/config";
 import { OG_COLORS, OG_FONT_FAMILY, renderOgImage } from "@/utils/ogImage";
 
 export const GET: APIRoute = async () => {

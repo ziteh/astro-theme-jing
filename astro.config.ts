@@ -11,7 +11,7 @@ import rehypeExternalLinks from "rehype-external-links";
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import remarkMath from "remark-math";
-import { SITE } from "./src/consts";
+import { SITE } from "./src/config/site";
 
 // https://astro.build/config
 export default defineConfig({

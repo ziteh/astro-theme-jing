@@ -1,5 +1,5 @@
 import { type APIRequestContext, expect, test } from "@playwright/test";
-import { SITE } from "@/consts";
+import { SITE } from "@/config/site";
 
 /** Remove a trailing slash from the path unless the URL is a bare origin */
 function normalizeUrl(url: string): string {

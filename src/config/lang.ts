@@ -1,3 +1,7 @@
+/**
+ * I18n language and locale configuration.
+ */
+
 interface langPack {
   /**
    * BCP 47 language tag, https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag
@@ -66,11 +70,13 @@ interface langPack {
 
 // You can create your own language pack by modifying the `myLang` object
 const myLang: langPack = (() => {
-  const lang = "en";
-  const timeZone = "America/New_York";
+  const lang = "en"; // BCP 47 language tag
+  const langOg = "en_US"; // Open Graph locale tag
+  const timeZone = "America/New_York"; // IANA time zone
+
   return {
     lang,
-    langOg: "en_US",
+    langOg,
     timeZone,
     posts: {
       title: "Posts",

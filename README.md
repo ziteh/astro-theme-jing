@@ -78,3 +78,7 @@ pnpm dev --host
 ```
 
 Open <http://localhost:9000/signin> and enter <http://host.containers.internal:4321> as the target URL.
+
+## Deploy
+
+- [Cloudflare Pages build system](https://developers.cloudflare.com/pages/configuration/build-image/#languages-and-runtime)

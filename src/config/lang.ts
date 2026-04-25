@@ -2,81 +2,16 @@
  * I18n language and locale configuration.
  */
 
-interface langPack {
-  /**
-   * BCP 47 language tag, https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag
-   */
-  lang: string;
-
-  /**
-   * Open Graph locale tag (language_TERRITORY), https://ogp.me/#optional
-   */
-  langOg: string;
-
-  /**
-   *  IANA time zone, https://timeapi.io/documentation/iana-timezones
-   */
-  timeZone: string;
-  posts: {
-    title: string;
-    desc: string;
-  };
-  tags: {
-    title: string;
-    desc: string;
-    pageTitle: (name: string) => string;
-  };
-  categories: {
-    title: string;
-    desc: string;
-    pageTitle: (name: string) => string;
-  };
-  search: {
-    title: string;
-    desc: string;
-  };
-  about: {
-    title: string;
-    desc: string;
-  };
-  archives: {
-    title: string;
-    desc: string;
-    total: (count: number) => string;
-  };
-  notFound: {
-    title: string;
-    desc: string;
-  };
-  common: {
-    backToTop: string;
-    viewAllPosts: string;
-    rssFeed: string;
-    featuredPost: string;
-    recentPost: string;
-    skipToMain: string;
-  };
-  pagination: {
-    next: string;
-    prev: string;
-  };
-  date: {
-    monthDay: (date: Date) => string;
-    shortFormat: (date: Date) => string;
-    longFormat: (date: Date) => string;
-    postedOn: (date: string) => string;
-  };
-}
-
-// You can create your own language pack by modifying the `myLang` object
-const myLang: langPack = (() => {
-  const lang = "en"; // BCP 47 language tag
-  const langOg = "en_US"; // Open Graph locale tag
-  const timeZone = "America/New_York"; // IANA time zone
-
+const en = (() => {
+  const lang = "en";
+  const langOg = "en_US";
+  const timeZone = "America/New_York";
   return {
+    /** BCP 47 language tag, https://developer.mozilla.org/en-US/docs/Glossary/BCP_47_language_tag */
     lang,
+    /** Open Graph locale tag (language_TERRITORY), https://ogp.me/#optional */
     langOg,
+    /** IANA time zone, https://timeapi.io/documentation/iana-timezones */
     timeZone,
     posts: {
       title: "Posts",
@@ -160,13 +95,16 @@ const myLang: langPack = (() => {
   };
 })();
 
-/*
-const myLangExample: langPack = (() => {
-  const lang = "zh-TW";
-  const timeZone = "Asia/Taipei";
+// You can create your own language pack by modifying the `myLang` object
+// biome-ignore lint/correctness/noUnusedVariables: keep as an example
+const myLang: typeof en = (() => {
+  const lang = "zh-TW"; // BCP 47 language tag
+  const langOg = "zh_TW"; // Open Graph locale tag
+  const timeZone = "Asia/Taipei"; // IANA time zone
+
   return {
     lang,
-    langOg: "zh_TW",
+    langOg,
     timeZone,
     posts: {
       title: "文章",
@@ -248,6 +186,6 @@ const myLangExample: langPack = (() => {
     },
   };
 })();
-*/
 
-export const _t: langPack = myLang;
+// Select your language pack
+export const _t: typeof en = en;

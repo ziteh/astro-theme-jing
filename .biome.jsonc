@@ -29,6 +29,19 @@
           }
         }
       }
+    },
+    {
+      "includes": ["**/*.css"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnknownMediaFeatureName": "off"
+          },
+          "suspicious": {
+            "noUnknownAtRules": "off"
+          }
+        }
+      }
     }
   ],
   "assist": {

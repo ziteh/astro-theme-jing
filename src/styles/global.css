@@ -1,3 +1,5 @@
+@import "./breakpoints.css";
+
 :root {
   color-scheme: light;
 
@@ -53,8 +55,6 @@ body {
   font-family: var(--font-body);
   font-weight: var(--font-weight-light);
   margin: 0;
-  padding: 0;
-  text-align: left;
   background: var(--color-100);
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -68,7 +68,12 @@ main {
   width: var(--content-width);
   max-width: calc(100% - 2em);
   margin: auto;
-  padding: 3em 1em;
+  padding: 1em;
+}
+@media (--bp-md) {
+  main {
+    padding: 3em 1em;
+  }
 }
 
 h1,
@@ -201,12 +206,6 @@ h4:hover .icon-link::before,
 h5:hover .icon-link::before,
 h6:hover .icon-link::before {
   opacity: 1;
-}
-
-@media (max-width: 768px) {
-  main {
-    padding: 1em;
-  }
 }
 
 .sr-only {

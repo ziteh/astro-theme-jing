@@ -11,7 +11,7 @@ import { _t, SITE } from "@/config";
     <div class="internal-links">
       <HeaderLink href="/posts">{_t.posts.title}</HeaderLink>
       <HeaderLink href="/about">{_t.about.title}</HeaderLink>
-      <HeaderLink href="/search" class="icon-link-header" aria-label={_t.search.title}
+      <HeaderLink href="/search" class="header-icon-link" aria-label={_t.search.title}
         ><IconSearch /></HeaderLink
       >
       <ThemeToggle />
@@ -19,19 +19,25 @@ import { _t, SITE } from "@/config";
   </nav>
 </header>
 <style>
+  @import "@/styles/breakpoints.css";
+
   header {
     margin: 0;
-    padding: 0 3em;
+    padding: 0 1em;
     border: none;
     border-bottom: 1px solid var(--color-500);
     font-weight: var(--font-weight-light);
+  }
+  @media (--bp-md) {
+    header {
+      padding: 0 3em;
+    }
   }
   .site-title {
     margin: 0;
     font-size: 1em;
     font-weight: var(--font-weight-bold);
   }
-
   .site-title a,
   .site-title a.active {
     text-decoration: none;
@@ -55,13 +61,8 @@ import { _t, SITE } from "@/config";
     text-decoration: none;
     border-bottom-color: var(--color-900);
   }
-  :global(.icon-link-header) {
-    display: flex !important;
+  :global(.header-icon-link) {
+    display: flex;
     align-items: center;
-  }
-  @media (max-width: 768px) {
-    header {
-      padding: 0 1em;
-    }
   }
 </style>

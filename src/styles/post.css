@@ -12,6 +12,89 @@
     padding-bottom: 1em;
   }
 }
+.prose p {
+  margin-bottom: 1.5em;
+}
+
+table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  border-top: 1px solid var(--color-500);
+  border-bottom: 1px solid var(--color-500);
+  border-left: none;
+  border-right: none;
+  padding: 0.5em 0.75em;
+}
+th {
+  border-bottom-width: 2px;
+  border-top-width: 2px;
+}
+
+code {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: var(--color-300);
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+pre > code {
+  all: unset;
+}
+.expressive-code {
+  margin: 1.5em 0;
+}
+
+blockquote {
+  border-left: 4px solid var(--color-300);
+  padding: 0 0 0 20px;
+  margin: 0;
+  font-size: 0.9em;
+  color: var(--color-700);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-500);
+}
+
+figure {
+  margin: 1.5em 0;
+}
+figcaption {
+  font-size: 0.9em;
+  color: var(--color-700);
+  text-align: center;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* rehype-autolink-headings */
+.icon-link::before {
+  content: "#";
+  margin-left: 0.25em;
+  display: inline-block;
+  color: var(--color-500);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+h1:hover .icon-link::before,
+h2:hover .icon-link::before,
+h3:hover .icon-link::before,
+h4:hover .icon-link::before,
+h5:hover .icon-link::before,
+h6:hover .icon-link::before {
+  opacity: 1;
+}
+
 .title {
   margin-bottom: 2.5em;
   padding: 1em 0;
@@ -20,6 +103,7 @@
 .title h1 {
   margin: 0 0 0.5em 0;
 }
+
 .meta {
   margin: 0 0 0.5em 0;
   color: var(--color-700);
@@ -96,6 +180,7 @@
   padding-left: 0;
   list-style-type: none;
 }
+
 .post-nav {
   display: flex;
   justify-content: space-between;

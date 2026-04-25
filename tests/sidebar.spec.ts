@@ -53,6 +53,8 @@ test.describe("Sidebar toggle", () => {
 
   test("toggle works after blog-post → post-list navigation", async ({ page }) => {
     await page.goto(BLOG_POST);
+    // On mobile the nav links are hidden behind the menu-toggle; open it first.
+    await page.locator(".menu-toggle").click();
     await page.locator(`a[href="${POST_LIST}"]`).first().click();
     await page.waitForURL(`**${POST_LIST}`);
 

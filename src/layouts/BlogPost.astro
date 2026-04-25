@@ -140,10 +140,15 @@ const ogImage = `${Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "")}
       if (__DEV__) console.debug("init back to top button");
 
       const backToTop = document.getElementById("back-to-top");
-      if (!backToTop) return;
+      const sidebar = document.querySelector(".sidebar");
+      const overlay = document.querySelector(".sidebar-overlay");
+      if (!backToTop || !sidebar || !overlay) return;
 
       backToTop.addEventListener("click", () => {
         if (__DEV__) console.debug("back to top");
+        sidebar.classList.remove("open");
+        overlay.classList.remove("open");
+
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
       });

@@ -18,7 +18,7 @@
   transition: transform 0.3s ease;
   box-sizing: border-box;
   overflow-y: auto;
-  font-size: var(--font-size-main);
+  font-size: var(--font-size-body);
 }
 .sidebar.open {
   transform: translateX(0);

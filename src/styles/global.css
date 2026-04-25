@@ -11,13 +11,14 @@
   --color-100: #fcfcfc;
 
   /* Typography */
-  --font-size-h1: clamp(2.225rem, 2.2176rem + 0.037vw, 2.25rem);
-  --font-size-h2: clamp(2rem, 1.9333rem + 0.3333vw, 2.225rem);
-  --font-size-h3: clamp(1.5rem, 1.463rem + 0.1852vw, 1.625rem);
-  --font-size-h4: clamp(1.15rem, 1.1204rem + 0.1481vw, 1.25rem);
-  --font-size-h5: clamp(1rem, 0.963rem + 0.1852vw, 1.125rem);
-  --font-size-main: clamp(0.9375rem, 0.919rem + 0.0926vw, 1rem);
-  --font-size-small: clamp(0.75rem, 0.7352rem + 0.0741vw, 0.8rem);
+  --font-size-h1: clamp(1.875rem, 1.6875rem + 0.5vw, 2.125rem);
+  --font-size-h2: clamp(1.875rem, 1.7813rem + 0.25vw, 2rem);
+  --font-size-h3: clamp(1.375rem, 1.2813rem + 0.25vw, 1.5rem);
+  --font-size-h4: clamp(1.125rem, 1.0875rem + 0.1vw, 1.175rem);
+  --font-size-h5: clamp(1rem, 0.9527rem + 0.126vw, 1.063rem);
+  --font-size-body: 1rem;
+  --font-size-small: clamp(0.75rem, 0.7125rem + 0.1vw, 0.8rem);
+
   --font-weight-bold: 700;
   --font-weight-normal: 400;
   --font-weight-light: 400;
@@ -59,7 +60,7 @@ body {
   word-wrap: break-word;
   overflow-wrap: break-word;
   color: var(--color-900);
-  font-size: var(--font-size-main);
+  font-size: var(--font-size-body);
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
 }
@@ -82,7 +83,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 3.75rem 0 1.2rem 0;
+  margin: 3.75rem 0 1.25rem 0;
   color: var(--color-900);
   font-weight: var(--font-weight-bold);
   line-height: 1.2;
@@ -94,17 +95,24 @@ h2 {
   font-size: var(--font-size-h2);
 }
 h3 {
+  margin-top: 2.75rem;
   font-size: var(--font-size-h3);
 }
 h4 {
+  margin-top: 1.75rem;
+  margin-bottom: 0.875rem;
   font-size: var(--font-size-h4);
 }
 h5 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.875rem;
   font-size: var(--font-size-h5);
 }
 h6 {
-  font-size: var(--font-size-main);
-  /* font-style: italic; */
+  margin-top: 1.5rem;
+  margin-bottom: 0.875rem;
+  font-size: var(--font-size-body);
+  font-style: italic;
 }
 
 strong,

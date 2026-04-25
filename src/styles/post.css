@@ -138,7 +138,7 @@ h6:hover .icon-link::before {
   padding: 0;
   cursor: pointer;
   color: var(--color-700);
-  font-size: var(--font-size-main);
+  font-size: var(--font-size-body);
   font-weight: var(--font-weight-light);
   align-self: flex-start;
 }

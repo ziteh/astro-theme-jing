@@ -77,44 +77,6 @@ main {
   }
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 3.75rem 0 1.25rem 0;
-  color: var(--color-900);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
-}
-h1 {
-  font-size: var(--font-size-h1);
-}
-h2 {
-  font-size: var(--font-size-h2);
-}
-h3 {
-  margin-top: 2.75rem;
-  font-size: var(--font-size-h3);
-}
-h4 {
-  margin-top: 1.75rem;
-  margin-bottom: 0.875rem;
-  font-size: var(--font-size-h4);
-}
-h5 {
-  margin-top: 1.5rem;
-  margin-bottom: 0.875rem;
-  font-size: var(--font-size-h5);
-}
-h6 {
-  margin-top: 1.5rem;
-  margin-bottom: 0.875rem;
-  font-size: var(--font-size-body);
-  font-style: italic;
-}
-
 strong,
 b {
   font-weight: var(--font-weight-bold);

@@ -11,6 +11,7 @@
     "format:check": "prettier --check .",
     "lint": "biome check --write",
     "lint:check": "biome check",
+    "type:check": "tsc --noEmit",
     "test": "playwright test",
     "test:a11y": "playwright test tests/a11y.spec.ts",
     "test:urls": "playwright test tests/urls.spec.ts",

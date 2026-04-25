@@ -2,7 +2,7 @@
  * Generates Open Graph images.
  */
 
-import satori, { type SatoriNode } from "satori";
+import satori from "satori";
 import sharp from "sharp";
 
 export const OG_COLORS = {
@@ -35,7 +35,8 @@ async function getFonts(): Promise<[ArrayBuffer, ArrayBuffer]> {
   return [latin, cjk];
 }
 
-export async function renderOgImage(element: SatoriNode): Promise<Response> {
+/* biome-ignore lint/suspicious/noExplicitAny: not sure which type to use */
+export async function renderOgImage(element: any): Promise<Response> {
   const [latin, cjk] = await getFonts();
 
   const svg = await satori(element, {

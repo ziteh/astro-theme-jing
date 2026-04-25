@@ -70,7 +70,7 @@ Refer to [Astro project structure](https://docs.astro.build/en/basics/project-st
 ```bash
 pnpm test       # All tests
 pnpm test:lh    # Lighthouse
-pnpm test:urls  # URLs 
+pnpm test:urls  # URLs
 pnpm test:a11y  # Accessibility
 ```
 

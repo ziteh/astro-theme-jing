@@ -7,5 +7,5 @@ dist/
 package-lock.json
 pnpm-lock.yaml
 
-# Markdown files are handled by a markdownlint
-**/*.md
+# It is recommended to use markdownlint to format Markdown files
+# **/*.md

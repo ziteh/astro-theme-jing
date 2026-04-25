@@ -19,6 +19,7 @@ export const OG_FONT_FAMILY = "NotoTC, NotoLatin";
 const CDN = "https://cdn.jsdelivr.net/fontsource/fonts";
 
 // Cache font data in memory to avoid redundant fetches
+// TODO: Accessing font data programmatically, https://docs.astro.build/en/guides/fonts/#accessing-font-data-programmatically
 let fontLatin400: ArrayBuffer | null = null;
 let fontCjk400: ArrayBuffer | null = null;
 async function getFonts(): Promise<[ArrayBuffer, ArrayBuffer]> {

@@ -1,8 +1,3 @@
----
-layout: ../layouts/AboutLayout.astro
-title: About
-description: About me
----
 
 [Astro Theme Jing](https://github.com/ziteh/astro-theme-jing) is a calm blog theme powered by [Astro](https://astro.build/).
 

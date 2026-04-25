@@ -51,7 +51,9 @@ Refer to [Astro project structure](https://docs.astro.build/en/basics/project-st
 │   │   ├── lang.ts     # I18n and locale config
 │   │   └── socials.ts  # Social media links
 │   ├── assets/
-│   ├── content/blog/   # Markdown posts
+│   ├── content/
+│   │   ├── blog/       # Markdown posts
+│   │   └── about.md    # About page
 │   ├── components/
 │   ├── layouts/
 │   ├── pages/          # Routes

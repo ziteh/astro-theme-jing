@@ -11,3 +11,4 @@ Features:
 - Internationalization (i18n)
 - Comment systems (Giscus / Disqus)
 - Sitemap & RSS feed
+- Static site

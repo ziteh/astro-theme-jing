@@ -2,51 +2,54 @@
  * Generates Open Graph images.
  */
 
-import satori from "satori";
+import { fontData } from "astro:assets";
+import { outDir } from "astro:config/server";
+import { readFile } from "node:fs/promises";
+import satori, { type Font as SatoriFont } from "satori";
 import sharp from "sharp";
 
 export const OG_COLORS = {
-  bg: "#fcfcfc",
-  text: "#202020",
-  muted: "#646464",
-  faint: "#cecece",
+  bg: "#f9f9f8",
+  text: "#21201c",
+  muted: "#63635e",
+  faint: "#cfceca",
 };
 
 export const OG_WIDTH = 1200;
 export const OG_HEIGHT = 630;
+export const OG_FONT_FAMILY = "OpenGraphFont";
 
-export const OG_FONT_FAMILY = "NotoTC, NotoLatin";
-const CDN = "https://cdn.jsdelivr.net/fontsource/fonts";
+let cachedFonts: SatoriFont[] | null = null;
+async function getFonts(origin: string): Promise<SatoriFont[]> {
+  if (cachedFonts) return cachedFonts;
 
-// Cache font data in memory to avoid redundant fetches
-// TODO: Accessing font data programmatically, https://docs.astro.build/en/guides/fonts/#accessing-font-data-programmatically
-let fontLatin400: ArrayBuffer | null = null;
-let fontCjk400: ArrayBuffer | null = null;
-async function getFonts(): Promise<[ArrayBuffer, ArrayBuffer]> {
-  const [latin, cjk] = await Promise.all([
-    fontLatin400 ??
-      fetch(`${CDN}/noto-sans-tc@latest/latin-400-normal.woff`).then((r) => r.arrayBuffer()),
-    fontCjk400 ??
-      fetch(`${CDN}/noto-sans-tc@latest/chinese-traditional-400-normal.woff`).then((r) =>
-        r.arrayBuffer(),
-      ),
-  ]);
-  fontLatin400 = latin;
-  fontCjk400 = cjk;
-  return [latin, cjk];
+  const faces = fontData["--font-og"];
+
+  cachedFonts = await Promise.all(
+    faces.map(async (face) => {
+      const src = face.src[0];
+      if (!src) throw new Error("No src in font face");
+
+      const data = import.meta.env.DEV
+        ? await fetch(new URL(src.url, origin)).then((r) => r.arrayBuffer())
+        : await readFile(new URL(`.${src.url}`, outDir)).then(
+            (b) => b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength) as ArrayBuffer,
+          );
+      return { name: OG_FONT_FAMILY, data, weight: 400 as const, style: "normal" as const };
+    }),
+  );
+
+  return cachedFonts;
 }
 
 /* biome-ignore lint/suspicious/noExplicitAny: not sure which type to use */
-export async function renderOgImage(element: any): Promise<Response> {
-  const [latin, cjk] = await getFonts();
+export async function renderOgImage(element: any, url: URL): Promise<Response> {
+  const fonts = await getFonts(url.origin);
 
   const svg = await satori(element, {
     width: OG_WIDTH,
     height: OG_HEIGHT,
-    fonts: [
-      { name: "NotoTC", data: cjk, weight: 400, style: "normal" },
-      { name: "NotoLatin", data: latin, weight: 400, style: "normal" },
-    ],
+    fonts,
   });
 
   const png = await sharp(Buffer.from(svg)).png().toBuffer();

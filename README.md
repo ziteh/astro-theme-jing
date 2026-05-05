@@ -1,4 +1,4 @@
-# Astro Theme Jing
+# Astro Jing
 
 A calm blog theme powered by [Astro](https://astro.build/).
 

@@ -104,7 +104,7 @@ figure {
   margin: 1.5em 0;
 }
 figcaption {
-  font-size: 0.9em;
+  font-size: 0.75em;
   color: var(--color-700);
   text-align: center;
 }

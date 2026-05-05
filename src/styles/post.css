@@ -135,7 +135,7 @@ h6:hover .icon-link::before {
 
 .title {
   margin-bottom: 2.5em;
-  padding: 1em 0;
+  padding: 0 0 2em 0;
   line-height: 1;
 }
 .title h1 {

@@ -163,6 +163,50 @@ For performance reasons, only the first `getDescriptionMaxLines` lines of each `
 
 You can adjust `getDescriptionCount` and `getDescriptionMaxLines` in [`site.ts`](#sitets).
 
+### Fonts
+
+By default, Astro Jing downloads **Noto Sans** (body) and **Fira Mono** (code) at build time via [Astro's built-in font API](https://docs.astro.build/en/guides/fonts/).
+
+If you prefer **system-native fonts** — for example, to use Traditional Chinese fonts like PingFang TC / Microsoft JhengHei without any web font download — you can switch manually:
+
+1. `astro.config.ts` — Remove the `--font-body` and `--font-mono` entries from the `fonts` array. Keep `--font-og` (Satori needs it to generate OG images).
+
+```ts
+fonts: [
+  // Remove --font-body and --font-mono entries
+  {
+    cssVariable: "--font-og",
+    name: "Noto Sans",
+    weights: [400],
+    styles: ["normal"],
+    formats: ["woff"],
+    provider: fontProviders.fontsource(),
+  },
+],
+```
+
+2. `src/layouts/BaseLayout.astro` — Replace the two `<Font>` tags with an inline style that defines the CSS variables directly:
+
+```astro
+<!-- Replace: -->
+<Font cssVariable="--font-body" preload />
+<Font cssVariable="--font-mono" />
+
+<!-- With: -->
+<style is:inline>
+  :root {
+    --font-body:
+      "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, -apple-system,
+      BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono: ui-monospace, "Cascadia Code", Menlo, Monaco, Consolas, "Courier New", monospace;
+  }
+</style>
+```
+
+> Use `is:inline` so Astro does not scope the `<style>` tag — scoped styles would prevent `:root` from applying globally.
+
+All other CSS files (`global.css`, `post.css`, etc.) already use `var(--font-body)` and `var(--font-mono)` and require no changes.
+
 ### Syntax highlighting
 
 Astro Jing uses Expressive Code for syntax highlighting; please refer to <https://expressive-code.com/>

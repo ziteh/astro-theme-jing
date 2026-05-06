@@ -154,6 +154,38 @@ const ogImage = `${Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "")}
       });
     }
     document.addEventListener("astro:page-load", initBackToTop);
+
+    function initSidebarEndBehavior() {
+      if (__DEV__) console.debug("init sidebar end behavior");
+
+      const sidebar = document.querySelector(".sidebar");
+      const articleHr = document.querySelector("article.prose > footer > hr");
+      if (!sidebar || !articleHr) return;
+
+      const mq = window.matchMedia("(min-width: 1025px)");
+      const defaultBottom = 80;
+
+      function update() {
+        if (!mq.matches) {
+          sidebar.style.bottom = "";
+          return;
+        }
+        const hrTop = articleHr.getBoundingClientRect().top;
+        const needed = window.innerHeight - hrTop - 32;
+        sidebar.style.bottom = needed > defaultBottom ? needed + "px" : "";
+      }
+
+      if (window.__sidebarEndScroll) {
+        window.removeEventListener("scroll", window.__sidebarEndScroll);
+        window.removeEventListener("resize", window.__sidebarEndScroll);
+      }
+      window.__sidebarEndScroll = update;
+      window.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update, { passive: true });
+      mq.addEventListener("change", update);
+      update();
+    }
+    document.addEventListener("astro:page-load", initSidebarEndBehavior);
   })();
 </script>
 

@@ -94,6 +94,10 @@ blockquote {
   font-size: 0.85em;
   color: var(--color-700);
 }
+mark {
+  background-color: var(--color-sp);
+  color: var(--color-900);
+}
 
 hr {
   border: none;

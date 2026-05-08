@@ -9,6 +9,7 @@
   --color-500: #cfceca;
   --color-300: #e9e8e6;
   --color-100: #f9f9f8;
+  --color-sp: #ffdfb5;
 
   /* Typography */
   --font-size-4xl: clamp(1.875rem, 1.6875rem + 0.5vw, 2.125rem);
@@ -41,6 +42,7 @@
   --color-500: #494844;
   --color-300: #31312e;
   --color-100: #191918;
+  --color-sp: #66350c;
 }
 
 ::-webkit-scrollbar-track {

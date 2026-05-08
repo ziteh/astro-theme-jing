@@ -209,10 +209,10 @@ h6:hover .icon-link::before {
     transform: none;
     transition: none;
     font-weight: var(--font-weight-light);
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
   }
   .sidebar .back-to-top {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     align-self: auto;
   }
 }

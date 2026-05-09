@@ -181,45 +181,24 @@ h6:hover .icon-link::before {
 .categories a:hover {
   color: var(--color-900);
 }
-.sidebar .back-to-top {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  color: var(--color-700);
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-light);
-  align-self: flex-start;
+.article-footer {
+  width: var(--content-width);
+  max-width: calc(100% - 2em);
+  margin: auto;
+  padding: 0 1em 1em;
 }
 
 @media (--bp-lg) {
-  .sidebar {
-    display: block;
-    position: fixed;
-    top: auto;
-    bottom: 80px;
-    right: 2rem;
-    left: auto;
-    width: 100px;
-    height: auto;
-    max-height: calc(100vh - 100px);
-    background: none;
-    padding: 0;
-    z-index: auto;
-    transform: none;
-    transition: none;
-    font-weight: var(--font-weight-light);
-    font-size: var(--font-size-xs);
+  .post-layout {
+    display: grid;
+    grid-template-columns: 1fr var(--content-width) 1fr;
+    width: 100vw;
+    margin-left: calc((var(--content-width) - 100vw) / 2);
   }
-  .sidebar .back-to-top {
-    font-size: var(--font-size-xs);
-    align-self: auto;
-  }
-}
-@media (--bp-xl) {
-  .sidebar {
-    right: 4rem;
-    width: 160px;
+  .prose {
+    grid-column: 2;
+    margin: 0;
+    min-width: 0;
   }
 }
 .tag-list {

@@ -62,7 +62,6 @@ table {
 }
 th,
 td {
-  border-top: 1px solid var(--color-500);
   border-bottom: 1px solid var(--color-500);
   border-left: none;
   border-right: none;
